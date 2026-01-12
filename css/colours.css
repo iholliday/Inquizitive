@@ -1,12 +1,26 @@
 :root {
-    --white:F0F0F0;
-    --yellow:FDC300;
-    --purple:524A71;
-    --purple1:524A71;
-    --purple2:32304D;
-    --purple3:241D34;
-}
+    /* Inquizitive palette */
+    --c-dark-purple: #241D34;
+    --c-space-cadet: #32304D;
+    --c-english-violet: #524A71;
+    --c-yellow: #FDC300;
+    --c-offwhite: #F0F0F0;
 
-body {
-    background-color: var(--purple);
+    /* Theme mapping */
+    --bg: var(--c-dark-purple);
+    --topbar-bg: var(--c-dark-purple);
+    --sidebar-bg: var(--c-space-cadet);
+    --sidebar-profile-bg: var(--c-dark-purple);
+    --main-bg: #ffffff;
+
+    --text: var(--c-offwhite);
+    --muted: rgba(240, 240, 240, 0.75);
+    --border: rgba(240, 240, 240, 0.12);
+
+    --highlight-bg: var(--c-english-violet);
+    --accent: var(--c-yellow);
+
+    /* Fonts */
+    --font-primary: "Quicksand", sans-serif;
+    --font-secondary: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
