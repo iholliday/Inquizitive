@@ -1,0 +1,292 @@
+/* ===== Main Styles ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-secondary);
+    background: var(--bg);
+    color: var(--text);
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Topbar ===== */
+.topbar {
+    height: var(--topbar-height);
+    width: 100%;
+    background: var(--topbar-bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    background: var(--accent);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15) inset;
+}
+
+.brand-name {
+    font-family: var(--font-primary);;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    opacity: 0.95;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(240, 240, 240, 0.06);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.icon-btn:hover {
+    background: rgba(240, 240, 240, 0.10);
+    border-color: rgba(240, 240, 240, 0.18);
+}
+
+.icon-btn:active {
+    transform: translateY(1px);
+}
+
+/* ===== Layout under topbar ===== */
+.layout {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.nav {
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    overflow: auto;
+}
+
+.nav-item {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text);
+    padding: 14px 18px;
+    border-radius: 0;
+    transition: background 120ms ease, border-color 120ms ease;
+}
+
+.nav-item:hover {
+    background: rgba(240, 240, 240, 0.06);
+}
+
+.nav-item.active {
+    background: var(--highlight-bg);
+    border-left: 4px solid var(--accent);
+    padding-left: 14px;
+}
+
+/* ===== Profile section (bottom) ===== */
+.profile-section {
+    height: var(--profile-height);
+    background: var(--sidebar-profile-bg);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: stretch;
+}
+
+.profile-menu {
+    position: relative;
+    width: 100%;
+}
+
+/* ===== Sidebar Rows ===== */
+.profile-trigger {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text);
+}
+
+.profile-trigger:hover {
+    background: rgba(240, 240, 240, 0.05);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+}
+
+.avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(240, 240, 240, 0.08);
+    border: 2px solid rgba(240, 240, 240, 0.14);
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.name {
+    font-weight: 700;
+}
+
+.role {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* ===== Drop Up ===== */
+.profile-actions {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+
+    background: rgba(50, 48, 77, 0.98);
+    border: 1px solid var(--border);
+    border-bottom: none;
+
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+
+    box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.35);
+    z-index: 20;
+}
+
+.profile-menu.open .profile-actions {
+    display: flex;
+}
+
+/* ===== Menu Items ===== */
+.profile-btn {
+    width: 100%;
+    padding: 12px 12px;
+    border-radius: 12px;
+
+    border: 1px solid rgba(240, 240, 240, 0.10);
+    background: rgba(240, 240, 240, 0.05);
+
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    transition: background 140ms ease, border-color 140ms ease, transform 60ms ease;
+}
+
+.profile-btn:hover {
+    background: rgba(253, 195, 0, 0.12);
+    border-color: rgba(253, 195, 0, 0.35);
+}
+
+.profile-btn:active {
+    transform: translateY(1px);
+}
+
+.profile-btn.danger:hover {
+    background: rgba(253, 195, 0, 0.10);
+    border-color: rgba(253, 195, 0, 0.35);
+}
+
+
+/* ===== Main content ===== */
+.main {
+    flex: 1;
+    min-width: 0;
+    background: var(--main-bg);
+    padding: 12px;
+    overflow: auto;
+    color: #111;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    :root {
+        --sidebar-width: 260px;
+    }
+}
+
+@media (max-width: 720px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .profile-section {
+        height: auto;
+    }
+
+    .profile-actions {
+        position: static;
+        display: none;
+    }
+
+    .profile-menu.open .profile-actions {
+        display: flex;
+    }
+}
