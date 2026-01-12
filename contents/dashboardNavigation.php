@@ -29,8 +29,9 @@
                 <nav class="nav">
                     <a class="nav-item active" href="#">Dashboard</a>
                     <a class="nav-item" href="#">Quizzes</a>
-                    <a class="nav-item" href="#">Leaderboard</a>
+                    <a class="nav-item" href="#">Modules</a>
                     <a class="nav-item" href="#">Results</a>
+                    <a class="nav-item" href="#">Settings</a>
                 </nav>
 
                 <!-- Drop up -->
@@ -47,7 +48,6 @@
 
                 <div class="profile-actions" id="profileActions" role="menu" aria-hidden="true">
                     <button class="profile-btn" type="button" role="menuitem">My Profile</button>
-                    <button class="profile-btn" type="button" role="menuitem">Settings</button>
                     <button class="profile-btn" type="button" role="menuitem">Log out</button>
                     <!-- We can add more buttons :) -->
                 </div>
