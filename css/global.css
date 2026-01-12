@@ -1,0 +1,11 @@
+/* Non-colour css that can be used across the website */
+
+:root {
+    /* Layout */
+    --sidebar-width: 320px;
+    --topbar-height: 88px;
+    --profile-height: 140px;
+
+    /* UI */
+    --radius: 10px;
+}
