@@ -1,23 +1,79 @@
 /* CSS for the landing page 
-
 lp stands for landing page
 */
 
-#header {
-    
+:root {
+    --spacing: 50px;
+
+
+    --lg-img-height: 500px;
+    --md-img-height: 350px;
 }
 
-.image{}
+body {
+    background-color: var(--main-bg);
+}
 
+#header {
+    width: 100vw;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
 
 .flex-row {
-
+    display: flex;
+    flex-direction: row;
 }
 
-.landing-page-row {
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
 
+* {
+    border: black 1px dashed;
+    background-color: rgba(200,200,200,0.5)
+}
+
+
+
+
+
+
+.lp-row {
+    margin-bottom: 50px;
+}
+
+.lp-row img {
+    object-fit: cover;
+    height: 500px;
+    width: auto;
 }
 
 .halves-row {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: var(--spacing);
+}
 
+.thirds-row {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: var(--spacing);
+}
+
+#guide-row img {
+    height:  var(--md-img-height);
+    width: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 600px) {
+    .sm-collapse {
+        grid-template-columns: auto;
+    }
 }
