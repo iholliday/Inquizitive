@@ -62,7 +62,7 @@
             <script>
                 <?php
                 // If user has already signed in, link to dashboard page.
-                // TBC
+                require_once("./js/loadDashboard.js");
                 ?>
             </script>
     <?php

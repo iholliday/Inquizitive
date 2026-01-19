@@ -3,7 +3,7 @@
     require_once ("./php/blockDirectAccess.php");
 
     // Require the database connection file.
-    require ("_connect.php");
+    require_once ("_connect.php");
 
     // Set response to JSON.
     header('Content-Type: application/json');
@@ -35,55 +35,30 @@
         $db = new inquizitiveDB();
 
         // Query prepares internally, binds the parameters, and executes them. 
-        $stmt = $db->Query("CALL GetUserByEmail()?", [$email]);
+        $stmt = $db->Query("CALL GetUserByEmail(?)", [$email]);
 
-        // If prepared statement fails, provide error message.
-        if (!$stmt) {
-            echo json_encode(['status' => 'error', 'message' => 'Database query failed.']);
-            mysqli_stmt_close($stmt);
-            mysqli_next_result($connect);
+        // Ensure query succeeded before using the result resource.
+        if ($stmt === false) {
+            error_log('DB query failed: ' . mysqli_error($db->connect));
+            echo json_encode(['status' => 'error', 'message' => 'Your email or password is invalid.']);
             exit;
         }
-
-
-        // Gets result from statement.
-        $result = mysqli_stmt_get_result($stmt);
-
-        /*
-        // Prepare the CALL statement.
-        $stmt = mysqli_prepare($connect, "CALL GetUserByEmail(?)");
-
-        // If prepared statement fails, provide error message.
-        if (!$stmt) {
-            echo json_encode(['status' => 'error', 'message' => 'Database query failed.']);
-            exit;
-        }
-
-        // Bind parameters, execute query and gather results.
-        mysqli_stmt_bind_param($stmt, "s", $email);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        */
 
         // Check if exactly one user is found.
-        if (mysqli_num_rows($result) == 1) 
+        if (mysqli_num_rows($stmt) == 1) 
         {
             // Fetch user data with associated account.
-            $user = mysqli_fetch_assoc($result);
+            $user = mysqli_fetch_assoc($stmt);
 
             // Verify password.
             if (password_verify($password, $user['password'])) 
             {
-                // Set session variables.
-                
-                /*
-                TBC
-                
+                // Set session variables.             
                 $_SESSION['userUUID'] = $user['userUUID'];
                 $_SESSION['firstName'] = $user['firstName'];
                 $_SESSION['lastName'] = $user['lastName'];
                 $_SESSION['email'] = $user['email'];
-                $_SESSION['accessLevel'] = $user['accessLevel'];*/
+                $_SESSION['accessLevel'] = $user['accessLevel'];
 
                 // Send success response.
                 echo json_encode(['status' => 'success', 'message' => 'Login successful']);
@@ -105,10 +80,6 @@
         // Missing email or password.
         echo json_encode(['status' => 'error', 'message' => 'Please enter a email or password.']);
     }
-
-    // Close statement.
-    mysqli_stmt_close($stmt);
-    mysqli_next_result($connect);
 
     // Exit script.
     exit;

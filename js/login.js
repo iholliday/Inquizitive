@@ -8,6 +8,8 @@ $("#login-form").submit(function (event)
     sessionStorage.clear();
     localStorage.clear(); 
 
+    console.log("Before Ajax")
+
     // AJAX request to authenticate login via POST, ensuring that the server response is in JSON.
     $.ajax({
         url: "./auth",
@@ -22,7 +24,7 @@ $("#login-form").submit(function (event)
             {
                 // If auth is successful, redirect user to dashboard page via AJAX.
                 $.ajax({
-                    url: "./dashboardPage", 
+                    url: "./dashboard", 
                     type: 'GET',
                     success: function(data) {
                         // Replace the content of the body with the dashboard.
