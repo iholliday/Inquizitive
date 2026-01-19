@@ -44,8 +44,14 @@ body {
     width: 44px;
     height: 44px;
     border-radius: 6px;
-    background: var(--accent);
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15) inset;
+
+    background-image: url("../contents/images/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    /* Optional polish */
+    background-color: transparent;
 }
 
 .brand-name {
@@ -248,6 +254,14 @@ body {
     border-color: rgba(253, 195, 0, 0.35);
 }
 
+.sidebar .nav-divider, 
+.profile-menu .dropup-divider{
+  border: none;
+  height: 1px;
+  background-color: color-mix(in srgb, var(--sidebar-bg) 50%, white 50%);
+}
+
+
 
 /* ===== Main content ===== */
 .main {
@@ -290,3 +304,5 @@ body {
         display: flex;
     }
 }
+
+

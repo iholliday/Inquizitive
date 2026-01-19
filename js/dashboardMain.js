@@ -80,10 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
     resultsPage: "./includes/inc-ResultsDashboardPage.php",
 
     // Lecturer Dashboard
-    // -- To be added --
+    studentManagement: "./includes/inc-LecStudentManagement.php",
+    testManagement: "./includes/inc-LecTestManagement.php",
 
     // Admin Dashboard
-    // -- To be added --
+    lecturerManagement: "./includes/inc-AdmlecturerManagement.php",
 
     // Drop Up Section
     profilePage: "./includes/inc-ProfileDashboardPage.php",
@@ -200,4 +201,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
