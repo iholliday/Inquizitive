@@ -1,9 +1,53 @@
 // ==================== SIDEBAR PROFILE MENU ====================
-
+console.log("uwu");
 // Get references to the profile menu elements
 const profileMenu = document.getElementById("profileMenu");
 const profileTrigger = document.getElementById("profileTrigger");
 const profileActions = document.getElementById("profileActions");
+  function setActiveNav(activeId) {
+    $(".nav-item").removeClass("active");
+    if (activeId) $("#" + activeId).addClass("active");
+  }
+
+  function loadIntoMain(url, activeId, { pushHistory = true } = {}) {
+    $.ajax({
+      url,
+      type: "GET",
+      success: function (data) {
+        $("#content").html(data);
+
+        // Give active class if page is selected
+        setActiveNav(activeId);
+
+        // Remember the last visited page (in case of refresh)
+        if (activeId) sessionStorage.setItem("currentPage", activeId);
+
+        // Allows for back and forward navigation
+        if (pushHistory) {
+          history.pushState({ url, activeId }, "", "#"+activeId);
+        }
+      },
+      // Error message for if page is not found
+      error: function (xhr, status, error) {
+        console.error("Error loading page:", url, status, error);
+        $("#content").html(`
+          <div style="padding:16px;">
+            <h2 style="margin:0 0 8px;">Couldn’t load that page</h2>
+            <p style="margin:0;">Please try again.</p>
+          </div>
+        `);
+      },
+    });
+  }
+
+$(".link").ready(function(){
+  $(".link").click(function(e)
+  {
+    e.preventDefault();
+    loadIntoMain($(this).attr("id"), $(this).attr("id"));
+    console.log($(this).attr("id"));
+  });
+});
 
 // Opens the profile drop-up menu
 function openMenu() {
@@ -91,45 +135,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // -------- Sidebar active state (only for nav items not drop up) --------
-  function setActiveNav(activeId) {
-    $(".nav-item").removeClass("active");
-    if (activeId) $("#" + activeId).addClass("active");
-  }
+
 
   // -------- Content loader --------
-  function loadIntoMain(url, activeId, { pushHistory = true } = {}) {
-    $.ajax({
-      url,
-      type: "GET",
-      success: function (data) {
-        $(contentSelector).html(data);
 
-        // Give active class if page is selected
-        setActiveNav(activeId);
-
-        // Remember the last visited page (in case of refresh)
-        if (activeId) sessionStorage.setItem("currentPage", activeId);
-
-        // Allows for back and forward navigation
-        if (pushHistory) {
-          history.pushState({ url, activeId }, "", "#"+activeId);
-        }
-      },
-      // Error message for if page is not found
-      error: function (xhr, status, error) {
-        console.error("Error loading page:", url, status, error);
-        $(contentSelector).html(`
-          <div style="padding:16px;">
-            <h2 style="margin:0 0 8px;">Couldn’t load that page</h2>
-            <p style="margin:0;">Please try again.</p>
-          </div>
-        `);
-      },
-    });
-  }
 
   // -------- One event listener for all route buttons --------
-  document.addEventListener("click", (e) => {
+/*  document.addEventListener("click", (e) => {
+    console.log("owo");
     // Find the closest clicked element that has an ID
     const el = e.target.closest("[id]");
     // Exit if no element with an ID is selected
@@ -146,32 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Load the requested page into the main content area with AJAX
     loadIntoMain(url, id);
-  });
-
-  // -------- Logout handler --------
-  document.addEventListener("click", (e) => {
-    const logoutBtn = e.target.closest("#logoutPage"); 
-    if (!logoutBtn) return;
-
-    e.preventDefault();
-
-    $.ajax({
-      url: "./logout",
-      type: "GET",
-      dataType: "json",
-      success: function (response) {
-        if (response.status === "success") {
-          window.location.href = "./";
-        } else {
-          alert("Error logging out. Please try again.");
-        }
-      },
-      error: function (xhr, status, error) {
-        console.error("Logout Error:", status, error);
-        alert("An error occurred while logging out. Please try again.");
-      },
-    });
-  });
+  });*/
 
   // -------- Restore last visited page --------
 
