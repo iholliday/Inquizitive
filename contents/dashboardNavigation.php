@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/colours.css" />
     <link rel="stylesheet" href="../css/dashboardMain.css" />
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -27,11 +31,10 @@
         <div class="layout">
             <aside class="sidebar">
                 <nav class="nav">
-                    <a class="nav-item active" href="#">Dashboard</a>
-                    <a class="nav-item" href="#">Quizzes</a>
-                    <a class="nav-item" href="#">Modules</a>
-                    <a class="nav-item" href="#">Results</a>
-                    <a class="nav-item" href="#">Settings</a>
+                    <a class="nav-item active" id="dashboardPage">Dashboard</a>
+                    <a class="nav-item" id="quizPage">Quizzes</a>
+                    <a class="nav-item" id="subjectsPage">Subjects</a>
+                    <a class="nav-item" id="resultsPage">Results</a>
                 </nav>
 
                 <!-- Drop up -->
@@ -47,8 +50,9 @@
                 </button>
 
                 <div class="profile-actions" id="profileActions" role="menu" aria-hidden="true">
-                    <button class="profile-btn" type="button" role="menuitem">My Profile</button>
-                    <button class="profile-btn" type="button" role="menuitem">Log out</button>
+                    <button class="profile-btn" type="button" role="menuitem" id="profilePage">My Profile</button>
+                    <button class="profile-btn" type="button" role="menuitem" id="settingsPage">Settings</button>
+                    <button class="profile-btn" type="button" role="menuitem" id="logoutPage">Log out</button>
                     <!-- We can add more buttons :) -->
                 </div>
                 </div>
@@ -59,9 +63,7 @@
             </aside>
 
             <main class="main">
-                <!-- EVERYTHING GOES IN MAIN!! -->
-                 <h1>no</h1>
-                 <p>hi</p>
+                <div id="content"></div>
             </main>
         </div>
 
