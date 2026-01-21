@@ -32,18 +32,18 @@
         <div class="layout">
             <aside class="sidebar">
                 <nav class="nav">
-                    <a class="nav-item active" id="dashboardPage">Dashboard</a>
-                    <a class="nav-item" id="quizPage">Quizzes</a>
-                    <a class="nav-item" id="subjectsPage">Subjects</a>
-                    <a class="nav-item" id="resultsPage">Results</a>
+                    <a class="nav-item active link" id="landing">Dashboard</a>
+                    <a class="nav-item link" id="quizzes">Quizzes</a>
+                    <a class="nav-item link" id="subjects">Subjects</a>
+                    <a class="nav-item link" id="results">Results</a>
                     <div class="lecturer-nav">
                         <hr class="nav-divider">
-                        <a class="nav-item" id="studentManagement">Student Management</a>
-                        <a class="nav-item" id="testManagement">Test Management</a>
+                        <a class="nav-item link" id="student-management">Student Management</a>
+                        <a class="nav-item link" id="test-management">Test Management</a>
                     </div>
                     <div class="admin-nav">
                         <hr class="nav-divider">
-                        <a class="nav-item" id="lecturerManagement">Lecturer Management</a>
+                        <a class="nav-item link" id="lecturer-management">Lecturer Management</a>
                     </div>
                 </nav>
 
@@ -61,8 +61,8 @@
                 </button>
 
                 <div class="profile-actions" id="profileActions" role="menu" aria-hidden="true">
-                    <button class="profile-btn link" type="button" role="menuitem" id="profilePage">My Profile</button>
-                    <button class="profile-btn link" type="button" role="menuitem" id="settingsPage">Settings</button>
+                    <button class="profile-btn link" type="button" role="menuitem" id="profile">My Profile</button>
+                    <button class="profile-btn link" type="button" role="menuitem" id="settings">Settings</button>
                     <button class="profile-btn link" type="button" role="menuitem" id="logoutPage">Log out</button>
                     <!-- We can add more buttons :) -->
                 </div>
