@@ -41,13 +41,15 @@ class inquizitiveDB
             $types = str_repeat("s", count($params));
             mysqli_stmt_bind_param($stmt, $types, ...$params);
             mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
         }
         else
         {
-            $stmt = mysqli_query($this->connect, $SQL);
+            $result = mysqli_query($this->connect, $SQL);
         }
 
-        return $stmt;
+
+        return $result;
     }
 
     public function __destruct()

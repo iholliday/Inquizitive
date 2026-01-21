@@ -12,11 +12,18 @@
     // Default route.
     $route->Route(['get'], '/', "./contents/login.php"); 
 
-    // Allows for images and stylesheets to load from public folder.
-    $route->AddDir('/public', "./contents/public");
+    // Allow serving static CSS and JS directories directly.
+    $route->AddDir('/css', "./css/");
+    $route->AddDir('/js', "./js/");
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
+    $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
+    $route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
+
+
+
+    $route->Route(['get'], '/logoutPage', "./php/logout.php");
 
 
     // Any code must be above this.
