@@ -40,20 +40,35 @@ const profileActions = document.getElementById("profileActions");
     });
   }
 
-$(".link").ready(function(){
-  $(".link").click(function(e)
-  {
-    e.preventDefault();
-    loadIntoMain($(this).attr("id"), $(this).attr("id"));
-    console.log($(this).attr("id"));
+  // No .link
+  $(function () {
+    $(".link").on("click", function (e) {
+      e.preventDefault();
+      loadIntoMain($(this).attr("id"), $(this).attr("id"));
+      // console.log removed
+    });
   });
-});
+
+
+// ==================== PROFILE MENU ====================
+
+function handleOutsideClick(e) {
+  if (!profileMenu.contains(e.target)) closeMenu();
+}
+
+function handleEscapeKey(e) {
+  if (e.key === "Escape") closeMenu();
+}
 
 // Opens the profile drop-up menu
 function openMenu() {
   profileMenu.classList.add("open");
   profileTrigger.setAttribute("aria-expanded", "true");
   profileActions.setAttribute("aria-hidden", "false");
+
+  // Attach listeners only when needed (menu is open)
+  document.addEventListener("click", handleOutsideClick);
+  document.addEventListener("keydown", handleEscapeKey);
 }
 
 // Closes the profile drop-up menu
@@ -61,6 +76,10 @@ function closeMenu() {
   profileMenu.classList.remove("open");
   profileTrigger.setAttribute("aria-expanded", "false");
   profileActions.setAttribute("aria-hidden", "true");
+
+  // Remove listeners when not needed
+  document.removeEventListener("click", handleOutsideClick);
+  document.removeEventListener("keydown", handleEscapeKey);
 }
 
 // Toggles the profile menu open or closed
@@ -71,20 +90,11 @@ function toggleMenu() {
 }
 
 // Toggle the menu when the profile area is clicked
-profileTrigger.addEventListener("click", (e) => {
+profileTrigger?.addEventListener("click", (e) => {
   e.stopPropagation();
   toggleMenu();
 });
 
-// Closes the profile menu when clicking anywhere outside of it
-document.addEventListener("click", (e) => {
-  if (!profileMenu.contains(e.target)) closeMenu();
-});
-
-// Closes the profile menu when the Escape key is pressed
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeMenu();
-});
 
 // ==================== BURGER MENU ====================
 const burger = document.getElementById("burgerToggle");
