@@ -80,6 +80,17 @@
     </div>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+    <script>
+    $(function () {
+        const activeId = sessionStorage.getItem("currentPage");
+        if (activeId) {
+        $(".nav-item").removeClass("active");
+        $("#" + activeId).addClass("active");
+        }
+    });
+    </script>
+
+
 </body>
 
 </html>
