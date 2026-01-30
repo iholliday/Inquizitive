@@ -6,7 +6,7 @@
     require_once ("php/_connect.php");
 
     // Establishing routing variables ($routerOptions order: debugMode, urlPrefix, cspLevel, forceTrailingSlash).
-    $routerOptions = new RouterOptions(false, '/Inquizitive', 'none', false);
+    $routerOptions = new RouterOptions(false, '/inq/Inquizitive', 'none', false);
     $route = new jRoute($routerOptions);
 
     // Default route.
@@ -18,10 +18,21 @@
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
+
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
-    $route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
+
+    $route->Route(['get'], '/landing', "./contents/includes/dashboardMain.php");
+    $route->Route(['get'], '/quizzes', "./contents/includes/quizzesPage.php");
+    $route->Route(['get'], '/subjects', "./contents/includes/subjectsPage.php");
+    $route->Route(['get'], '/results', "./contents/includes/resultsPage.php");
+    $route->Route(['get'], '/student-management', "./contents/includes/studentManagement.php");
+    $route->Route(['get'], '/test-management', "./contents/includes/testManagement.php");
+    $route->Route(['get'], '/lecturer-management', "./contents/includes/admLecturerManagement.php");
+    $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
+    $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
 
 
+    $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
 
     $route->Route(['get'], '/logoutPage', "./php/logout.php");
 
