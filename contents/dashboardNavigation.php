@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <div id ="h" tabindex="0" class="click hidden"></div>
     <div class="app">
         <header class="topbar">
             <div class="brand">

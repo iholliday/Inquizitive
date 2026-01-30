@@ -193,6 +193,18 @@ body {
     color: var(--muted);
 }
 
+.click{
+    height:100vh;
+    width:100vw;
+    /* This needs to be on top of anything else, if anyone adds anything, they need to be aware that this needs to go above ANYTHING */
+    z-index: 1;
+    position:absolute;
+}
+
+.hidden{
+    display:none !important;
+}
+
 /* ===== Drop Up ===== */
 .profile-actions {
     position: absolute;

@@ -38,6 +38,20 @@ const profileActions = document.getElementById("profileActions");
         `);
       },
     });
+
+
+    $.ajax({
+      url:"./last-page",
+      type: "POST",
+      data:{lastPage:url},
+      success: function (data) {
+        console.log("Saved into session")
+      },
+      // Error message for if page is not found
+      error: function (xhr, status, error) {
+        console.error("Error loading page:", url, status, error);
+      },
+    });
   }
 
   // No .link
@@ -52,12 +66,18 @@ const profileActions = document.getElementById("profileActions");
 
 // ==================== PROFILE MENU ====================
 
-function handleOutsideClick(e) {
-  if (!profileMenu.contains(e.target)) closeMenu();
-}
 
-function handleEscapeKey(e) {
-  if (e.key === "Escape") closeMenu();
+function toggleMenu() {
+  const isOpen = profileMenu.classList.contains("open");
+
+  if (isOpen) {
+    closeMenu();
+    $("#h").addClass("hidden");     // hide after closing
+  } else {
+    openMenu();
+    $("#h").removeClass("hidden")   // show before focusing
+         .focus();
+  }
 }
 
 // Opens the profile drop-up menu
@@ -65,10 +85,6 @@ function openMenu() {
   profileMenu.classList.add("open");
   profileTrigger.setAttribute("aria-expanded", "true");
   profileActions.setAttribute("aria-hidden", "false");
-
-  // Attach listeners only when needed (menu is open)
-  document.addEventListener("click", handleOutsideClick);
-  document.addEventListener("keydown", handleEscapeKey);
 }
 
 // Closes the profile drop-up menu
@@ -76,24 +92,30 @@ function closeMenu() {
   profileMenu.classList.remove("open");
   profileTrigger.setAttribute("aria-expanded", "false");
   profileActions.setAttribute("aria-hidden", "true");
-
-  // Remove listeners when not needed
-  document.removeEventListener("click", handleOutsideClick);
-  document.removeEventListener("keydown", handleEscapeKey);
 }
 
-// Toggles the profile menu open or closed
-function toggleMenu() {
-  const isOpen = profileMenu.classList.contains("open");
-  if (isOpen) closeMenu();
-  else openMenu();
-}
+$("#h").click(function(){toggleMenu();});
+
 
 // Toggle the menu when the profile area is clicked
 profileTrigger?.addEventListener("click", (e) => {
   e.stopPropagation();
   toggleMenu();
 });
+
+$("#h").on("keydown", function (e) {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    toggleMenu();
+  }
+
+  if (e.key === "Escape") {
+    e.preventDefault();
+    closeMenu();
+    $("#h").addClass("hidden");
+  }
+});
+
 
 
 // ==================== BURGER MENU ====================
@@ -112,3 +134,6 @@ overlay?.addEventListener("click", () => {
 });
 
 
+$(sidebar).ready(function(){
+  
+});
