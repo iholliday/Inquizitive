@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
+    <!-- temp -->
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/colours.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Required scripts -->
     <script
         src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -8,6 +14,7 @@
         crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         // Function to enable submit button once reCAPTCHA has been completed.
         function enableSubmitBtn(){
@@ -27,7 +34,7 @@
                 <div class="container loginContainer p-4 mt-4" data-bs-theme="dark">
                     <div class="grid-container">
                         <div class="grid-item item1">
-                            <!--<img src="" alt="Login image">-->
+                            <img src="contents/images/login.png" alt="Login image">
                         </div>
                         <div class="grid-item item2">
                             <h2 class="loginTitle">Sign in</h2>
@@ -38,15 +45,17 @@
                                 <div class="mb-3">
                                     <input type="password" name="txtPass" id="password" class="form-control loginFormControl" placeholder="Password" aria-describedby="passwordHelpBlock" required>
                                 </div>
-                                <!--<div class="g-recaptcha" data-sitekey=" TBC " data-callback="enableSubmitBtn"></div>-->
-                                <button type="submit" id="submitBtn" class="btn btn-danger btn-signin">Sign in</button> <!--Add disabled once CAPTCHA added-->
-                            </form>
+                                <p class="login-help" id="forgot-password"><a href="/">Forgot password?<a></p>
+                                <div class="g-recaptcha" data-sitekey="PLACEHOLDER" data-callback="enableSubmitBtn"></div>
+                                <!-- <div class="g-recaptcha" data-sitekey="<?= $_ENV['RECAPTCHA_SITE_KEY'] ?>" data-callback="enableSubmitBtn"></div>-->
+                                <button type="submit" id="submitBtn" class="btn btn-danger btn-signin" >Sign in</button> <!-- add disabled -->
+                                <p class="login-help" id="sign-up-help"><a href="/">Don't have an account?</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
-        </body>
+    </body>
         
     <script>
         <?php
