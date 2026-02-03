@@ -24,3 +24,24 @@
     --font-primary: "Quicksand", sans-serif;
     --font-secondary: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
+
+.c-dark-purple {
+    background-color: #241D34;
+}
+
+.c-space-cadet {
+    background-color: #32304D;
+}
+
+.c-english-violet {
+    background-color: #524A71;
+}
+
+.c-yellow {
+    background-color: #FDC300;
+}
+
+.c-offwhite {
+    background-color: #F0F0F0;
+}
+

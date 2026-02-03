@@ -2,6 +2,9 @@
 lp stands for landing page
 */
 
+
+
+/* Globals and raw elements */
 :root {
     --spacing: 50px;
 
@@ -12,10 +15,7 @@ lp stands for landing page
 
 body {
     background-color: var(--main-bg);
-}
-
-#header {
-    width: 100vw;
+    font-family: "Quicksand", sans-serif;
 }
 
 img {
@@ -24,6 +24,15 @@ img {
     object-fit: cover;
 }
 
+/* testing styles */
+* {
+    border: black 1px dashed;
+    background-color: rgba(200,200,200,0.5)
+}
+
+
+
+/* Useful - could move to website global */
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -34,16 +43,17 @@ img {
     flex-direction: column;
 }
 
-* {
-    border: black 1px dashed;
-    background-color: rgba(200,200,200,0.5)
+.textbox {
+    padding: 20px;
+}
+
+.spacing-margin {
+    margin: var(--spacing);
 }
 
 
 
-
-
-
+/* General */
 .lp-row {
     margin-bottom: 50px;
 }
@@ -52,6 +62,7 @@ img {
     object-fit: cover;
     height: 500px;
     width: auto;
+    margin: var(--spacing);
 }
 
 .halves-row {
@@ -66,14 +77,68 @@ img {
   gap: var(--spacing);
 }
 
-#guide-row img {
-    height:  var(--md-img-height);
-    width: 100%;
-    object-fit: cover;
-}
-
 @media only screen and (max-width: 600px) {
     .sm-collapse {
         grid-template-columns: auto;
     }
+}
+
+.bold-button {
+    background-color: var(--c-yellow);
+    color: var(--c-offwhite);
+}
+
+.button {
+    border: solid var(--c-offwhite) 1px;
+    color: var(--c-yellow);
+}
+
+
+
+/* IDs */
+#header {
+    width: 100vw;
+    background-color: var(--c-dark-purple);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#header button {
+    border-radius: 3px;
+    border-style: none;
+}
+
+#first-row {
+    background-color: var(--c-space-cadet);
+    color: var(--c-offwhite);
+}
+
+#first-row button {
+    background-color: var(--c-yellow);
+    color: var(--c-dark-purple)
+}
+
+#second-row {
+    background-color: var(--c-offwhite);
+    color: var(--c-dark-purple)
+}
+
+#guide-row {
+    background-color: var(--c-english-violet);
+    color: var(--c-offwhite);
+}
+
+#guide-row img {
+    height: var(--md-img-height);
+    width: 100%;
+    object-fit: cover;
+    margin-left: var(--spacing);
+}
+
+#bottom-row {
+    width: 100vw;
+    background-color: var(--c-dark-purple);
+    color: var(--)
 }
