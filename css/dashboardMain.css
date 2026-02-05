@@ -280,7 +280,6 @@ body {
     flex: 1;
     min-width: 0;
     background: var(--main-bg);
-    padding: 12px;
     overflow: auto;
     color: #111;
 }
@@ -359,4 +358,213 @@ body {
     .sidebar-overlay.show {
         display: block;
     }
+}
+
+/* =========================================
+   Lecturer Management (page-scoped)
+   ========================================= */
+
+#admLecturerManagement {
+  --lm-surface: #ffffff;
+  --lm-border: rgba(0, 0, 0, 0.08);
+  --lm-muted: rgba(0, 0, 0, 0.55);
+  --lm-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  --lm-radius: 16px;
+}
+
+#admLecturerManagement .lm-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#admLecturerManagement .lm-header__right {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#admLecturerManagement .lm-title {
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+#admLecturerManagement .lm-subtitle {
+  color: var(--lm-muted);
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+#admLecturerManagement .lm-card {
+  background: var(--lm-surface);
+  border: 1px solid var(--lm-border);
+  border-radius: var(--lm-radius);
+  box-shadow: var(--lm-shadow);
+}
+
+#admLecturerManagement .lm-stat {
+  padding: 16px 18px;
+}
+
+#admLecturerManagement .lm-stat__label {
+  color: var(--lm-muted);
+  font-size: 0.9rem;
+}
+
+#admLecturerManagement .lm-stat__value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+#admLecturerManagement .lm-panel__head {
+  padding: 18px 18px 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--lm-border);
+}
+
+#admLecturerManagement .lm-panel__body {
+  padding: 18px;
+}
+
+#admLecturerManagement .lm-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#admLecturerManagement .lm-controls .form-control {
+  width: 240px;
+  max-width: 100%;
+}
+
+#admLecturerManagement .lm-controls .form-select {
+  width: 160px;
+  max-width: 100%;
+}
+
+#admLecturerManagement .form-control,
+#admLecturerManagement .form-select {
+  border-radius: 10px;
+}
+
+#admLecturerManagement .btn {
+  border-radius: 10px;
+}
+
+#admLecturerManagement .lm-note {
+  font-size: 0.9rem;
+  color: var(--lm-muted);
+}
+
+#admLecturerManagement .lm-badge {
+  background: rgba(13, 110, 253, 0.12);
+  color: rgba(13, 110, 253, 1);
+  border: 1px solid rgba(13, 110, 253, 0.25);
+}
+
+#admLecturerManagement .lm-badge-success {
+  background: rgba(25, 135, 84, 0.12);
+  color: rgba(25, 135, 84, 1);
+  border: 1px solid rgba(25, 135, 84, 0.25);
+}
+
+#admLecturerManagement .lm-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#admLecturerManagement .lm-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  background: rgba(13, 110, 253, 0.12);
+  color: rgba(13, 110, 253, 1);
+  flex: 0 0 auto;
+}
+
+#admLecturerManagement .lm-person__name {
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+#admLecturerManagement .lm-person__id {
+  font-size: 0.85rem;
+  color: var(--lm-muted);
+}
+
+#admLecturerManagement .lm-panel__scroll {
+  min-height: 0;
+  overflow: auto;
+  padding: 14px 18px 18px;
+}
+
+#admLecturerManagement .lm-tableWrap {
+  border: 1px solid var(--lm-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#admLecturerManagement .table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.02);
+  color: var(--lm-muted);
+  font-size: 0.86rem;
+  border-bottom: 1px solid var(--lm-border);
+}
+
+#admLecturerManagement .lm-actions {
+  display: inline-flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+#admLecturerManagement .lm-actions .btn {
+  padding: 0.28rem 0.6rem;
+}
+
+#admLecturerManagement .lm-eq > .lm-eq__col {
+  display: flex;
+}
+
+#admLecturerManagement .lm-eq__card {
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  #admLecturerManagement .lm-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #admLecturerManagement .lm-header__right {
+    justify-content: flex-start;
+  }
+
+  #admLecturerManagement .lm-panel__head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #admLecturerManagement .lm-controls {
+    width: 100%;
+  }
+
+  #admLecturerManagement .lm-controls .form-control,
+  #admLecturerManagement .lm-controls .form-select {
+    width: 100%;
+  }
 }
