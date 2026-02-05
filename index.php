@@ -6,7 +6,7 @@
     require_once ("php/_connect.php");
 
     // Establishing routing variables ($routerOptions order: debugMode, urlPrefix, cspLevel, forceTrailingSlash).
-    $routerOptions = new RouterOptions(false, '/inq/Inquizitive', 'none', false);
+    $routerOptions = new RouterOptions(false, '/Inquizitive', 'none', false);
     $route = new jRoute($routerOptions);
 
     // Default route.
