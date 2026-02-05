@@ -217,7 +217,7 @@ if (mysqli_multi_query($conn, $sql)) {
                     <tr data-useruuid="<?= htmlspecialchars($uuid) ?>">
                       <td>
                         <div class="lm-person">
-                          <div class="lm-avatar"><?= htmlspecialchars($initials) ?></div>
+                          <img class="lm-avatar" src="https://proficon.appserver.uk/api/initials/<?= htmlspecialchars($initials) ?>.svg"alt="<?= htmlspecialchars($initials) ?>">
                           <div class="lm-person__meta">
                             <div class="lm-person__name">
                               <?= htmlspecialchars("$first $last") ?>
