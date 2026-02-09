@@ -22,38 +22,37 @@ $status = "all";
 $searchEsc = mysqli_real_escape_string($conn, $search);
 $statusEsc = mysqli_real_escape_string($conn, $status);
 
-$sql = "CALL GetLecturersAndStats('$searchEsc', '$statusEsc')";
+$stmt = $conn->prepare("CALL GetLecturersAndStats(?, ?)");
+$stmt->bind_param("ss", $searchEsc, $statusEsc);
+$stmt->execute();
 
 $lecturers = [];
 $stats = ["total" => 0, "active" => 0, "disabled" => 0];
 
-if (mysqli_multi_query($conn, $sql)) {
 
-  /* RESULT SET 1: lecturers */
-  $result = mysqli_store_result($conn);
-  if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-      $lecturers[] = $row;
-    }
-    mysqli_free_result($result);
+/* RESULT SET 1: lecturers */
+if ($res1 = $stmt->get_result()) {
+  while ($row = $res1->fetch_assoc()) {
+    $lecturers[] = $row;
   }
+  $res1->free();
+}
 
-  /* RESULT SET 2: stats */
-  if (mysqli_more_results($conn)) {
-    mysqli_next_result($conn);
-    $result2 = mysqli_store_result($conn);
-    if ($result2) {
-      $stats = mysqli_fetch_assoc($result2) ?: $stats;
-      mysqli_free_result($result2);
-    }
-  }
-
-  /* Clear remaining results */
-  while (mysqli_more_results($conn) && mysqli_next_result($conn)) {
-    $junk = mysqli_store_result($conn);
-    if ($junk) mysqli_free_result($junk);
+/* RESULT SET 2: stats */
+if ($stmt->more_results() && $stmt->next_result()) {
+  if ($res2 = $stmt->get_result()) {
+    $stats = $res2->fetch_assoc() ?: $stats;
+    $res2->free();
   }
 }
+
+/* Flush anything else */
+while ($stmt->more_results() && $stmt->next_result()) {
+  if ($junk = $stmt->get_result()) $junk->free();
+}
+
+$stmt->close();
+
 ?>
 
 <div id="admLecturerManagement" class="container-fluid py-4">

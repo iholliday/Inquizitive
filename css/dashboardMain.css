@@ -196,9 +196,9 @@ body {
 .click{
     height:100vh;
     width:100vw;
-    /* This needs to be on top of anything else, if anyone adds anything, they need to be aware that this needs to go above ANYTHING */
     z-index: 1;
-    position:absolute;
+    position:fixed;
+    inset: 0;
 }
 
 .hidden{
@@ -448,6 +448,10 @@ body {
   max-width: 100%;
 }
 
+#admLecturerManagement #lmCreateBtn {
+  margin-top:20px;
+}
+
 #admLecturerManagement .form-control,
 #admLecturerManagement .form-select {
   border-radius: 10px;
@@ -503,16 +507,23 @@ body {
   color: var(--lm-muted);
 }
 
-#admLecturerManagement .lm-panel__scroll {
-  min-height: 0;
-  overflow: auto;
-  padding: 14px 18px 18px;
+#admLecturerManagement .lm-panel__scroll{
+  height: 450px !important;
+  max-height: 450px !important;
+  overflow: auto !important;
+
+  padding: 14px !important;   /* always-visible inset */
 }
 
-#admLecturerManagement .lm-tableWrap {
+
+#admLecturerManagement .lm-tableWrap{
   border: 1px solid var(--lm-border);
   border-radius: 12px;
   overflow: hidden;
+}
+
+#admLecturerManagement .table thead th{
+  top: 14px;                  /* sticky header respects the padding */
 }
 
 #admLecturerManagement .table thead th {
@@ -538,6 +549,7 @@ body {
 
 #admLecturerManagement .lm-eq > .lm-eq__col {
   display: flex;
+  padding-bottom:50px;
 }
 
 #admLecturerManagement .lm-eq__card {
