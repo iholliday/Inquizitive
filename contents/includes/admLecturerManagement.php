@@ -1,15 +1,15 @@
 <?php
 
-include __DIR__ . "/../../php/blockDirectAccess.php";
+// include __DIR__ . "/../../php/blockDirectAccess.php";
 
-// $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
-//           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+          strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 
-// if (!$isAjax) {
-//   $DASH_INCLUDE = __FILE__;
-//   require __DIR__ . '/../dashboardNavigation.php';
-//   exit;
-// }
+if (!$isAjax) {
+  $DASH_INCLUDE = __FILE__;
+  require __DIR__ . '/../dashboardNavigation.php';
+  exit;
+}
 
 require_once __DIR__ . "/../../php/_connect.php";
 
@@ -279,7 +279,7 @@ document.addEventListener("submit", async (e) => {
   if (btn) btn.disabled = true;
 
   try {
-    const res = await fetch("/inquizitive/php/addLecturer.php", {
+    const res = await fetch("./add-lecturer", {
       method: "POST",
       body: fd,
       headers: { "X-Requested-With": "XMLHttpRequest" }
