@@ -212,7 +212,7 @@ if (mysqli_multi_query($conn, $sql)) {
                       $uuid = $u["userUUID"];
                       $isDisabled = (int)$u["isDisabled"];
 
-                      $initials = strtoupper($first[0] . $last[0]);
+                      $initials = mb_strtoupper($first[0] . $last[0]);
                     ?>
                     <tr data-useruuid="<?= htmlspecialchars($uuid) ?>">
                       <td>
