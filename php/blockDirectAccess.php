@@ -6,4 +6,6 @@
         echo "Direct access to this page is forbidden, please enter through the dashboard.";
         exit;
     }
+
+    
 ?>
