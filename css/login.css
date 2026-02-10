@@ -1,13 +1,13 @@
 /* ===== General ===== */
-.loginPage {
+.login-page {
     margin: 0;
     padding: 0;
     min-height: 100vh;
     font-family: var(--font-primary);
 }
 
-.loginBackground {
-    background: var(--c-dark-purple);
+.login-background {
+    background: linear-gradient(135deg, #1B1628, var(--c-dark-purple), #2E2540);
     min-height: 100vh;
     width:100%;
     display: flex;
@@ -16,13 +16,13 @@
 }
 
 /* ===== Container ===== */
-.loginContainer {
+.login-container {
     background-color: var(--sidebar-bg);
     width: 800px;
     max-width: 100%;
     min-height: 500px; 
     border-radius: var(--radius);
-    /*box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);*/
+    box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.35);
     display: flex;
     align-items: center;
     padding: 20px;
@@ -71,7 +71,7 @@
 }
 
 /* ===== Title ===== */
-.loginTitle {
+.login-title {
     font-size: 2rem;
     margin-bottom: 20px;
     padding-bottom: 20px;
@@ -80,12 +80,12 @@
 }
 
 /* ===== Form ===== */
-.loginForm {
+#login-form {
     width: 100%;
     max-width: 350px;
 }
 
-.loginFormControl {
+.login-form-control {
     width: 100%;
     max-width: 300px;
     margin-bottom: 15px;
@@ -94,30 +94,45 @@
     background-color: var(--highlight-bg);
     border: 1px solid var(--border);
     color: var(--text);
+    border-radius: var(--radius);
 }
 
-.loginFormControl::placeholder {
+.login-form-control::placeholder {
     color: var(--muted);
 }
 
-.loginFormControl:focus {
+.login-form-control:focus {
     outline: none;
     border-color: var(--accent);
     box-shadow: 0 0 0 2px rgba(253, 195, 0, 0.35);
 }
 
 .login-help a{
-    color: var(--accent);
+    color: var(--text);
     font-size: 0.85rem;
     text-decoration: none;
 }
 
 .login-help a:hover {
     text-decoration: underline;
+    color: var(--accent);
 }
 
 #forgot-password {
     margin-top: -3px;
+}
+
+#sign-up-help {
+    margin-top: 15px;
+    margin-left: 88px;
+    position: absolute;
+}
+
+.signup-divider{
+    height: 1px;
+    width: 92%;
+    margin-top: 28px;
+    background-color: var(--c-english-violet);
 }
 
 /* ===== Button ===== */
@@ -130,6 +145,7 @@
     border: none;
     cursor: pointer;
     margin-left: 120px;
+    border-radius: var(--radius);
 }
 
 .btn-signin:hover {
@@ -157,7 +173,7 @@
 /* ===== Mobile ===== */
 @media (max-width: 1000px) {
 
-    .loginBackground {
+    .login-background {
         overflow: hidden;
     }
 
@@ -165,14 +181,14 @@
         display: none; 
     }
 
-    .loginContainer { 
+    .login-container { 
         max-width: 362px;
     } 
 }
 
 @media (max-width: 400px)
 {
-    .loginContainer { 
+    .login-container { 
         transform: scale(0.85);
     } 
 }
