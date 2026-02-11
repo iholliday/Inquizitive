@@ -17,9 +17,9 @@
 
 <body>
     <div id="header">
-        <div>Inquizitive Logo</div>
+        <div id="logo"><div class="l1">i</div><div class="l2">Q</div></div>
         <div>
-            <button class="button">Login</button>
+            <button>Login</button>
             <button class="bold-button">Create an account</button>
         </div>
     </div>
@@ -49,23 +49,23 @@
         <div class="flex-col">
             <img src="../images/sampleimage.png" alt="sample">
             <div class="textbox">
-                <h2>First Step</h2>
-                <p>First step things</p>
+                <h2>1: Create an account</h2>
+                <p>Click the <a href="">Sign Up</a> button in the top right to start!</p>
             </div>
             
         </div>
         <div class="flex-col">
-            <img src="images/sampleimage.png" alt="sample">
+            <img src="../images/sampleimage.png" alt="sample">
             <div class="textbox">
-                <h2> Step</h2>
-                <p> step things</p>
+                <h2>2: Join a course</h2>
+                <p>Teachers can create classes for their students, or you can join a class created by your teacher.</p>
             </div>
         </div>
         <div class="flex-col">
-            <img src="images/sampleimage.png" alt="sample">
+            <img src="../images/sampleimage.png" alt="sample">
             <div class="textbox">
-                <h2> Step</h2>
-                <p> step things</p>
+                <h2>3: Start quizzing!</h2>
+                <p>Learn in a fun environment and track your progress.</p>
             </div>
         </div>
     </div>
