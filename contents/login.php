@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./css/colours.css" />
     <link rel="stylesheet" href="./css/login.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login | Inquizitive </title>
+    <title>Login | Inquizitive</title>
 
     <!-- Required scripts -->
     <script
@@ -49,7 +49,7 @@
                                 <p class="login-help" id="forgot-password"><a href="/">Forgot password?</a></p>
                                 <div class="g-recaptcha" data-sitekey="PLACEHOLDER" data-callback="enableSubmitBtn"></div>
                                 <!-- <div class="g-recaptcha" data-sitekey="<?= $_ENV['RECAPTCHA_SITE_KEY'] ?>" data-callback="enableSubmitBtn"></div>-->
-                                <button type="submit" id="submitBtn" class="btn btn-danger btn-signin" >Sign in</button> <!-- add disabled -->
+                                <button type="submit" id="submitBtn" class="btn btn-danger btn-signin" >SIGN IN</button> <!-- add disabled -->
                                 <div class="signup-divider">
                                     <p class="login-help" id="sign-up-help"><a href="/">Don't have an account?</a></p>
                                 </div>
