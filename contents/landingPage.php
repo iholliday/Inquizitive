@@ -25,7 +25,7 @@
     </div>
     
     <!-- First row - welcome to Inquizitive -->
-    <div id="first-row" class="flex-row lp-row halves-row 100w">
+    <div id="first-row" class="flex-row lp-row halves-row 100w md-collapse">
         <div class="spacing-margin">
             <h1>Welcome to Inquizitive!</h1>
             <p>UCW's own reinforcement testing platform.</p>
@@ -37,15 +37,24 @@
     </div>
     
     <!-- Second row -->
-    <div id="second-row" class="flex-row lp-row halves-row 100w">
+    <div id="second-row" class="flex-row lp-row halves-row 100w md-collapse">
         <div>
             <img class="spacing-margin" src="../images/sampleimage.png" alt="sample">
         </div>
-        <div class="spacing-margin">Text portion</div>
+        <div class="spacing-margin">
+            <h3>Who It’s For</h3>
+            <p>Inquizitive is designed for university learners and the educators who support them, offering an engaging way to reinforce knowledge beyond traditional lectures.</p>
+
+            <h3>What It Does</h3>
+            <p>The platform gives teachers greater control over quiz creation and clear visibility into student progress, while providing students with a flexible space to practise and improve at their own pace.</p>
+
+            <h3>Why It Stands Out</h3>
+            <p>Inquizitive blends structured assessment with enjoyable gamified elements, striking a balance between formal testing and fun to motivate students even when no exam is approaching.</p>
+        </div>
     </div>
     
     <!-- Third row - how to use Inquizitive -->
-    <div id="guide-row" class="flex-row lp-row thirds-row 100vw">
+    <div id="guide-row" class="flex-row lp-row thirds-row 100vw md-collapse">
         <div class="flex-col">
             <img src="../images/sampleimage.png" alt="sample">
             <div class="textbox">
@@ -70,6 +79,12 @@
         </div>
     </div>
     
-    <div id="bottom-row">Row</div>
+    <div id="bottom-row">
+        <!-- to be email form -->
+        <form action="post">
+            <label for="email">Enter your email:</label>
+            <input type="email" id="email" name="email"> 
+        </form>
+    </div>
 </body>
 </html>

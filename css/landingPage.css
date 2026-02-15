@@ -19,8 +19,8 @@ body {
 }
 
 img {
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -44,7 +44,7 @@ img {
 }
 
 .textbox {
-    padding: 20px;
+    padding: var(--spacing);
 }
 
 .spacing-margin {
@@ -77,8 +77,14 @@ img {
   gap: var(--spacing);
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
     .sm-collapse {
+        grid-template-columns: auto;
+    }
+}
+
+@media (max-width: 950px) {
+    .md-collapse {
         grid-template-columns: auto;
     }
 }
@@ -106,12 +112,17 @@ button:hover {
     width: 100vw;
     min-height: 30px;
     background-color: var(--c-dark-purple);
+    background-image: linear-gradient(to right, var(--c-english-violet), var(--c-dark-purple), var(--c-dark-purple));
+    box-shadow: 5px 0px 0px var(--c-dark-purple);
+    z-index: 1;
     padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    vertical-align: middle;
 }
 
+/* placeholder */
 #logo {
     height: 40px;
     width: 40px;
@@ -152,17 +163,19 @@ button:hover {
 #guide-row {
     background-color: var(--c-english-violet);
     color: var(--c-offwhite);
+    padding: var(--spacing);
 }
 
 #guide-row img {
-    height: var(--md-img-height);
-    width: 100%;
+    height: var(--lg-img-height);
+    width: 25vw;
     object-fit: cover;
-    margin: var(--spacing) 0;
+    margin: var(--spacing) auto;
 }
 
 #bottom-row {
     width: 100vw;
     background-color: var(--c-dark-purple);
     color: var(--);
+    min-height: 100px;
 }
