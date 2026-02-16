@@ -45,7 +45,8 @@
                 <button type="submit" id="submitBtn">SIGN UP</button>
 
                 <p>
-                    <a href="/login">Already have an account? Sign in</a>
+                    <!-- Temp Link -->
+                    <a href="/Inquizitive">Already have an account? Sign in</a>
                 </p>
 
             </form>
