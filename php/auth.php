@@ -21,7 +21,7 @@
     if (isset($_POST['txtEmail']) && isset($_POST['txtPass'])) 
     {
         // Set variables.
-        $email = $_POST['txtEmail'];
+        $email = $email = strtolower(trim($_POST['txtEmail']));
         $password = $_POST['txtPass'];
 
         // Validate email format, send error if invalid.
