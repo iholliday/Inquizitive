@@ -4,31 +4,39 @@ lp stands for landing page
 
 
 
-/* Globals and raw elements */
+/* Globals and raw elements - classes exist to avoid bootstrap overriding */
 :root {
     --spacing: 50px;
 
 
-    --lg-img-height: 500px;
-    --md-img-height: 350px;
+    --img-height-lg: 500px;
+    --img-height-md: 350px;
 }
 
-body {
+.body {
     background-color: var(--main-bg);
     font-family: "Quicksand", sans-serif;
 }
 
 img {
-    height: 300px;
+    height: var(--img-height-md);
     width: 100%;
     object-fit: cover;
 }
 
+.a {
+    color: var(--c-yellow);
+}
+
+.a:hover {
+    color: var(--c-english-violet);
+}
+
 /* testing styles */
-/* * {
+* {
     border: black 1px dashed;
     background-color: rgba(200,200,200,0.5)
-} */
+}
 
 
 
@@ -43,51 +51,66 @@ img {
     flex-direction: column;
 }
 
-.textbox {
+.textbox-lg {
     padding: var(--spacing);
+    height: fit-content;
+}
+
+.textbox {
+    padding: 20px;
+    height: fit-content;
 }
 
 .spacing-margin {
     margin: var(--spacing);
 }
 
-
-
-/* General */
-.lp-row {
-    margin-bottom: 50px;
-}
-
-.lp-row img {
-    object-fit: cover;
-    height: 500px;
-    width: auto;
-    margin: var(--spacing);
-}
-
-.halves-row {
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: var(--spacing);
-}
-
-.thirds-row {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: var(--spacing);
-}
-
 @media (max-width: 600px) {
     .sm-collapse {
-        grid-template-columns: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .sm-hide {
+        display: none;
     }
 }
 
 @media (max-width: 950px) {
     .md-collapse {
-        grid-template-columns: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .md-hide {
+        display: none;
     }
 }
+
+
+
+/* General */
+.lp-row {
+    /*margin/padding and vert align*/
+    display: flex;
+    align-items: center;
+}
+
+.lp-row-internal {
+    max-width: 1500px;
+    margin: var(--spacing) auto;
+}
+
+.halves-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing);
+}
+
+.thirds-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing);
+}
+
 
 body button {
     border-style: none;
@@ -119,20 +142,25 @@ button:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    vertical-align: middle;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+#header > div {
+    height: fit-content;
 }
 
 /* placeholder */
 #logo {
     height: 40px;
     width: 40px;
-    background-color: var(--c-yellow); 
-    border-radius:5px; 
-    background-color: var(--c-english-violet);
+    border-radius: 10px; 
+    background-color: var(--c-dark-purple);
     display: flex;
     flex-direction: row;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 800;
     place-content: center;
     align-content: center;
 }
@@ -142,7 +170,7 @@ button:hover {
 }
 
 #logo .l2 {
-    color: var(--c-dark-purple) 
+    color: var(--c-english-violet) 
 }
 
 #first-row {
@@ -155,27 +183,37 @@ button:hover {
     color: var(--c-dark-purple)
 }
 
+#first-row > .lp-row-internal {
+    align-items: center;
+}
+
 #second-row {
     background-color: var(--c-offwhite);
     color: var(--c-dark-purple)
 }
 
+#second-row > .lp-row-internal {
+    align-items: center;
+}
+
 #guide-row {
     background-color: var(--c-english-violet);
     color: var(--c-offwhite);
-    padding: var(--spacing);
 }
 
 #guide-row img {
-    height: var(--lg-img-height);
-    width: 25vw;
+    height: var(--img-height-lg);
     object-fit: cover;
     margin: var(--spacing) auto;
+}
+
+#guide-row .a:hover {
+    color: var(--c-dark-purple)
 }
 
 #bottom-row {
     width: 100vw;
     background-color: var(--c-dark-purple);
-    color: var(--);
+    color: var(--c-offwhite);
     min-height: 100px;
 }

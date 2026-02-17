@@ -11,7 +11,7 @@
     --topbar-bg: var(--c-dark-purple);
     --sidebar-bg: var(--c-space-cadet);
     --sidebar-profile-bg: var(--c-dark-purple);
-    --main-bg: #ffffff;
+    --main-bg: var(--c-offwhite);
 
     --text: var(--c-offwhite);
     --muted: rgba(240, 240, 240, 0.75);

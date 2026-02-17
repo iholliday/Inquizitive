@@ -15,75 +15,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Mogra&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pacifico&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="body">
     <div id="header">
         <div id="logo"><div class="l1">i</div><div class="l2">Q</div></div>
         <div>
-            <button>Login</button>
+            <button class="sm-hide">Login</button>
             <button class="bold-button">Create an account</button>
         </div>
     </div>
     
     <!-- First row - welcome to Inquizitive -->
-    <div id="first-row" class="flex-row lp-row halves-row 100w md-collapse">
-        <div class="spacing-margin">
-            <h1>Welcome to Inquizitive!</h1>
-            <p>UCW's own reinforcement testing platform.</p>
-            <button>Find out more</button>
+    <section id="first-row" class="flex-row lp-row">
+        <div class="lp-row-internal halves-row 100w md-collapse">
+            <div class="textbox-lg">
+                <h1>Welcome to Inquizitive!</h1>
+                <p>UCW's own reinforcement testing platform.</p>
+                <button>Find out more</button>
+            </div>
+            <div>
+                <img class="" src="../images/sampleimage.png" alt="sample">
+            </div>
         </div>
-        <div>
-            <img class="spacing-margin" src="../images/sampleimage.png" alt="sample">
-        </div>
-    </div>
+    </section>
     
     <!-- Second row -->
-    <div id="second-row" class="flex-row lp-row halves-row 100w md-collapse">
-        <div>
-            <img class="spacing-margin" src="../images/sampleimage.png" alt="sample">
-        </div>
-        <div class="spacing-margin">
-            <h3>Who It’s For</h3>
-            <p>Inquizitive is designed for university learners and the educators who support them, offering an engaging way to reinforce knowledge beyond traditional lectures.</p>
+    <section id="second-row" class="flex-row lp-row">
+        <div class="lp-row-internal halves-row 100w md-collapse">
+            <div>
+                <img class="" src="../images/sampleimage.png" alt="sample">
+            </div>
+            <div class="textbox-lg">
+                <h3>Who It’s For</h3>
+                <p>Inquizitive is designed for university learners and the educators who support them, offering an engaging way to reinforce knowledge beyond traditional lectures.</p>
 
-            <h3>What It Does</h3>
-            <p>The platform gives teachers greater control over quiz creation and clear visibility into student progress, while providing students with a flexible space to practise and improve at their own pace.</p>
+                <h3>What It Does</h3>
+                <p>The platform gives teachers greater control over quiz creation and clear visibility into student progress, while providing students with a flexible space to practise and improve at their own pace.</p>
 
-            <h3>Why It Stands Out</h3>
-            <p>Inquizitive blends structured assessment with enjoyable gamified elements, striking a balance between formal testing and fun to motivate students even when no exam is approaching.</p>
+                <h3>Why It Stands Out</h3>
+                <p>Inquizitive blends structured assessment with enjoyable gamified elements, striking a balance between formal testing and fun to motivate students even when no exam is approaching.</p>
+            </div>
         </div>
-    </div>
+    </section>
     
     <!-- Third row - how to use Inquizitive -->
-    <div id="guide-row" class="flex-row lp-row thirds-row 100vw md-collapse">
-        <div class="flex-col">
-            <img src="../images/sampleimage.png" alt="sample">
-            <div class="textbox">
-                <h2>1: Create an account</h2>
-                <p>Click the <a href="">Sign Up</a> button in the top right to start!</p>
+    <section id="guide-row" class="flex-row lp-row 100vw">
+        <div class="lp-row-internal thirds-row md-collapse">
+            <div class="flex-col">
+                <img src="../images/sampleimage.png" alt="sample">
+                <div class="textbox">
+                    <h2>1: Create an account</h2>
+                    <p>Click <a class="a" href="">Create an Account</a> in the top right to start!</p>
+                </div>
+                
             </div>
-            
-        </div>
-        <div class="flex-col">
-            <img src="../images/sampleimage.png" alt="sample">
-            <div class="textbox">
-                <h2>2: Join a course</h2>
-                <p>Teachers can create classes for their students, or you can join a class created by your teacher.</p>
+            <div class="flex-col">
+                <img src="../images/sampleimage.png" alt="sample">
+                <div class="textbox">
+                    <h2>2: Join a course</h2>
+                    <p>Teachers can create classes for their students, or you can join a class created by your teacher.</p>
+                </div>
+            </div>
+            <div class="flex-col">
+                <img src="../images/sampleimage.png" alt="sample">
+                <div class="textbox">
+                    <h2>3: Start quizzing!</h2>
+                    <p>Learn in a fun environment and track your progress.</p>
+                </div>
             </div>
         </div>
-        <div class="flex-col">
-            <img src="../images/sampleimage.png" alt="sample">
-            <div class="textbox">
-                <h2>3: Start quizzing!</h2>
-                <p>Learn in a fun environment and track your progress.</p>
-            </div>
-        </div>
-    </div>
+    </section>
     
     <div id="bottom-row">
         <!-- to be email form -->
         <form action="post">
             <label for="email">Enter your email:</label>
-            <input type="email" id="email" name="email"> 
+            <input type="email" id="email" name="email">
+            <input type="text" name="" id="">
+            <input type="submit" value=""><i>></i></input>
         </form>
     </div>
 </body>
