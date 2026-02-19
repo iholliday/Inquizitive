@@ -383,6 +383,7 @@ document.addEventListener("submit", async (e) => {
       // Remove the deleted row from the table immediately
       btn.closest("tr").remove();
 
+      // Plan to add loadLecturers function, which will reload the table, reload the statistics and everything else
       if (typeof loadLecturers === "function") loadLecturers();
 
     } catch (err) {
@@ -398,15 +399,22 @@ document.addEventListener("submit", async (e) => {
   }); 
   </script>
 
+  <!-- Disabling users -->
   <script>
     document.addEventListener("click", async (e) => {
+
+    // Check if the clicked element is a disable/enable button
     const btn = e.target.closest(".lmToggleDisableBtn");
     if (!btn) return;
 
+    // Retrieve user UUID and current disabled state from data attribute
     const userUUID = btn.dataset.useruuid;
     const currentlyDisabled = btn.dataset.disabled === "1";
+    
+    // Determine new state
     const newDisabled = currentlyDisabled ? 0 : 1;
 
+    // Confirmation modal before changing anything
     const confirm = await Swal.fire({
       icon: "warning",
       title: newDisabled ? "Disable user?" : "Enable user?",
@@ -417,8 +425,10 @@ document.addEventListener("submit", async (e) => {
       confirmButtonText: newDisabled ? "Disable" : "Enable"
     });
 
+    // Stop execution if Admin cancels
     if (!confirm.isConfirmed) return;
 
+    // Prevent duplicate requests
     btn.disabled = true;
 
     try {
@@ -426,6 +436,7 @@ document.addEventListener("submit", async (e) => {
       fd.append("userUUID", userUUID);
       fd.append("isDisabled", String(newDisabled));
 
+      // Sending AJAX request to update user status
       const res = await fetch("./set-user-disabled", {
         method: "POST",
         body: fd,
@@ -443,7 +454,7 @@ document.addEventListener("submit", async (e) => {
       btn.dataset.disabled = String(newDisabled);
       btn.textContent = newDisabled ? "Enable" : "Disable";
 
-      // Update status badge in the row
+      // Update status badge visually in the table row
       const row = btn.closest("tr");
       const badge = row.querySelector("td:nth-child(3) .badge");
       if (badge) {
@@ -457,6 +468,7 @@ document.addEventListener("submit", async (e) => {
       console.error(err);
       await Swal.fire({ icon: "error", title: "Server error", text: "Something went wrong." });
     } finally {
+      // Re-enable button regardless of success/failure
       btn.disabled = false;
     }
   });
