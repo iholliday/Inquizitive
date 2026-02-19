@@ -40,7 +40,7 @@ $('#signup-form').submit(function (e)
     {
         // AJAX request to create account
         $.ajax({
-            url: "./createAccount",      // Adjust if needed (routing or relative path)
+            url: "./createAccount",     
             type: "POST",
             data: $('#signup-form').serialize(),
             dataType: "json",
@@ -49,7 +49,6 @@ $('#signup-form').submit(function (e)
 
                 if (res.status === "success") {
                     Swal.fire("Account created!", res.message, "success").then(() => {
-                        // Optionally redirect to login page
                         location.reload();
                     });
                 } else {

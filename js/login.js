@@ -42,7 +42,7 @@ $("#login-form").submit(function (event)
                 // Display SweetAlert error popup.
                 Swal.fire({
                 title: 'Login Failed',
-                text: 'Your username or password is incorrect. Please try again.',
+                text: res.message,
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
