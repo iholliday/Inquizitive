@@ -243,10 +243,13 @@ $stmt->close();
 
                       <td class="text-end">
                         <div class="lm-actions">
+                          <!-- Edit Button -->
                           <button class="btn btn-sm btn-outline-primary">Edit</button>
-                          <button class="btn btn-sm btn-outline-warning">
+                          <!-- Disable/Enable Button -->
+                          <button class="btn btn-sm btn-outline-warning lmToggleDisableBtn" data-useruuid="<?= htmlspecialchars($uuid) ?>" data-disabled="<?= $isDisabled?>">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
                           </button>
+                          <!-- Delete Button -->
                           <button class="btn btn-sm btn-outline-danger lmDeleteBtn" data-useruuid="<?= htmlspecialchars($uuid)?>">Delete</button>
                         </div>
                       </td>
@@ -323,6 +326,7 @@ document.addEventListener("submit", async (e) => {
 });
 </script>
 
+<!-- DELETE LECTURER SCRIPT -->
 <script>
   document.addEventListener("click", async (e) => {
     // Check if the clicked element is a delete button
@@ -392,4 +396,69 @@ document.addEventListener("submit", async (e) => {
       btn.disabled = false;
     }
   }); 
+  </script>
+
+  <script>
+    document.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".lmToggleDisableBtn");
+    if (!btn) return;
+
+    const userUUID = btn.dataset.useruuid;
+    const currentlyDisabled = btn.dataset.disabled === "1";
+    const newDisabled = currentlyDisabled ? 0 : 1;
+
+    const confirm = await Swal.fire({
+      icon: "warning",
+      title: newDisabled ? "Disable user?" : "Enable user?",
+      text: newDisabled
+        ? "This will prevent the user from accessing the system."
+        : "This will allow the user to access the system again.",
+      showCancelButton: true,
+      confirmButtonText: newDisabled ? "Disable" : "Enable"
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    btn.disabled = true;
+
+    try {
+      const fd = new FormData();
+      fd.append("userUUID", userUUID);
+      fd.append("isDisabled", String(newDisabled));
+
+      const res = await fetch("./set-user-disabled", {
+        method: "POST",
+        body: fd,
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      });
+
+      const data = await res.json();
+
+      if (!data.ok) {
+        await Swal.fire({ icon: "error", title: "Update failed", text: data.message || "Error" });
+        return;
+      }
+
+      // Update button label + state
+      btn.dataset.disabled = String(newDisabled);
+      btn.textContent = newDisabled ? "Enable" : "Disable";
+
+      // Update status badge in the row
+      const row = btn.closest("tr");
+      const badge = row.querySelector("td:nth-child(3) .badge");
+      if (badge) {
+        badge.className = "badge " + (newDisabled ? "lm-badge-danger" : "lm-badge-success");
+        badge.textContent = newDisabled ? "Disabled" : "Active";
+      }
+
+      await Swal.fire({ icon: "success", title: "Updated", text: data.message || "Done." });
+
+    } catch (err) {
+      console.error(err);
+      await Swal.fire({ icon: "error", title: "Server error", text: "Something went wrong." });
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
   </script>
