@@ -69,7 +69,7 @@
                 $_SESSION['accessLevel'] = $user['accessLevel'];
 
                 // Send success response.
-                echo json_encode(['status' => 'success', 'message' => 'Login successful']);
+                echo json_encode(['status' => 'success', 'message' => 'Welcome to the dashboard!']);
             } 
             else 
             {
