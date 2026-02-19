@@ -247,7 +247,7 @@ $stmt->close();
                           <button class="btn btn-sm btn-outline-warning">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
                           </button>
-                          <button class="btn btn-sm btn-outline-danger">Delete</button>
+                          <button class="btn btn-sm btn-outline-danger lmDeleteBtn" data-useruuid="<?= htmlspecialchars($uuid)?>">Delete</button>
                         </div>
                       </td>
                     </tr>
@@ -322,3 +322,74 @@ document.addEventListener("submit", async (e) => {
   }
 });
 </script>
+
+<script>
+  document.addEventListener("click", async (e) => {
+    // Check if the clicked element is a delete button
+    const btn = e.target.closest(".lmDeleteBtn");
+    if (!btn) return;
+
+    // Get the UUID stored in the buttons data attribute
+    const userUUID = btn.dataset.useruuid;
+
+    // Ask the Admin User to confirm, warning that this action is permenant, a way to delete not permenantly will be disabling
+    const confirm = await Swal.fire({
+      icon: "warning",
+      title: "Delete user?",
+      text: "This action is permanent and cannot be undone.",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      confirmButtonColor: "#d33"
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    // Used to prevent double-clicking or duplicate requests
+    btn.disabled = true;
+
+    try {
+      const fd = new FormData();
+      fd.append("userUUID", userUUID);
+
+      const res = await fetch("./delete-user", {
+        method: "POST",
+        body: fd,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      });
+
+      const data = await res.json();
+
+      if (!data.ok) {
+        await Swal.fire({
+          icon: "error",
+          title: "Delete failed",
+          text: data.message || "Something went wrong."
+        });
+        return;
+      }
+
+      await Swal.fire({
+        icon: "success",
+        title: "User deleted",
+        text: data.message || "Account removed successfully."
+      });
+
+      // Remove the deleted row from the table immediately
+      btn.closest("tr").remove();
+
+      if (typeof loadLecturers === "function") loadLecturers();
+
+    } catch (err) {
+      console.error(err);
+      await Swal.fire({
+        icon: "error",
+        title: "Server error",
+        text: "Something went wrong."
+      });
+    } finally {
+      btn.disabled = false;
+    }
+  }); 
+  </script>

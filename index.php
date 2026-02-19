@@ -19,6 +19,7 @@
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
     $route->Route(['post'], '/add-lecturer', "./php/addLecturer.php");
+    $route->Route(['post'], '/delete-user', "./php/deleteUser.php");
 
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
 
