@@ -196,9 +196,9 @@ body {
 .click{
     height:100vh;
     width:100vw;
-    /* This needs to be on top of anything else, if anyone adds anything, they need to be aware that this needs to go above ANYTHING */
     z-index: 1;
-    position:absolute;
+    position:fixed;
+    inset: 0;
 }
 
 .hidden{
@@ -280,7 +280,6 @@ body {
     flex: 1;
     min-width: 0;
     background: var(--main-bg);
-    padding: 12px;
     overflow: auto;
     color: #111;
 }
@@ -359,4 +358,262 @@ body {
     .sidebar-overlay.show {
         display: block;
     }
+}
+
+/* =========================================
+   Lecturer Management (page-scoped)
+   ========================================= */
+
+#adminDashboard {
+  --lm-surface: #ffffff;
+  --lm-border: rgba(0, 0, 0, 0.08);
+  --lm-muted: rgba(0, 0, 0, 0.55);
+  --lm-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  --lm-radius: 16px;
+}
+
+#adminDashboard .lm-header,
+#adminDashboard .sm-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#adminDashboard .lm-header__right,
+#adminDashboard .sm-header__right {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#adminDashboard .lm-title,
+#adminDashboard .sm-title {
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+#adminDashboard .lm-subtitle,
+#adminDashboard .sm-subtitle {
+  color: var(--lm-muted);
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+#adminDashboard .lm-card,
+#adminDashboard .sm-card {
+  background: var(--lm-surface);
+  border: 1px solid var(--lm-border);
+  border-radius: var(--lm-radius);
+  box-shadow: var(--lm-shadow);
+}
+
+#adminDashboard .lm-stat,
+#adminDashboard .sm-stat {
+  padding: 16px 18px;
+}
+
+#adminDashboard .lm-stat__label,
+#adminDashboard .sm-stat__label {
+  color: var(--lm-muted);
+  font-size: 0.9rem;
+}
+
+#adminDashboard .lm-stat__value,
+#adminDashboard .sm-stat__value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+#adminDashboard .lm-panel__head,
+#adminDashboard .sm-panel__head {
+  padding: 18px 18px 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--lm-border);
+}
+
+#adminDashboard .lm-panel__body,
+#adminDashboard .sm-panel__body {
+  padding: 18px;
+}
+
+#adminDashboard .lm-controls,
+#adminDashboard .sm-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#adminDashboard .lm-controls .form-control,
+#adminDashboard .sm-controls .form-control {
+  width: 240px;
+  max-width: 100%;
+}
+
+#adminDashboard .lm-controls .form-select,
+#adminDashboard .sm-controls .form-select {
+  width: 160px;
+  max-width: 100%;
+}
+
+#adminDashboard #lmCreateBtn,
+#adminDashboard #smCreateBtn {
+  margin-top:20px;
+}
+
+#adminDashboard .form-control,
+#adminDashboard .form-select {
+  border-radius: 10px;
+}
+
+#adminDashboard .btn {
+  border-radius: 10px;
+}
+
+#adminDashboard .lm-note {
+  font-size: 0.9rem;
+  color: var(--lm-muted);
+}
+
+#adminDashboard .lm-badge,
+#adminDashboard .sm-badge {
+  background: rgba(13, 110, 253, 0.12);
+  color: rgba(13, 110, 253, 1);
+  border: 1px solid rgba(13, 110, 253, 0.25);
+}
+
+#adminDashboard .lm-badge-success,
+#adminDashboard .sm-badge-success {
+  background: rgba(25, 135, 84, 0.12);
+  color: rgba(25, 135, 84, 1);
+  border: 1px solid rgba(25, 135, 84, 0.25);
+}
+
+#adminDashboard .lm-badge-danger,
+#adminDashboard .sm-badge-danger {
+  background: rgba(173, 20, 87, 0.10);
+  color: rgba(173, 20, 87, 1);
+  border: 1px solid rgba(173, 20, 87, 0.25);
+}
+
+#adminDashboard .lm-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#adminDashboard .lm-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  background: rgba(13, 110, 253, 0.12);
+  color: rgba(13, 110, 253, 1);
+  flex: 0 0 auto;
+}
+
+#adminDashboard .lm-person__name,
+#adminDashboard .sm-subject__name {
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+#adminDashboard .lm-person__id,
+#adminDashboard .sm-subject__id {
+  font-size: 0.85rem;
+  color: var(--lm-muted);
+}
+
+#adminDashboard .lm-panel__scroll,
+#adminDashboard .sm-panel__scroll{
+  height: 450px !important;
+  max-height: 450px !important;
+  overflow: auto !important;
+
+  padding: 14px !important;   /* always-visible inset */
+}
+
+
+#adminDashboard .lm-tableWrap,
+#adminDashboard .sm-tableWrap{
+  border: 1px solid var(--lm-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#adminDashboard .table thead th{
+  top: 14px;
+}
+
+#adminDashboard .table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.02);
+  color: var(--lm-muted);
+  font-size: 0.86rem;
+  border-bottom: 1px solid var(--lm-border);
+}
+
+#adminDashboard .lm-actions,
+#adminDashboard .sm-actions {
+  display: inline-flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+#adminDashboard .lm-actions .btn,
+#adminDashboard .sm-actions .btn {
+  padding: 0.28rem 0.6rem;
+}
+
+#adminDashboard .lm-eq > .lm-eq__col,
+#adminDashboard .sm-eq > .sm-eq__col {
+  display: flex;
+  padding-bottom:50px;
+}
+
+#adminDashboard .lm-eq__card,
+#adminDashboard .sm-eq__card {
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  #adminDashboard .lm-header,
+  #adminDashboard .sm-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #adminDashboard .lm-header__right,
+  #adminDashboard .sm-header__right {
+    justify-content: flex-start;
+  }
+
+  #adminDashboard .lm-panel__head,
+  #adminDashboard .sm-panel__head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #adminDashboard .lm-controls,
+  #adminDashboard .sm-controls {
+    width: 100%;
+  }
+
+  #adminDashboard .lm-controls .form-control,
+  #adminDashboard .lm-controls .form-select ,
+  #adminDashboard .sm-controls .form-control,
+  #adminDashboard .sm-controls .form-select {
+    width: 100%;
+  }
 }
