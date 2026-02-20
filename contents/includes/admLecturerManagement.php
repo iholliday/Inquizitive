@@ -58,7 +58,7 @@ $stmt->close();
 
 ?>
 
-<div id="admLecturerManagement" class="container-fluid py-4">
+<div id="adminDashboard" class="container-fluid py-4">
 
   <!-- Header -->
   <div class="lm-header mb-4">
