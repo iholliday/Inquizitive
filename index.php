@@ -31,6 +31,7 @@
     $route->Route(['get'], '/student-management', "./contents/includes/studentManagement.php");
     $route->Route(['get'], '/test-management', "./contents/includes/testManagement.php");
     $route->Route(['get'], '/lecturer-management', "./contents/includes/admLecturerManagement.php");
+    $route->Route(['get'], '/subject-management', "./contents/includes/admSubjectManagement.php");
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
 

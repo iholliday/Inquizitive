@@ -46,6 +46,7 @@
                     <div class="admin-nav">
                         <hr class="nav-divider">
                         <a class="nav-item link" id="lecturer-management">Lecturer Management</a>
+                        <a class="nav-item link" id="subject-management">Subject Management</a>
                     </div>
                 </nav>
 
