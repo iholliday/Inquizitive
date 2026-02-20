@@ -1,21 +1,25 @@
 /* CSS for the landing page 
 lp stands for landing page
+!important used to override bootstrap
 */
 
 
 
-/* Globals and raw elements - classes exist to avoid bootstrap overriding */
+/* Globals and raw elements */
 :root {
     --spacing: 50px;
 
 
     --img-height-lg: 500px;
     --img-height-md: 350px;
+
+
 }
 
-.body {
-    background-color: var(--main-bg);
-    font-family: "Quicksand", sans-serif;
+body {
+    background-color: var(--main-bg) !important;
+    font-family: Geneva, sans-serif !important; /* backup font */
+    font-family: "Quicksand", sans-serif !important;
 }
 
 img {
@@ -24,19 +28,19 @@ img {
     object-fit: cover;
 }
 
-.a {
-    color: var(--c-yellow);
+a {
+    color: var(--c-yellow) !important;
 }
 
-.a:hover {
-    color: var(--c-english-violet);
+a:hover {
+    color: var(--c-english-violet) !important;
 }
 
 /* testing styles */
-* {
+/* * {
     border: black 1px dashed;
     background-color: rgba(200,200,200,0.5)
-}
+} */
 
 
 
@@ -127,6 +131,12 @@ button:hover {
 .bold-button {
     background-color: var(--c-yellow);
     color: var(--c-dark-purple);
+}
+
+.large-section-img {
+    width: 750px;
+    max-width: 100vw;
+    height: 650px;
 }
 
 

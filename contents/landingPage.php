@@ -33,7 +33,7 @@
                 <button>Find out more</button>
             </div>
             <div>
-                <img class="" src="../images/sampleimage.png" alt="sample">
+                <img class="large-section-img" src="../images/sampleimage.png" alt="picture of app">
             </div>
         </div>
     </section>
@@ -42,7 +42,7 @@
     <section id="second-row" class="flex-row lp-row">
         <div class="lp-row-internal halves-row 100w md-collapse">
             <div>
-                <img class="" src="../images/sampleimage.png" alt="sample">
+                <img class="large-section-img" src="../images/sampleimage.png" alt="student using app">
             </div>
             <div class="textbox-lg">
                 <h3>Who It’s For</h3>
@@ -86,13 +86,13 @@
     </section>
     
     <div id="bottom-row">
-        <!-- to be email form -->
+        <!-- to be email form - hidden for first pull request
         <form action="post">
             <label for="email">Enter your email:</label>
             <input type="email" id="email" name="email">
             <input type="text" name="" id="">
             <input type="submit" value=""><i>></i></input>
-        </form>
+        </form> -->
     </div>
 </body>
 </html>
