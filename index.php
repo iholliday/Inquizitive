@@ -22,7 +22,8 @@
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
     $route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
     $route->Route(['get'], '/tempCreateUser', "./contents/tempCreateUser.php");
-
+    $route->Route(['get'], '/signup', "./contents/signup.php");
+    $route->Route(['get'], '/login', "./contents/login.php");
 
 
     $route->Route(['get'], '/logoutPage', "./php/logout.php");
