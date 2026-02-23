@@ -81,9 +81,9 @@ class quiz
                 $moveSpot = random_int(0, (sizeof($this->questions) -1)); // Cryptographically secure random generation
                 //Please pay attention that we remove 1 from the max to avoid
                 //an off by one error :3
-
-                $spotArray[$target] =$moveSpot;
-                $spotArray[$moveSpot] = $target;
+                $temp = $spotArray[$target];
+                $spotArray[$target] =$spotArray[$moveSpot];
+                $spotArray[$moveSpot] = $temp;
                 //swap complete
             }    
         }
@@ -156,15 +156,15 @@ $currentQuiz->shuffleQuestions();
                 for($n=0; $n < sizeof($currentQuiz->getQuestions());$n++)
                 {
                     echo '
-                    <div id="question' . $n . '" class="questionWrapper hidden"> 
+                    <div id="' . $currentQuiz->getQuestions()[$n]->getUUID() . '" class="questionWrapper hidden"> 
                         <div class="questionText ">
                             <h1>Question: ' . $currentQuiz->getQuestions()[$n]->getDescription() . '</h1>
                         </div>
                         <div class="questionOptionWrapper">
-                            <div id="' . $n . 'A" class="questionOption">A: ' . $currentQuiz->getQuestions()[$n]->getOptions()[0] . '</div>
-                            <div id="' . $n . 'B" class="questionOption">B: ' . $currentQuiz->getQuestions()[$n]->getOptions()[1] . '</div>
-                            <div id="' . $n . 'C" class="questionOption">C: ' . $currentQuiz->getQuestions()[$n]->getOptions()[2] . '</div>
-                            <div id="' . $n . 'D" class="questionOption">D: ' . $currentQuiz->getQuestions()[$n]->getOptions()[3] . '</div> 
+                            <div id="' . $n . 'A" class="questionOption" choice ="A">A: ' . $currentQuiz->getQuestions()[$n]->getOptions()[0] . '</div>
+                            <div id="' . $n . 'B" class="questionOption" choice ="B">B: ' . $currentQuiz->getQuestions()[$n]->getOptions()[1] . '</div>
+                            <div id="' . $n . 'C" class="questionOption" choice ="C">C: ' . $currentQuiz->getQuestions()[$n]->getOptions()[2] . '</div>
+                            <div id="' . $n . 'D" class="questionOption" choice ="D">D: ' . $currentQuiz->getQuestions()[$n]->getOptions()[3] . '</div> 
                         </div>
                     </div>'; 
                 }
@@ -179,20 +179,42 @@ $currentQuiz->shuffleQuestions();
         var submitted = false;
         timeLeft =20000;
         timeSpent =0;
+        function sendPayload()
+        {
+            if(!submitted)
+            {
+                clearTimeout(quizTimeout);
+                console.log(answered);
+                submitted=true;
+            }
+        }
         function quizTimer()
         {
             percent = ((timeLeft-timeSpent) / timeLeft) * 100;
             $("#quizTimer").css("width",percent+"%");
             if(timeLeft-(timeSpent+100)>0)
             {
-                quizTimeout = setTimeout(quizTimer, 100);
-                timeSpent+=100;
+                if(answered.length < questions.length){
+                    quizTimeout = setTimeout(quizTimer, 100);
+                    timeSpent+=100;
+                }else
+                {
+                    sendPayload();
+                }
             }else
             {
                 if(answered.length < questions.length)
                 {
-                    answered.push("Time ran out!");
+                    var payload ={
+                        questionUUID: questions[currentQuestion].toString(),
+                        answer: "Time ran out!"
+                    }
+                    console.log(currentQuestion);
+                    answered.push(payload);
                     nextQuestion();
+                }else
+                {
+                    sendPayload();
                 }
             }
         }
@@ -213,8 +235,7 @@ $currentQuiz->shuffleQuestions();
             }else
             {
                 //send data to results page
-                clearTimeout(quizTimeout);
-                console.log(answered);
+                sendPayload();
             }
         }
 
@@ -231,13 +252,24 @@ $currentQuiz->shuffleQuestions();
         $(".questionOption").ready(function(){
             $(".questionOption").click(function(){
                 if(answered.length<questions.length){
-                    answered.push($(this).attr("id").toString());
+                    var payload ={
+                        questionUUID: questions[currentQuestion],
+                        answer: $(this).attr("choice").toString()
+                    }
+                    console.log(currentQuestion);
+                    answered.push(payload);
                     nextQuestion();
+                }else
+                {
+                    sendPayload();
                 }
             })
         })
 
-        nextQuestion();
+        //Show the first and start counting
+        $(".questionWrapper").addClass("hidden");
+        $("#"+questions[currentQuestion]).removeClass("hidden");
+        quizTimer();
 
         })
     </script>
