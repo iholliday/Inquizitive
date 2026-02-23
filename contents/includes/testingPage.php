@@ -222,11 +222,11 @@ $currentQuiz->shuffleQuestions();
         {
             if(currentQuestion < questions.length)
             {
+                currentQuestion+=1;
                 $(".questionWrapper").addClass("hidden");
                 $("#"+questions[currentQuestion]).removeClass("hidden");
                 timeLeft = 20000;
                 timeSpent =0;
-                currentQuestion+=1;
                 if( typeof quizTimeout !== 'undefined')
                 {
                     clearTimeout(quizTimeout);
