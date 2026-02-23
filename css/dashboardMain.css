@@ -464,6 +464,16 @@ body {
 #adminDashboard #lmCreateBtn,
 #adminDashboard #smCreateBtn {
   margin-top:20px;
+  background-color: var(--c-english-violet);
+  color:white;
+}
+
+#adminDashboard #lmCreateBtn:hover,
+#adminDashboard #smCreateBtn:hover {
+  margin-top:20px;
+  background-color: var(--c-space-cadet);
+  color:white;
+  transition:ease-in-out 0.2s;
 }
 
 #adminDashboard .form-control,

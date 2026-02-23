@@ -119,7 +119,7 @@ $stmt->close();
             </div>
 
             <div class="col-12 d-grid mt-1">
-              <button type="submit" class="btn btn-primary" id="smCreateBtn">
+              <button type="submit" class="btn" id="smCreateBtn">
                 Create Subject
               </button>
             </div>
