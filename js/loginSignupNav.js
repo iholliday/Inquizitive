@@ -26,5 +26,10 @@ $(document).ready(function()
         e.preventDefault();
         loadPage("signup");
     });
+
+    $("#dashboardLink").click(function(e){
+        e.preventDefault();
+        loadPage("dashboard");
+    });
 });
 

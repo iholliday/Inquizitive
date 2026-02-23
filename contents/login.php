@@ -73,9 +73,13 @@
         } else 
         {
     ?>
-    <script>
-        loadPage("dashboard");
-    </script>
+            <a href="#" id="dashboardLink" style="display:none;">Dashboard</a>
+            <script>
+                
+                $(document).ready(function() {
+                    $("#dashboardLink").click();
+                });
+            </script>
     <?php
         }
     ?>
