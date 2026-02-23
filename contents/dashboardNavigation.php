@@ -37,15 +37,28 @@
                     <a class="nav-item link" id="quizzes">Quizzes</a>
                     <a class="nav-item link" id="subjects">Subjects</a>
                     <a class="nav-item link" id="results">Results</a>
-                    <div class="lecturer-nav">
-                        <hr class="nav-divider">
-                        <a class="nav-item link" id="student-management">Student Management</a>
-                        <a class="nav-item link" id="test-management">Test Management</a>
-                    </div>
-                    <div class="admin-nav">
-                        <hr class="nav-divider">
-                        <a class="nav-item link" id="lecturer-management">Lecturer Management</a>
-                    </div>
+                    <?php 
+                        if (isset($_SESSION['accessLevel']) && in_array($_SESSION['accessLevel'], ["LECTURER", "ADMIN"])) {
+                        ?>
+                            <div class="lecturer-nav">
+                                <hr class="nav-divider">
+                                <a class="nav-item link" id="student-management">Student Management</a>
+                                <a class="nav-item link" id="test-management">Test Management</a>
+                            </div>
+                        <?php
+                        }
+                    ?>
+
+                    <?php 
+                        if (isset($_SESSION['accessLevel']) && $_SESSION['accessLevel'] === "ADMIN") {
+                        ?>
+                            <div class="admin-nav">
+                                <hr class="nav-divider">
+                                <a class="nav-item link" id="lecturer-management">Lecturer Management</a>
+                            </div>
+                        <?php
+                        }
+                    ?>
                 </nav>
 
                 <!-- Drop up -->
