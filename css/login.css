@@ -175,17 +175,19 @@
 }
 
 .signup form {
-    margin-left: 23px;
+    margin-right: 20px;
 }
 
 .name-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
     gap: 15px;
+    width: 321px;
 }
 
 .name-row input {
-    width: 35.4%;
-    max-width: 100%;
+    width: 100%; 
+    box-sizing: border-box;
 }
 
 .signup .g-recaptcha {
@@ -200,11 +202,11 @@
 }
 
 .signup .signup-divider {
-    margin-left: -10px;
+    margin-left: 10px;
 }
 
 .signup #loginLink {
-    margin-left: -18px;
+    margin-left: -40px;
 }
 
 /* ===== Mobile ===== */
@@ -223,24 +225,11 @@
     } 
 
     .signup .grid-item {
-        max-width: 260px;
-        margin-left: 22px;
-    }
-
-    .signup .g-recaptcha {
-        margin-left:27px;
+        max-width: 97%;
     }
 
     .signup .name-row input {
-        width: 132px;
-    }
-
-    .signup .signup-divider {
-        margin-left: 10px;
-    }
-
-    .signup #loginLink {
-        margin-left: -40px;
+        flex: 1;
     }
 }
 
