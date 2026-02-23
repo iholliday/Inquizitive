@@ -6,7 +6,7 @@
     require_once ("php/_connect.php");
 
     // Establishing routing variables ($routerOptions order: debugMode, urlPrefix, cspLevel, forceTrailingSlash).
-    $routerOptions = new RouterOptions(false, '/inq/Inquizitive', 'none', false);
+    $routerOptions = new RouterOptions(false, 'Inquizitive/', 'none', false);
     $route = new jRoute($routerOptions);
 
     // Default route.
@@ -31,6 +31,7 @@
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
 
+    $route->Route(['post'], '/testing', "./contents/includes/testingPage.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
 

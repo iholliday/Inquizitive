@@ -1,0 +1,143 @@
+#testingPage
+{
+    position: relative;
+    height: 100%;
+    width:100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color:  rgb(82, 74, 113);
+    color:white; 
+    padding:0;
+    margin:0;
+}
+.main
+{
+    padding :0;
+}
+#content {
+    height:100%;
+    width:100%;
+    max-height:100%;
+    max-width:100%;
+    overflow-x: hidden;
+    overflow-y: auto; 
+}
+#testingPage #quizTimerWrapper
+{
+    position: relative;
+    width:98%;
+    height:25px;
+    padding:4px;
+    left:1%;
+    top:5px;
+    background-color: rgba(255,255,255,0.1);
+}
+#testingPage #quizTimer
+{
+    transition: 0.11s all linear;
+    height:100%;
+    margin-left:0;
+
+}
+#testingPage .animatedBackground
+{
+    background-color: rgba(36, 29, 52,1);
+    color:white; 
+    background-image: linear-gradient(to right, rgb(240,240,240), rgb(100, 92, 127)); /*respecting the house style*/
+    background-size:400%;
+    background-repeat: no-repeat; 
+    background-position: 0% 0%; 
+    animation: prettyBackground 2s infinite;
+}
+#testingPage .questionWrapper
+{
+    position:absolute;
+    height:95%;
+    width:98%;
+    left:1%;
+    padding-top:10%;
+    padding-left:5%;
+    padding-right:5%;
+}
+#testingPage .questionText
+{
+    background-color: rgba(240,240,240,0.8);
+    height:20%;
+    width:100%;
+    
+}
+#testingPage .questionText
+{
+    background-color: rgba(240,240,240,0.8);
+    color:gray;
+    font-size: large;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+#testingPage .questionText h1
+{
+    position: relative;
+    top:25%;
+    max-height:75%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#testingPage .questionOptionWrapper
+{
+    background-color: rgba(240,240,240,0.8);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    padding:25px;
+    min-height: 50%;
+    max-height: 50%;
+    margin-top: 5px;
+}
+#testingPage .questionOptionWrapper .questionOption
+{
+    margin:5px;
+    border:solid gray 2px;
+    color:gray;
+    font-size: x-large;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#testingPage .questionOptionWrapper .questionOption:hover
+{
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.1);
+    transition: 0.1s ease-in-out;
+
+}
+
+#testingPage .hidden
+{
+    display: none !important ;
+}
+
+
+
+@keyframes prettyBackground {
+    0%{background-position: 0% 0%;}
+    50%{background-position: 100% 100%;}
+    100%{background-position: 0% 0%;}
+}
+@media screen and (max-width: 740px) {
+    #testingPage
+    {
+        position: static !important;
+        height:100%;
+    }
+  #testingPage .questionOptionWrapper
+ {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr 1fr 1fr 1fr !important;
+  }
+
+#main {
+        background-color:  rgb(82, 74, 113) !important;
+
+}
+}
