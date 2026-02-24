@@ -68,7 +68,7 @@ require_once __DIR__ . "/../../php/_connect.php";
             </div>
 
             <div class="col-12 d-grid mt-1">
-              <button type="submit" class="btn btn-primary" id="sdmCreateBtn">
+              <button type="submit" class="btn" id="sdmCreateBtn">
                 Create Student
               </button>
             </div>

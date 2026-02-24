@@ -425,6 +425,19 @@ body {
   margin-top:20px;
 }
 
+#lecturerDashboard #sdmCreateBtn{
+  margin-top:20px;
+  background-color: var(--c-english-violet);
+  color:white;
+}
+
+#lecturerDashboard #sdmCreateBtn:hover{
+  margin-top:20px;
+  background-color: var(--c-space-cadet);
+  color:white;
+  transition:ease-in-out 0.2s;
+}
+
 #lecturerDashboard .form-control,
 #lecturerDashboard .form-select {
   border-radius: 10px;
