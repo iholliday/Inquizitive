@@ -6,7 +6,7 @@
     require_once ("php/_connect.php");
 
     // Establishing routing variables ($routerOptions order: debugMode, urlPrefix, cspLevel, forceTrailingSlash).
-    $routerOptions = new RouterOptions(false, '/inq/Inquizitive', 'none', false);
+    $routerOptions = new RouterOptions(false, 'Inquizitive/', 'none', false);
     $route = new jRoute($routerOptions);
 
     // Default route.
@@ -15,6 +15,7 @@
     // Allow serving static CSS and JS directories directly.
     $route->AddDir('/css', "./css/");
     $route->AddDir('/js', "./js/");
+    $route->AddDir('/img', "./contents/images/");
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
@@ -30,6 +31,8 @@
     $route->Route(['get'], '/lecturer-management', "./contents/includes/admLecturerManagement.php");
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
+    $route->Route(['get'], '/shop', "./contents/includes/shopPage.php");
+    $route->Route(['get'], '/inventory', "./contents/includes/inventoryPage.php");
 
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
