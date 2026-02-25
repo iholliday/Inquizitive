@@ -16,8 +16,8 @@ if ($result = $db->Query("CALL GetAllQuizzes();",[])) {
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)){
             echo'<div>
-                <div>Quizz ' . htmlspecialchars($row['quizUUID']) . '</div>
-                <button id="' . htmlspecialchars($row['quizUUID']) . '" class ="take-quizz-btn" >Take quizz</button>
+                <div>Quiz ' . htmlspecialchars($row['quizUUID']) . '</div>
+                <button id="' . htmlspecialchars($row['quizUUID']) . '" class ="take-quiz-btn" >Take quiz</button>
             </div>';
         }
     }
@@ -28,12 +28,12 @@ if ($result = $db->Query("CALL GetAllQuizzes();",[])) {
     </section>
 
     <script> // Move to scriptName.js
-        $(".take-quizz-btn").ready(function(){
-            $(".take-quizz-btn").click(function(){
+        $(".take-quiz-btn").ready(function(){
+            $(".take-quiz-btn").click(function(){
                 $.ajax({
                     url: './testing', 
                     type: 'POST', 
-                    data: { quizzID: $(this).attr("id").toString(), key2: 'test' },
+                    data: { quizID: $(this).attr("id").toString(), key2: 'test' },
                     success: function(response) {
                         //console.log('Success:', response);
                         $("#content").html(response);

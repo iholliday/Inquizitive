@@ -29,6 +29,22 @@ class question
         $this->questionUUID=$UUID;
     }
 
+    public function shuffleOptions()
+    {
+        for($i=0; $i < sizeof($this->options);$i++)
+        {
+            $target = random_int(0, (sizeof($this->options) -1)); // Cryptographically secure random generation
+            $moveSpot = random_int(0, (sizeof($this->options) -1)); // Cryptographically secure random generation
+            //Please pay attention that we remove 1 from the max to avoid
+            //an off by one error :3
+            $memory = $this->options[$target];
+            $this->options[$target] = $this->options[$moveSpot];
+            $this->options[$moveSpot] = $memory; // Now theoretically we could do a bit XOR so we don't have to use memory 
+            //But this saves development time for abysmal memory cost.
+            //Future efficiency can be implemented here in the case that we run into memory problems (we won't)
+        }
+    }
+
     public function getTitle()
     {
         return $this->title;
@@ -85,6 +101,10 @@ class quiz
                 $spotArray[$target] =$spotArray[$moveSpot];
                 $spotArray[$moveSpot] = $temp;
                 //swap complete
+
+                $this->questions[$n]->shuffleOptions();
+                //Also shuffle the order of the options 
+                //This way we ensure that students can't memorise answer positions but the actual answer
             }    
         }
         //shuffle complete
@@ -110,9 +130,10 @@ class quiz
 $currentQuiz = new quiz();
 $db= new inquizitiveDB ();
 
-$quizUUID = mysqli_real_escape_string($db->connect,$_POST['quizzID']); // Unnecessary since we use prepared statements anyway but why not?
+$quizUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quizID'])); // Unnecessary since we use prepared statements anyway but why not?
+//UUID now also uses htmlspecialchars
 //We query the questions for the given UUID
-if ($result = $db->Query("CALL GetQuizzQuestionsByID(?);",[$quizUUID])) {
+if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
 
     $questionCount = mysqli_num_rows($result);
     if ($questionCount > 0) {
@@ -143,28 +164,32 @@ $currentQuiz->shuffleQuestions();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizz Title</title>
+    <title>Quiz Title</title>
     <link rel = "stylesheet" href="./css/testingPage.css" /> 
 </head>
 <body>
-    <section id="testingPage" class="">
-        <div id="quizTimerWrapper">
-            <div id="quizTimer" class="animatedBackground"></div>
+    <section id="testing-page" class="">
+        <div id="quiz-timer-wrapper" class="shadow-sm">
+            <div id="quiz-timer" class="animated-background"></div>
         </div>
-        <div id="quizzesWrapper">
+        <div id="quizzes-wrapper">
             <?php
                 for($n=0; $n < sizeof($currentQuiz->getQuestions());$n++)
                 {
                     echo '
-                    <div id="' . $currentQuiz->getQuestions()[$n]->getUUID() . '" class="questionWrapper hidden"> 
-                        <div class="questionText ">
-                            <h1>Question: ' . $currentQuiz->getQuestions()[$n]->getDescription() . '</h1>
+                    <div id="' . $currentQuiz->getQuestions()[$n]->getUUID() . '" class="question-wrapper hidden"> 
+                        <div class="question-text shadow">
+                            <div class="question-num">QUESTION ' . ($n+1) .'/' . sizeof($currentQuiz->getQuestions()) . '</div>
+                            <div class="divider-small">
+                                <div class="quiz-completion-divider"></div>
+                            </div>
+                            <h1>' . $currentQuiz->getQuestions()[$n]->getDescription() . '</h1>
                         </div>
-                        <div class="questionOptionWrapper">
-                            <div id="' . $n . 'A" class="questionOption" choice ="A">A: ' . $currentQuiz->getQuestions()[$n]->getOptions()[0] . '</div>
-                            <div id="' . $n . 'B" class="questionOption" choice ="B">B: ' . $currentQuiz->getQuestions()[$n]->getOptions()[1] . '</div>
-                            <div id="' . $n . 'C" class="questionOption" choice ="C">C: ' . $currentQuiz->getQuestions()[$n]->getOptions()[2] . '</div>
-                            <div id="' . $n . 'D" class="questionOption" choice ="D">D: ' . $currentQuiz->getQuestions()[$n]->getOptions()[3] . '</div> 
+                        <div class="question-option-wrapper shadow">
+                            <div id="' . $n . 'A" class="question-option question-option-A shadow-sm" choice ="A">' . $currentQuiz->getQuestions()[$n]->getOptions()[0] . '</div>
+                            <div id="' . $n . 'B" class="question-option question-option-B shadow-sm" choice ="B">' . $currentQuiz->getQuestions()[$n]->getOptions()[1] . '</div>
+                            <div id="' . $n . 'C" class="question-option question-option-C shadow-sm" choice ="C">' . $currentQuiz->getQuestions()[$n]->getOptions()[2] . '</div>
+                            <div id="' . $n . 'D" class="question-option question-option-D shadow-sm" choice ="D">' . $currentQuiz->getQuestions()[$n]->getOptions()[3] . '</div> 
                         </div>
                     </div>'; 
                 }
@@ -177,21 +202,37 @@ $currentQuiz->shuffleQuestions();
         var currentQuestion =0;
         var quizTimeout =setTimeout(() => {}, 10);
         var submitted = false;
+        var completion =0;
         timeLeft =20000;
         timeSpent =0;
+        function completionBarUpdate()
+        {
+            if( currentQuestion !== 0 && currentQuestion <= questions.length)
+            {
+                completion = (currentQuestion / questions.length) *100;
+                $(".quiz-completion-divider").css("width",completion+"%");
+        
+            }else if( currentQuestion ==0 )
+            {
+                completion =0; //Avoid division by 0 or computer very angry :c
+                $(".quiz-completion-divider").css("width",completion+"%");
+            }
+        }
         function sendPayload()
         {
             if(!submitted)
             {
                 clearTimeout(quizTimeout);
+                completionBarUpdate();
                 console.log(answered);
                 submitted=true;
             }
         }
+
         function quizTimer()
         {
             percent = ((timeLeft-timeSpent) / timeLeft) * 100;
-            $("#quizTimer").css("width",percent+"%");
+            $("#quiz-timer").css("width",percent+"%");
             if(timeLeft-(timeSpent+100)>0)
             {
                 if(answered.length < questions.length){
@@ -223,7 +264,7 @@ $currentQuiz->shuffleQuestions();
             if(currentQuestion < questions.length)
             {
                 currentQuestion+=1;
-                $(".questionWrapper").addClass("hidden");
+                $(".question-wrapper").addClass("hidden");
                 $("#"+questions[currentQuestion]).removeClass("hidden");
                 timeLeft = 20000;
                 timeSpent =0;
@@ -232,6 +273,8 @@ $currentQuiz->shuffleQuestions();
                     clearTimeout(quizTimeout);
                 }
                 quizTimer();
+                completionBarUpdate();
+
             }else
             {
                 //send data to results page
@@ -241,16 +284,16 @@ $currentQuiz->shuffleQuestions();
 
 
         
-        $("#testingPage").ready(function(){
-            $(".questionWrapper").each(function(index, element){
+        $("#testing-page").ready(function(){
+            $(".question-wrapper").each(function(index, element){
                 questions.push($(this).attr("id").toString());
             })
             console.log(questions);
 
 
  
-        $(".questionOption").ready(function(){
-            $(".questionOption").click(function(){
+        $(".question-option").ready(function(){
+            $(".question-option").click(function(){
                 if(answered.length<questions.length){
                     var payload ={
                         questionUUID: questions[currentQuestion],
@@ -267,10 +310,11 @@ $currentQuiz->shuffleQuestions();
         })
 
         //Show the first and start counting
-        $(".questionWrapper").addClass("hidden");
+        $(".question-wrapper").addClass("hidden");
         $("#"+questions[currentQuestion]).removeClass("hidden");
         quizTimer();
-
+        completionBarUpdate();
+        
         })
     </script>
 </body>
