@@ -24,6 +24,13 @@
         $email = $email = strtolower(trim($_POST['txtEmail']));
         $password = $_POST['txtPass'];
 
+        // Check for blank entries.
+        if (empty($email) || empty($password))
+        {
+            echo json_encode(['status' => 'error', 'message' => "Missing entries."]);
+            exit;
+        }
+
         // Validate email format, send error if invalid.
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
         {
