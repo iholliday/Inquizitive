@@ -21,7 +21,7 @@
     if (isset($_POST['txtEmail']) && isset($_POST['txtPass'])) 
     {
         // Set variables.
-        $email = $_POST['txtEmail'];
+        $email = $email = strtolower(trim($_POST['txtEmail']));
         $password = $_POST['txtPass'];
 
         // Validate email format, send error if invalid.
@@ -53,6 +53,14 @@
             // Verify password.
             if (password_verify($password, $user['password'])) 
             {
+
+                // Checks to see if account has been approved.
+                if ($user['isDisabled'] == 1)
+                {
+                    echo json_encode(['status' => 'error', 'message' => 'Your account has yet to be approved by a lecturer.']);
+                    exit;
+                }
+
                 // Set session variables.             
                 $_SESSION['userUUID'] = $user['userUUID'];
                 $_SESSION['firstName'] = $user['firstName'];
@@ -61,7 +69,7 @@
                 $_SESSION['accessLevel'] = $user['accessLevel'];
 
                 // Send success response.
-                echo json_encode(['status' => 'success', 'message' => 'Login successful']);
+                echo json_encode(['status' => 'success', 'message' => 'Welcome to the dashboard!']);
             } 
             else 
             {
@@ -78,7 +86,7 @@
     else 
     {
         // Missing email or password.
-        echo json_encode(['status' => 'error', 'message' => 'Please enter a email or password.']);
+        echo json_encode(['status' => 'error', 'message' => 'Please enter an email or password.']);
     }
 
     // Exit script.

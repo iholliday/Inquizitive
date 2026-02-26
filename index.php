@@ -18,9 +18,12 @@
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
-
+    $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
-
+    $route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
+    $route->Route(['get'], '/signup', "./contents/signup.php");
+    $route->Route(['get'], '/login', "./contents/login.php");
+    $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
     $route->Route(['get'], '/landing', "./contents/includes/dashboardMain.php");
     $route->Route(['get'], '/quizzes', "./contents/includes/quizzesPage.php");
     $route->Route(['get'], '/subjects', "./contents/includes/subjectsPage.php");
@@ -30,12 +33,8 @@
     $route->Route(['get'], '/lecturer-management', "./contents/includes/admLecturerManagement.php");
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
-
-
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
-
     $route->Route(['get'], '/logoutPage', "./php/logout.php");
-
 
     // Any code must be above this.
     echo $route->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

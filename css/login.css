@@ -128,7 +128,7 @@
     position: absolute;
 }
 
-.signup-divider{
+.signup-divider { 
     height: 1px;
     width: 92%;
     margin-top: 28px;
@@ -136,7 +136,7 @@
 }
 
 /* ===== Button ===== */
-.btn-signin {
+.btn {
     width: 80px;
     padding: 10px;
     margin-top: 25px;
@@ -148,11 +148,11 @@
     border-radius: var(--radius);
 }
 
-.btn-signin:hover {
+.btn:hover {
     background-color: #e0ae00;
 }
 
-.btn-signin:active {
+.btn:active {
     background-color: #c99b00;
 }
 
@@ -169,6 +169,45 @@
     transform-origin: left;
 }
 
+/* ===== Signup ===== */
+.signup .login-title{
+    margin-top: -35px;
+}
+
+.signup form {
+    margin-right: 20px;
+}
+
+.name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px;
+    width: 321px;
+}
+
+.name-row input {
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.signup .g-recaptcha {
+    margin-top: 0px;
+    margin-left: 25px;
+}
+
+.signup .btn {
+    width: 90px;
+    margin-top: 15px;
+    margin-bottom: -9px;
+}
+
+.signup .signup-divider {
+    margin-left: 10px;
+}
+
+.signup #loginLink {
+    margin-left: -40px;
+}
 
 /* ===== Mobile ===== */
 @media (max-width: 1000px) {
@@ -184,6 +223,14 @@
     .login-container { 
         max-width: 362px;
     } 
+
+    .signup .grid-item {
+        max-width: 97%;
+    }
+
+    .signup .name-row input {
+        flex: 1;
+    }
 }
 
 @media (max-width: 400px)
