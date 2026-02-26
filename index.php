@@ -18,6 +18,12 @@
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
+    $route->Route(['post'], '/add-lecturer', "./php/addLecturer.php");
+    $route->Route(['post'], '/delete-user', "./php/deleteUser.php");
+    $route->Route(['post'], '/set-user-disabled', "./php/setUserDisabled.php");
+    $route->Route(['post'], '/create-subject', "./php/addSubject.php");
+    $route->Route(['post'], '/set-subject-disabled', "./php/setSubjectDisabled.php");
+
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
     $route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
@@ -31,6 +37,7 @@
     $route->Route(['get'], '/student-management', "./contents/includes/studentManagement.php");
     $route->Route(['get'], '/test-management', "./contents/includes/testManagement.php");
     $route->Route(['get'], '/lecturer-management', "./contents/includes/admLecturerManagement.php");
+    $route->Route(['get'], '/subject-management', "./contents/includes/admSubjectManagement.php");
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
