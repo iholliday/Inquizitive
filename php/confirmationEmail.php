@@ -32,7 +32,6 @@ function sendSignupEmail($email, $firstName, $lastName)
 
    // Send the email to the user's email address.
     if (mail($sanitizedEmail, $emailSubject, $emailBody, $headers)) {
-        error_log("Signup email sent to: $sanitizedEmail");
         return true;
     } else {
         error_log("Signup email FAILED for: $sanitizedEmail");
