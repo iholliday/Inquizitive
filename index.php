@@ -34,7 +34,7 @@
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
-    $route->Route(['get'], '/logoutPage', "./php/logout.php");
+    $route->Route(['get'], '/logout', "./php/logout.php");
 
     // Any code must be above this.
     echo $route->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
