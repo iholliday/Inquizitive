@@ -5,6 +5,10 @@
     // Require the database connection file.
     require_once ("_connect.php");
 
+    // Required for sending confirmation email.
+    require_once ("confirmationEmail.php");
+    require_once ("checkLocalHost.php");
+    
     // Set response to JSON.
     header('Content-Type: application/json');
 
@@ -53,9 +57,14 @@
             error_log("Prepare failed: " . mysqli_error($db->connect));
         }
         
+        // Send signup email, disabled for localhost development.
+        if (!isLocalHost()) 
+        {
+            sendSignupEmail($email, $firstName, $lastName);
+        }
+
         // Success response.
         echo json_encode(['status' => 'success', 'message' => 'Account created successfully.']);
-
     } 
     else 
     {

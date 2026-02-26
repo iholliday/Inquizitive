@@ -6,7 +6,7 @@
     require_once ("php/_connect.php");
 
     // Establishing routing variables ($routerOptions order: debugMode, urlPrefix, cspLevel, forceTrailingSlash).
-    $routerOptions = new RouterOptions(false, '/inq/Inquizitive', 'none', false);
+    $routerOptions = new RouterOptions(false, '/Inquizitive', 'none', false);
     $route = new jRoute($routerOptions);
 
     // Default route.
@@ -20,7 +20,7 @@
     $route->Route(['post'], '/auth', "./php/auth.php");
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
-    $route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
+    //$route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
     $route->Route(['get'], '/signup', "./contents/signup.php");
     $route->Route(['get'], '/login', "./contents/login.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
