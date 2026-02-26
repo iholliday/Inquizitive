@@ -40,6 +40,20 @@
             exit;
         }
 
+        // Defining password rules.
+        $minLength   = 8;
+        $uppercase   = preg_match('@[A-Z]@', $password);
+        $lowercase   = preg_match('@[a-z]@', $password);
+        $number      = preg_match('@[0-9]@', $password);
+        $specialChar = preg_match('@[^\w]@', $password);
+
+        // If password is illegal, send error.
+        if(strlen($password) < $minLength || !$uppercase || !$lowercase || !$number || !$specialChar) 
+        {
+            echo json_encode(['status' => 'error', 'message' => 'Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character.']);
+            exit;
+        }
+
         // Hash password.
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 

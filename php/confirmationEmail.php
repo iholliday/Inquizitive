@@ -21,7 +21,7 @@ function sendSignupEmail($email, $firstName, $lastName)
     // Create the email subject and body for the confirmation message.
     $emailSubject = "Welcome to Inquizitive!";
     $emailBody = "Hello $sanitizedFirstName $sanitizedLastName,\n\n"
-               . "Your account has been successfully created!\n\n"
+               . "Your account has been successfully created!\n"
                . "Student created accounts require lecturer approval prior to accessing the platform.\n\n"
                . "This is an automated message — please do not reply.";
 
