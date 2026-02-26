@@ -6,9 +6,9 @@ class item
     private $name;
     private $description;
     private $rarity;
-    private $price;
     private $effectType;
     private $effectValue;
+    private $quantity;
     public function __construct()
     {
     }
@@ -19,6 +19,10 @@ class item
     public function setSprite($sprite)
     {
         $this->sprite = $sprite;
+    }
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
     }
     public function setName($name)
     {
@@ -32,10 +36,6 @@ class item
     {
         $this->rarity = $rarity;    
     }
-    public function setPrice($price)
-    {
-        $this->price = $price;      
-    }
     public function setEffectType($eT)
     {
         $this->effectType = $eT;
@@ -45,7 +45,10 @@ class item
     {
         $this->effectValue = $eV;        
     }
-
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
     public function getUUID()
     {
         return $this->UUID;
@@ -66,10 +69,6 @@ class item
     {
         return $this->rarity;    
     }
-    public function getPrice()
-    {
-        return $this->price;      
-    }
     public function getEffectType()
     {
         return $this->effectType;
@@ -80,8 +79,9 @@ class item
         return $this->effectValue;        
     }
 }
-class shop
+class inventory
 {
+    private $currency;
     private $items; //unsorted total list
     private $commonItems;
     private $epicItems;
@@ -154,10 +154,10 @@ class shop
 }
 
 $db= new inquizitiveDB ();
-$shop = new shop();
+$shop = new inventory();
 $userUUID= htmlspecialchars($_SESSION['userUUID']); 
-$userCurrency = 0;
-if ($result = $db->Query("CALL GetAllShopItems();")) {
+if(!isset($userUUID)){die("user session not set!");};
+if ($result = $db->Query("CALL GetAllInventoryItemsByUserUUID (?);",[$userUUID])) {
 
     $questionCount = mysqli_num_rows($result);
     if ($questionCount > 0) {
@@ -168,68 +168,17 @@ if ($result = $db->Query("CALL GetAllShopItems();")) {
             $item->setSprite(htmlspecialchars($row['itemSprite']));
             $item->setName(htmlspecialchars($row['itemName']));
             $item->setDescription(htmlspecialchars($row['itemDescription']));
-            $item->setPrice(htmlspecialchars($row['price']));
             $item->setRarity(htmlspecialchars($row['rarity']));
             $item->setEffectType(htmlspecialchars($row['itemEffectType']));
             $item->setEffectValue(htmlspecialchars($row['itemEffectValue']));
-
+            $item->setQuantity(htmlspecialchars($row['quantity']));
             $shop->addItem($item);
         }
     }
 }
 $shop->sortRarities();
-
-$db= new inquizitiveDB (); //php reference count should drop to 0 on new assignment causing destructor to close previous conn
-if ($result = $db->Query("CALL GetInquizitiveCurrencyByUserUUID(?);", [$userUUID])) {
-
-    $rowCount = mysqli_num_rows($result);
-    if ($rowCount > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $userCurrency = htmlspecialchars($row['quantity']);
-    }else
-    {
-        $db= new inquizitiveDB ();
-        $userCurrency =0;
-        if($itemUUIDResult = $db->Query("CALL GetCurrencyItemUUID();"))
-        {
-            $returnedRowsNum = mysqli_num_rows($itemUUIDResult);
-            if ($returnedRowsNum > 0) {
-                $row = mysqli_fetch_assoc($itemUUIDResult);
-                $itemUUID = htmlspecialchars($row['itemUUID']);
-                $db= new inquizitiveDB ();
-                $result = $db->Query("CALL AddItemToGivenAccountInventory(?,?,?);", [$userUUID,$itemUUID,$userCurrency]);
-
-            }
-        }
-
-    }
-}
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
-    <link rel="stylesheet" href="./css/shop.css" />
-</head>
-<body>
-    <section id="shop-page">
-        <div id="shop-page-content-wrapper" class="shadow">
-            <div id="shop-page-nav-wrapper">
-                <div class="links">
-                    <div id="shop-page-nav-shop" class="active">Shop</div>
-                    <div id="shop-page-nav-gacha">Gacha</div>
-                    <div id="shop-page-nav-inventory">Inventory</div>
-                </div>
-                <div id="shop-page-nav-currency-wrapper">
-                    <div class="currency-icon">🔎</div>
-                    <div id="shop-page-nav-currency"> <?= $userCurrency ?></div>
-                </div>
-            </div>
-            <div id="shop-page-content-display">
                 <div class="shop-items shop-common">
                     <div class="shop-items-header">Common</div>
                     <div class="shop-items-header-divider"></div>
@@ -242,7 +191,7 @@ if ($result = $db->Query("CALL GetInquizitiveCurrencyByUserUUID(?);", [$userUUID
                                 echo '
                                 <div class="shop-item">
                                     <img src="' . $shop->getCommonItems()[$i]->getSprite() . '" /> 
-                                    <div class="shop-item-price" item-id="' . $shop->getCommonItems()[$i]->getUUID() . '">' . $shop->getCommonItems()[$i]->getPrice() . '</div>
+                                    <div class="shop-item-price" item-id="' . $shop->getCommonItems()[$i]->getUUID() . '">' . $shop->getCommonItems()[$i]->getQuantity() . '</div>
                                 </div>';
                             }
                         }else
@@ -264,7 +213,7 @@ if ($result = $db->Query("CALL GetInquizitiveCurrencyByUserUUID(?);", [$userUUID
                                 echo '
                                 <div class="shop-item">
                                     <img src="' . $shop->getEpicItems()[$i]->getSprite() . '" /> 
-                                    <div class="shop-item-price" item-id="' . $shop->getEpicItems()[$i]->getUUID() . '">' . $shop->getEpicItems()[$i]->getPrice() . '</div>
+                                    <div class="shop-item-price" item-id="' . $shop->getEpicItems()[$i]->getUUID() . '">' . $shop->getEpicItems()[$i]->getQuantity() . '</div>
                                 </div>';
                             }
                         }else
@@ -286,7 +235,7 @@ if ($result = $db->Query("CALL GetInquizitiveCurrencyByUserUUID(?);", [$userUUID
                                 echo '
                                 <div class="shop-item">
                                     <img src="' . $shop->getLegendaryItems()[$i]->getSprite() . '" /> 
-                                    <div class="shop-item-price" item-id="' . $shop->getLegendaryItems()[$i]->getUUID() . '">' . $shop->getLegendaryItems()[$i]->getPrice() . '</div>
+                                    <div class="shop-item-price" item-id="' . $shop->getLegendaryItems()[$i]->getUUID() . '">' . $shop->getLegendaryItems()[$i]->getQuantity() . '</div>
                                 </div>';
                             }
                         }else
@@ -296,70 +245,3 @@ if ($result = $db->Query("CALL GetInquizitiveCurrencyByUserUUID(?);", [$userUUID
                         ?>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        var shopTabPrevious = "#shop-page-nav-shop";
-        $("#shop-page-nav-inventory").ready(function(){
-            $("#shop-page-nav-inventory").click(function (){
-                $(shopTabPrevious).removeClass("active");
-                $(this).addClass("active");
-                shopTabPrevious = "#shop-page-nav-inventory";
-                $.ajax({
-                    url: './shop-inventory', 
-                    type: 'GET', 
-                    success: function(response) {
-                        //console.log('Success:', response);
-                        $("#shop-page-content-display").html(response);
-                    },
-                    error: function(xhr, status, error) {
-                        //console.log('Error:', error);
-                    }
-                });
-            })
-        })
-
-        $("#shop-page-nav-shop").ready(function(){
-            $("#shop-page-nav-shop").click(function (){
-                $(shopTabPrevious).removeClass("active");
-                $(this).addClass("active");
-                shopTabPrevious = "#shop-page-nav-shop";
-                $.ajax({
-                    url: './shop-items', 
-                    type: 'GET', 
-                    success: function(response) {
-                        //console.log('Success:', response);
-                        $("#shop-page-content-display").html(response);
-                    },
-                    error: function(xhr, status, error) {
-                        //console.log('Error:', error);
-                    }
-                });
-            })
-        })
-
-
-        
-        $("#shop-page-nav-gacha").ready(function(){
-            $("#shop-page-nav-gacha").click(function (){
-                $(shopTabPrevious).removeClass("active");
-                $(this).addClass("active");
-                shopTabPrevious = "#shop-page-nav-gacha";
-                $.ajax({
-                    url: './shop-gacha', 
-                    type: 'GET', 
-                    success: function(response) {
-                        //console.log('Success:', response);
-                        $("#shop-page-content-display").html(response);
-                    },
-                    error: function(xhr, status, error) {
-                        //console.log('Error:', error);
-                    }
-                });
-            })
-        })
-    </script>
-</body>
-</html>
