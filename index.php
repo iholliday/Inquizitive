@@ -40,6 +40,9 @@
     $route->Route(['get'], '/subject-management', "./contents/includes/admSubjectManagement.php");
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
+
+    $route->Route(['post'], '/testing', "./contents/includes/testingPage.php");
+
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logoutPage', "./php/logout.php");
 
