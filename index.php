@@ -37,6 +37,7 @@
     $route->Route(['get'], '/shop-inventory', "./contents/includes/inventoryItemsPage.php");
     $route->Route(['get'], '/shop-items', "./contents/includes/shopItemsPage.php");
     $route->Route(['get'], '/shop-gacha', "./contents/includes/gachaItemsPage.php");
+    $route->Route(['post'], '/shop-buy-item', "./contents/includes/shopBuyItem.php");
 
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");

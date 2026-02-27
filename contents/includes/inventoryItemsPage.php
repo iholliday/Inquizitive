@@ -1,160 +1,9 @@
 <?php
-class item
-{
-    private $UUID;
-    private $sprite;
-    private $name;
-    private $description;
-    private $rarity;
-    private $effectType;
-    private $effectValue;
-    private $quantity;
-    public function __construct()
-    {
-    }
-        public function setItemUUID($UUID)
-    {
-        $this->UUID = $UUID;
-    }
-    public function setSprite($sprite)
-    {
-        $this->sprite = $sprite;
-    }
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-    }
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-    public function setDescription($desc)
-    {
-        $this->description =$desc;       
-    }
-    public function setRarity($rarity)
-    {
-        $this->rarity = $rarity;    
-    }
-    public function setEffectType($eT)
-    {
-        $this->effectType = $eT;
-        
-    }
-    public function setEffectValue($eV)
-    {
-        $this->effectValue = $eV;        
-    }
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-    public function getUUID()
-    {
-        return $this->UUID;
-    }
-    public function getSprite()
-    {
-        return $this->sprite;
-    }
-    public function getName()
-    {
-        return $this->name;
-    }
-    public function getDescription()
-    {
-        return $this->description;       
-    }
-    public function getRarity()
-    {
-        return $this->rarity;    
-    }
-    public function getEffectType()
-    {
-        return $this->effectType;
-        
-    }
-    public function getEffectValue()
-    {
-        return $this->effectValue;        
-    }
-}
-class inventory
-{
-    private $currency;
-    private $items; //unsorted total list
-    private $commonItems;
-    private $epicItems;
-    private $legendaryItems;
-    public function __construct()
-    {
-        $this->items = Array();
-        $this->commonItems = Array();
-        $this->epicItems = Array();
-        $this->legendaryItems = Array();
-    }
+require_once("./php/MT_classes.php");
 
-    public function addItem($item)
-    {
-        array_push($this->items,$item);
-    }
-    public function addCommonItem($item)
-    {
-        array_push($this->commonItems,$item);
-    }
-    public function addEpicItem($item)
-    {
-        array_push($this->epicItems,$item);
-    }
-    public function addLegendaryItem($item)
-    {
-        array_push($this->legendaryItems,$item);
-    }
-
-    public function sortRarities()
-    {
-        $this->commonItems =[];
-        $this->epicItems =[];
-        $this->legendaryItems =[]; 
-        
-        for($i=0;$i<sizeof($this->items);$i++)
-        {
-            if($this->items[$i]->getRarity() == "Common")
-            {
-                $this->addCommonItem($this->items[$i]);
-            }else if($this->items[$i]->getRarity() == "Epic")
-            {
-                $this->addEpicItem($this->items[$i]);
-
-            }else if($this->items[$i]->getRarity() == "Legendary")
-            {
-                $this->addLegendaryItem($this->items[$i]);
-
-            }
-        }
-    }
-
-    public function getItems()
-    {
-        return $this->items;
-    }
-    public function getCommonItems()
-    {
-        return $this->commonItems;
-    }
-    public function getEpicItems()
-    {
-        return $this->epicItems;
-    }
-    public function getLegendaryItems()
-    {
-        return $this->legendaryItems;
-    }
-
-}
 
 $db= new inquizitiveDB ();
-$shop = new inventory();
+$shop = new shop();
 $userUUID= htmlspecialchars($_SESSION['userUUID']); 
 if(!isset($userUUID)){die("user session not set!");};
 if ($result = $db->Query("CALL GetAllInventoryItemsByUserUUID (?);",[$userUUID])) {
@@ -218,7 +67,7 @@ $shop->sortRarities();
                             }
                         }else
                         {
-                            echo'<div class="shop-no-item">No items at this rarity for sale</div>';
+                            echo'<div class="shop-no-item">No items at this rarity in inventory</div>';
                         }
                         ?>
                     </div>
@@ -240,7 +89,7 @@ $shop->sortRarities();
                             }
                         }else
                         {
-                            echo'<div class="shop-no-item">No items at this rarity for sale</div>';
+                            echo'<div class="shop-no-item">No items at this rarity in inventorye</div>';
                         }
                         ?>
                     </div>
