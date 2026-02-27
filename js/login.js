@@ -29,7 +29,7 @@ $("#login-form").submit(function (event)
                     success: function(data) {
                         // Replace the content of the body with the dashboard.
                         $('body').html(data); 
-                        Swal.fire("Welcome to the dashboard!");
+                        Swal.fire(res.message);
                     },
                     error: function() {
                         // Display error.
@@ -42,7 +42,7 @@ $("#login-form").submit(function (event)
                 // Display SweetAlert error popup.
                 Swal.fire({
                 title: 'Login Failed',
-                text: 'Your username or password is incorrect. Please try again.',
+                text: res.message,
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
