@@ -11,11 +11,16 @@
     --topbar-bg: var(--c-dark-purple);
     --sidebar-bg: var(--c-space-cadet);
     --sidebar-profile-bg: var(--c-dark-purple);
+<<<<<<< IH-LandingPage
     --main-bg: var(--c-offwhite);
+=======
+    --main-bg: #ffffff;
+>>>>>>> staging
 
     --text: var(--c-offwhite);
     --muted: rgba(240, 240, 240, 0.75);
     --border: rgba(240, 240, 240, 0.12);
+<<<<<<< IH-LandingPage
 
     --highlight-bg: var(--c-english-violet);
     --accent: var(--c-yellow);
@@ -45,3 +50,13 @@
     background-color: #F0F0F0;
 }
 
+=======
+
+    --highlight-bg: var(--c-english-violet);
+    --accent: var(--c-yellow);
+
+    /* Fonts */
+    --font-primary: "Quicksand", sans-serif;
+    --font-secondary: "Quicksand", sans-serif;
+}
+>>>>>>> staging
