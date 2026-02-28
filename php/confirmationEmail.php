@@ -5,25 +5,16 @@
 require_once("./php/blockDirectAccess.php");
 
 // Sends confirmation email to new user.
-function sendSignupEmail($email, $firstName, $lastName)
+function sendSignupEmail($email, $sanitisedFirstName, $sanitisedLastName, $emailSubject, $emailBody)
 {
     // Sanitizing data to prevent XSS.
-    $sanitizedFirstName = htmlspecialchars($firstName, ENT_QUOTES, 'UTF-8');
-    $sanitizedLastName  = htmlspecialchars($lastName, ENT_QUOTES, 'UTF-8');
-    $sanitizedEmail     = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $sanitisedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
 
     // Check if email is valid.
-    if (!filter_var($sanitizedEmail, FILTER_VALIDATE_EMAIL)) {
-        error_log("Invalid email in sendSignupEmail(): $cleanEmail");
+    if (!filter_var($sanitisedEmail, FILTER_VALIDATE_EMAIL)) {
+        error_log("Invalid email in sendSignupEmail(): $sanitisedEmail");
         return false;
     }
-
-    // Create the email subject and body for the confirmation message.
-    $emailSubject = "Welcome to Inquizitive!";
-    $emailBody = "Hello $sanitizedFirstName $sanitizedLastName,\n\n"
-               . "Your account has been successfully created!\n"
-               . "Student created accounts require lecturer approval prior to accessing the platform.\n\n"
-               . "This is an automated message — please do not reply.";
 
     // Prepare the headers for the email.
     $fromEmail = "accounts@Inquisitive.remote.ac";
@@ -31,10 +22,11 @@ function sendSignupEmail($email, $firstName, $lastName)
     $headers .= "Content-Type: text/plain; charset=UTF-8";
 
    // Send the email to the user's email address.
-    if (mail($sanitizedEmail, $emailSubject, $emailBody, $headers)) {
+    if (mail($sanitisedEmail, $emailSubject, $emailBody, $headers)) {
         return true;
     } else {
-        error_log("Signup email FAILED for: $sanitizedEmail");
+        error_log("Signup email FAILED for: $sanitizsdEmail");
         return false;
     }
 }
+?>

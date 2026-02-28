@@ -74,7 +74,17 @@
         // Send signup email, disabled for localhost development.
         if (!isLocalHost()) 
         {
-            sendSignupEmail($email, $firstName, $lastName);
+            // Sanitizing data to prevent XSS.
+            $sanitisedFirstName = htmlspecialchars($firstName, ENT_QUOTES, 'UTF-8');
+            $sanitisedLastName  = htmlspecialchars($lastName, ENT_QUOTES, 'UTF-8');
+                
+            // Create the email subject and body for the confirmation message.
+            $emailSubject = "Welcome to Inquizitive!";
+            $emailBody = "Hello $sanitisedFirstName $sanitisedLastName,\n\n"
+                    . "Your account has been successfully created!\n"
+                    . "Student created accounts require lecturer approval prior to accessing the platform.\n\n"
+                    . "This is an automated message — please do not reply.";
+            sendSignupEmail($email, $sanitisedFirstName, $sanitisedLastName, $emailSubject, $emailBody);
         }
 
         // Success response.
