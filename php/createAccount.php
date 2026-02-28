@@ -84,7 +84,7 @@
                     . "Your account has been successfully created!\n"
                     . "Student created accounts require lecturer approval prior to accessing the platform.\n\n"
                     . "This is an automated message — please do not reply.";
-            sendSignupEmail($email, $sanitisedFirstName, $sanitisedLastName, $emailSubject, $emailBody);
+            sendEmail($email, $sanitisedFirstName, $sanitisedLastName, $emailSubject, $emailBody);
         }
 
         // Success response.

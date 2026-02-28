@@ -5,7 +5,7 @@
 require_once("./php/blockDirectAccess.php");
 
 // Sends confirmation email to new user.
-function sendSignupEmail($email, $sanitisedFirstName, $sanitisedLastName, $emailSubject, $emailBody)
+function sendEmail($email, $sanitisedFirstName, $sanitisedLastName, $emailSubject, $emailBody)
 {
     // Sanitizing data to prevent XSS.
     $sanitisedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
