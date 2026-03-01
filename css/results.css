@@ -1,0 +1,8 @@
+#results-page .wrong
+{
+    background-color: red !important;
+}
+#results-page .correct
+{
+    background-color: green !important;
+}

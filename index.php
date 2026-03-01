@@ -46,6 +46,12 @@
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logoutPage', "./php/logout.php");
 
+
+
+
+    $route->Route(['post'], '/quiz-result', "./contents/includes/quizResult.php");
+
+
     // Any code must be above this.
     echo $route->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 ?>
