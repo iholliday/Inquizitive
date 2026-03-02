@@ -70,7 +70,7 @@
                     <div class="avatar"></div>
                     <div class="profile-info">
                         <div class="name"><span><?php echo htmlspecialchars($_SESSION['firstName']);echo " ";echo htmlspecialchars($_SESSION['lastName']);?></span></div>
-                        <div class="role">Role</span></div>
+                        <div class="role"><?php echo htmlspecialchars($_SESSION['accessLevel'])?></span></div>
                     </div>
                     </div>
                 </button>
@@ -78,7 +78,7 @@
                 <div class="profile-actions" id="profileActions" role="menu" aria-hidden="true">
                     <button class="profile-btn link" type="button" role="menuitem" id="profile">My Profile</button>
                     <button class="profile-btn link" type="button" role="menuitem" id="settings">Settings</button>
-                    <button class="profile-btn link" type="button" role="menuitem" id="logoutPage">Log out</button>
+                    <button class="profile-btn link" type="button" role="menuitem" id="logout">Log out</button>
                     <!-- We can add more buttons :) -->
                 </div>
                 </div>

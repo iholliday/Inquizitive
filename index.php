@@ -9,6 +9,9 @@
     $routerOptions = new RouterOptions(false, '/Inquizitive', 'none', false);
     $route = new jRoute($routerOptions);
 
+    // Setting site to UK timezone.
+    date_default_timezone_set('Europe/London');
+
     // Default route.
     $route->Route(['get'], '/', "./contents/login.php"); 
 
@@ -26,7 +29,7 @@
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
-    $route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
+    //$route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
     $route->Route(['get'], '/signup', "./contents/signup.php");
     $route->Route(['get'], '/login', "./contents/login.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
@@ -44,7 +47,7 @@
     $route->Route(['post'], '/testing', "./contents/includes/testingPage.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
-    $route->Route(['get'], '/logoutPage', "./php/logout.php");
+    $route->Route(['get'], '/logout', "./php/logout.php");
 
     // Any code must be above this.
     echo $route->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

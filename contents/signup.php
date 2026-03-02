@@ -40,7 +40,7 @@
                         </div>
                         <div class="grid-item item2">
                             <h2 class="login-title signup">SIGN UP</h2>
-                            <form method="POST" id="signup-form">
+                            <form method="POST" id="signup-form" novalidate>
                                 <div class="name-row">
                                         <input type="text" name="txtFirstName" class="form-control login-form-control" id="firstName" placeholder="First Name" required>
                                         <input type="text" name="txtLastName" class="form-control login-form-control" id="lastName" placeholder="Last Name" required>

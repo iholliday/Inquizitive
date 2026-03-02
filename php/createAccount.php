@@ -5,6 +5,10 @@
     // Require the database connection file.
     require_once ("_connect.php");
 
+    // Required for sending confirmation email.
+    require_once ("confirmationEmail.php");
+    require_once ("checkLocalHost.php");
+    
     // Set response to JSON.
     header('Content-Type: application/json');
 
@@ -36,6 +40,20 @@
             exit;
         }
 
+        // Defining password rules.
+        $minLength   = 8;
+        $uppercase   = preg_match('@[A-Z]@', $password);
+        $lowercase   = preg_match('@[a-z]@', $password);
+        $number      = preg_match('@[0-9]@', $password);
+        $specialChar = preg_match('@[^\w]@', $password);
+
+        // If password is illegal, send error.
+        if(strlen($password) < $minLength || !$uppercase || !$lowercase || !$number || !$specialChar) 
+        {
+            echo json_encode(['status' => 'error', 'message' => 'Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character.']);
+            exit;
+        }
+
         // Hash password.
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
@@ -53,9 +71,24 @@
             error_log("Prepare failed: " . mysqli_error($db->connect));
         }
         
+        // Send signup email, disabled for localhost development.
+        if (!isLocalHost()) 
+        {
+            // Sanitizing data to prevent XSS.
+            $sanitisedFirstName = htmlspecialchars($firstName, ENT_QUOTES, 'UTF-8');
+            $sanitisedLastName  = htmlspecialchars($lastName, ENT_QUOTES, 'UTF-8');
+                
+            // Create the email subject and body for the confirmation message.
+            $emailSubject = "Welcome to Inquizitive!";
+            $emailBody = "Hello $sanitisedFirstName $sanitisedLastName,\n\n"
+                    . "Your account has been successfully created!\n"
+                    . "Student created accounts require lecturer approval prior to accessing the platform.\n\n"
+                    . "This is an automated message — please do not reply.";
+            sendEmail($email, $sanitisedFirstName, $sanitisedLastName, $emailSubject, $emailBody);
+        }
+
         // Success response.
         echo json_encode(['status' => 'success', 'message' => 'Account created successfully.']);
-
     } 
     else 
     {
