@@ -185,7 +185,7 @@ $stmt->close();
         data: {quizGrab:$(this).attr("id").toString()}, 
 
         success: function(response){
-          $(".main").html(response);
+          $("#content").html(response);
 
         }
       })
