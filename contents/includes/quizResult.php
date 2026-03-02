@@ -3,9 +3,9 @@ require_once("./php/_connect.php");
 require_once("./php/_mtQuizClasses.php");
 $quiz = new quiz();
 $db = new inquizitiveDB();
-
+$score =0;
 $quizUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quizUUID'])); // Unnecessary since we use prepared statements anyway but why not?
-
+$userUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_SESSION['userUUID']));
 $array = $_POST['answers'];
  $quizInstance =  htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quizInstance']));
  echo $quizInstance;
@@ -34,6 +34,7 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -60,8 +61,10 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
         if($answer == $quiz->getQuestions()[$n]->getAnswer())
         {
           $style ="correct";
+          $score +=30;
         }else
         {
+          $score -=10;
           $style="wrong";
         }
 
@@ -82,6 +85,34 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
       }
     }
 
+}
+
+if($score > 0){
+  $db= new inquizitiveDB ();
+  $currencyItemUUIDResult = $db->Query("CALL GetCurrencyItemUUID()");
+  $currencyItemUUID;
+  $rowCount = mysqli_num_rows($currencyItemUUIDResult);
+  if ($rowCount > 0) {
+          $row = mysqli_fetch_assoc($currencyItemUUIDResult);
+          $currencyItemUUID = htmlspecialchars($row['itemUUID']);
+      }
+  $db= new inquizitiveDB ();
+  if ($result = $db->Query("CALL GetInquizitiveCurrencyByUserUUID(?)", [$userUUID])) {
+
+      $rowCount = mysqli_num_rows($result);
+      if ($rowCount > 0) {
+          $row = mysqli_fetch_assoc($result);
+          $userCurrency = htmlspecialchars($row['quantity']);
+      }
+  }
+
+  $db= new inquizitiveDB ();
+  $moneyLeft =  (int)$userCurrency + $score;
+  if($currencyItemUUID && $userUUID && $userCurrency)
+  {
+  $b = $db->Query("CALL SetUserInventoryItemQuantity(?,?,?);", [$userUUID,$currencyItemUUID,$moneyLeft]);
+  echo "you gained " . $score;
+  }
 }
 ?>
 
