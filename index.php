@@ -9,6 +9,9 @@
     $routerOptions = new RouterOptions(false, '/Inquizitive', 'none', false);
     $route = new jRoute($routerOptions);
 
+    // Setting site to UK timezone.
+    date_default_timezone_set('Europe/London');
+
     // Default route.
     $route->Route(['get'], '/', "./contents/login.php"); 
 

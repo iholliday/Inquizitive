@@ -75,6 +75,10 @@
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['accessLevel'] = $user['accessLevel'];
 
+                // Update last login on database.
+                $currentTime = date("Y-m-d H:i:s");
+                $stmt = $db->Query("CALL UpdateLastLogin(?, ?)", [$_SESSION['userUUID'], $currentTime]);
+
                 // Send success response.
                 echo json_encode(['status' => 'success', 'message' => 'Welcome to the dashboard!']);
             } 
