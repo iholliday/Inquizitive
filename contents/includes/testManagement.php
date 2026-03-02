@@ -134,14 +134,11 @@ $stmt->close();
                     ?>
                     <tr>
                       <td>
-                            <div class="tm-subject__name">
-                              <?= htmlspecialchars($quizName) ?>
-                            </div>
-                            <div class="tm-subject__id">
-                              ID: <?= htmlspecialchars($quizUUID) ?>
-                            </div>
-                          </div>
-                        </div>
+                        <a class="tm-quizLink" id="<?= urlencode($quizUUID) ?>"
+                          data-quizuuid="<?= htmlspecialchars($quizUUID) ?>">
+                          <div class="tm-subject__name"><?= htmlspecialchars($quizName) ?></div>
+                          <div class="tm-subject__id">ID: <?= htmlspecialchars($quizUUID) ?></div>
+                        </a>
                       </td>
 
                       <td class="text-muted"><?= htmlspecialchars($subjectTitle) ?></td>
@@ -178,3 +175,21 @@ $stmt->close();
 
   </div>
 </div>
+
+<script>
+  $(".tm-quizLink").ready(function(){
+    $(".tm-quizLink").click(function(){
+      $.ajax({
+        url: "./test-management/editor",
+        type: "POST",
+        data: {quizGrab:$(this).attr("id").toString()}, 
+
+        success: function(response){
+          $(".main").html(response);
+
+        }
+      })
+    })
+  })
+
+</script>

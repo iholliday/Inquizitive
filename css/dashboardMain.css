@@ -549,19 +549,28 @@ body {
   width: 100%;
 }
 
+.tm-quizLink{
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+.tm-quizLink:hover{
+  text-decoration: underline;
+}
+
 @media (max-width: 576px) {
-  #lecturerDashboard .sdm-header {
+  #lecturerDashboard .sdm-header,
   #lecturerDashboard .tm-header {
     flex-direction: column;
     align-items: stretch;
   }
 
-  #lecturerDashboard .sdm-header__right {
+  #lecturerDashboard .sdm-header__right,
   #lecturerDashboard .tm-header__right {
     justify-content: flex-start;
   }
 
-  #lecturerDashboard .sdm-panel__head {
+  #lecturerDashboard .sdm-panel__head,
   #lecturerDashboard .tm-panel__head {
     flex-direction: column;
     align-items: stretch;
