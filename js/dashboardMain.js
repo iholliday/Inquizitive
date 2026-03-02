@@ -139,7 +139,7 @@ $(sidebar).ready(function(){
 
 // ==================== LOGOUT (TA) ====================
 $("#logout").click(function(e){
-    e.preventDefault();
+    //e.preventDefault();
 
     // Call logout.php dynamically via AJAX.
     $.ajax({
