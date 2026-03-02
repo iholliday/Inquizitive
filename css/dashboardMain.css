@@ -360,6 +360,24 @@ body {
     }
 }
 
+/* Student Management CSS */
+
+/* Example for multiple dashboards with the same stying
+#lecturerDashboard .sdm-title,
+#lecturerDashboard .tm-title{ <- Test Management
+*/
+
+
+#lecturerDashboard {
+  --sdm-surface: #ffffff;
+  --sdm-border: rgba(0, 0, 0, 0.08);
+  --sdm-muted: rgba(0, 0, 0, 0.55);
+  --sdm-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  --sdm-radius: 16px;
+}
+
+#lecturerDashboard .sdm-header,
+#lecturerDashboard .tm-header {
 /* =========================================
    Lecturer Management (page-scoped)
    ========================================= */
@@ -380,6 +398,9 @@ body {
   gap: 16px;
 }
 
+#lecturerDashboard .sdm-header__right,
+#lecturerDashboard .tm-header__right {
+    
 #adminDashboard .lm-header__right,
 #adminDashboard .sm-header__right {
   display: flex;
@@ -387,12 +408,17 @@ body {
   flex-wrap: wrap;
 }
 
+#lecturerDashboard .sdm-title,
+#lecturerDashboard .tm-title{    
 #adminDashboard .lm-title,
 #adminDashboard .sm-title {
   margin: 0;
   letter-spacing: -0.02em;
 }
 
+#lecturerDashboard .sdm-subtitle,
+#lecturerDashboard tm-subtitle {    
+  color: var(--sdm-muted);
 #adminDashboard .lm-subtitle,
 #adminDashboard .sm-subtitle {
   color: var(--lm-muted);
@@ -400,6 +426,16 @@ body {
   margin-top: 6px;
 }
 
+#lecturerDashboard .sdm-card,
+#lecturerDashboard .tm-card {
+  background: var(--sdm-surface);
+  border: 1px solid var(--sdm-border);
+  border-radius: var(--sdm-radius);
+  box-shadow: var(--sdm-shadow);
+}
+
+#lecturerDashboard .sdm-panel__head,
+#lecturerDashboard .tm-panel__head {
 #adminDashboard .lm-card,
 #adminDashboard .sm-card {
   background: var(--lm-surface);
@@ -436,6 +472,15 @@ body {
   border-bottom: 1px solid var(--lm-border);
 }
 
+#lecturerDashboard .sdm-panel__body,
+#lecturerDashboard .tm-panel__body {
+
+  padding: 18px;
+}
+
+
+#lecturerDashboard #sdmCreateBtn,
+#lecturerDashboard #tmCreateBtn{
 #adminDashboard .lm-panel__body,
 #adminDashboard .sm-panel__body {
   padding: 18px;
@@ -468,6 +513,8 @@ body {
   color:white;
 }
 
+#lecturerDashboard #sdmCreateBtn:hover,
+#lecturerDashboard #tmCreateBtn:hover{
 #adminDashboard #lmCreateBtn:hover,
 #adminDashboard #smCreateBtn:hover {
   margin-top:20px;
@@ -476,6 +523,17 @@ body {
   transition:ease-in-out 0.2s;
 }
 
+#lecturerDashboard .form-control,
+#lecturerDashboard .form-select {
+  border-radius: 10px;
+}
+
+#lecturerDashboard .btn {
+  border-radius: 10px;
+}
+
+#lecturerDashboard .sdm-note,
+#lecturerDashboard .tm-note {
 #adminDashboard .form-control,
 #adminDashboard .form-select {
   border-radius: 10px;
@@ -490,6 +548,8 @@ body {
   color: var(--lm-muted);
 }
 
+#lecturerDashboard .sdm-badge,
+#lecturerDashboard .tm-badge {
 #adminDashboard .lm-badge,
 #adminDashboard .sm-badge {
   background: rgba(13, 110, 253, 0.12);
@@ -497,6 +557,8 @@ body {
   border: 1px solid rgba(13, 110, 253, 0.25);
 }
 
+#lecturerDashboard .sdm-badge-success,
+#lecturerDashboard .tm-badge-success {
 #adminDashboard .lm-badge-success,
 #adminDashboard .sm-badge-success {
   background: rgba(25, 135, 84, 0.12);
@@ -504,6 +566,8 @@ body {
   border: 1px solid rgba(25, 135, 84, 0.25);
 }
 
+#lecturerDashboard .lm-badge-danger,
+#lecturerDashboard .tm-badge-danger {
 #adminDashboard .lm-badge-danger,
 #adminDashboard .sm-badge-danger {
   background: rgba(173, 20, 87, 0.10);
@@ -511,6 +575,8 @@ body {
   border: 1px solid rgba(173, 20, 87, 0.25);
 }
 
+#lecturerDashboard .lm-person__name,
+#lecturerDashboard .tm-subject__name {
 #adminDashboard .lm-person {
   display: flex;
   align-items: center;
@@ -536,12 +602,16 @@ body {
   line-height: 1.1;
 }
 
+#lecturerDashboard .lm-person__id,
+#lecturerDashboard .tm-subject__id {
 #adminDashboard .lm-person__id,
 #adminDashboard .sm-subject__id {
   font-size: 0.85rem;
   color: var(--lm-muted);
 }
 
+#lecturerDashboard .lm-panel__scroll,
+#lecturerDashboard .tm-panel__scroll{
 #adminDashboard .lm-panel__scroll,
 #adminDashboard .sm-panel__scroll{
   height: 450px !important;
@@ -552,6 +622,8 @@ body {
 }
 
 
+#lecturerDashboard .lm-tableWrap,
+#lecturerDashboard .tm-tableWrap{
 #adminDashboard .lm-tableWrap,
 #adminDashboard .sm-tableWrap{
   border: 1px solid var(--lm-border);
@@ -559,6 +631,11 @@ body {
   overflow: hidden;
 }
 
+#lecturerDashboard .table thead th{
+  top: 14px;
+}
+
+#lecturerDashboard .table thead th {
 #adminDashboard .table thead th{
   top: 14px;
 }
@@ -573,6 +650,8 @@ body {
   border-bottom: 1px solid var(--lm-border);
 }
 
+#lecturerDashboard .lm-actions,
+#lecturerDashboard .tm-actions {
 #adminDashboard .lm-actions,
 #adminDashboard .sm-actions {
   display: inline-flex;
@@ -581,6 +660,13 @@ body {
   flex-wrap: wrap;
 }
 
+#lecturerDashboard .lm-actions .btn,
+#lecturerDashboard .tm-actions .btn {
+  padding: 0.28rem 0.6rem;
+}
+
+#lecturerDashboard .sdm-eq > .sdm-eq__col,
+#lecturerDashboard .tm-eq > .tm-eq__col {
 #adminDashboard .lm-actions .btn,
 #adminDashboard .sm-actions .btn {
   padding: 0.28rem 0.6rem;
@@ -592,6 +678,23 @@ body {
   padding-bottom:50px;
 }
 
+#lecturerDashboard .sdm-eq__card,
+#lecturerDashboard .tm-eq__card {
+  width: 100%;
+}
+
+.tm-quizLink{
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+.tm-quizLink:hover{
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  #lecturerDashboard .sdm-header,
+  #lecturerDashboard .tm-header {
 #adminDashboard .lm-eq__card,
 #adminDashboard .sm-eq__card {
   width: 100%;
@@ -604,6 +707,13 @@ body {
     align-items: stretch;
   }
 
+  #lecturerDashboard .sdm-header__right,
+  #lecturerDashboard .tm-header__right {
+    justify-content: flex-start;
+  }
+
+  #lecturerDashboard .sdm-panel__head,
+  #lecturerDashboard .tm-panel__head {
   #adminDashboard .lm-header__right,
   #adminDashboard .sm-header__right {
     justify-content: flex-start;
@@ -615,6 +725,7 @@ body {
     align-items: stretch;
   }
 
+}
   #adminDashboard .lm-controls,
   #adminDashboard .sm-controls {
     width: 100%;
