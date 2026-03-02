@@ -10,4 +10,10 @@
 
     /* UI */
     --radius: 10px;
+
+}
+
+body {
+    margin: 0;
+    font-family: "Quicksand", sans-serif;
 }
