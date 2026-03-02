@@ -430,12 +430,8 @@ body {
   padding: 18px;
 }
 
-#lecturerDashboard #sdmCreateBtn,
-#lecturerDashboard #tmCreateBtn {
-  margin-top:20px;
-}
 
-#lecturerDashboard #sdmCreateBtn 
+#lecturerDashboard #sdmCreateBtn,
 #lecturerDashboard #tmCreateBtn{
   margin-top:20px;
   background-color: var(--c-english-violet);
@@ -479,6 +475,69 @@ body {
   border: 1px solid rgba(25, 135, 84, 0.25);
 }
 
+#lecturerDashboard .lm-badge-danger,
+#lecturerDashboard .tm-badge-danger {
+  background: rgba(173, 20, 87, 0.10);
+  color: rgba(173, 20, 87, 1);
+  border: 1px solid rgba(173, 20, 87, 0.25);
+}
+
+#lecturerDashboard .lm-person__name,
+#lecturerDashboard .tm-subject__name {
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+#lecturerDashboard .lm-person__id,
+#lecturerDashboard .tm-subject__id {
+  font-size: 0.85rem;
+  color: var(--lm-muted);
+}
+
+#lecturerDashboard .lm-panel__scroll,
+#lecturerDashboard .tm-panel__scroll{
+  height: 450px !important;
+  max-height: 450px !important;
+  overflow: auto !important;
+
+  padding: 14px !important;   /* always-visible inset */
+}
+
+
+#lecturerDashboard .lm-tableWrap,
+#lecturerDashboard .tm-tableWrap{
+  border: 1px solid var(--lm-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#lecturerDashboard .table thead th{
+  top: 14px;
+}
+
+#lecturerDashboard .table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.02);
+  color: var(--lm-muted);
+  font-size: 0.86rem;
+  border-bottom: 1px solid var(--lm-border);
+}
+
+#lecturerDashboard .lm-actions,
+#lecturerDashboard .tm-actions {
+  display: inline-flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+#lecturerDashboard .lm-actions .btn,
+#lecturerDashboard .tm-actions .btn {
+  padding: 0.28rem 0.6rem;
+}
+
 #lecturerDashboard .sdm-eq > .sdm-eq__col,
 #lecturerDashboard .tm-eq > .tm-eq__col {
   display: flex;
@@ -507,4 +566,5 @@ body {
     flex-direction: column;
     align-items: stretch;
   }
+
 }

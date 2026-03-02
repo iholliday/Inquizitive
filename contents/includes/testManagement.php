@@ -12,8 +12,28 @@ if (!$isAjax) {
 }
 
 require_once __DIR__ . "/../../php/_connect.php";
-?>
 
+$db = new inquizitiveDB();
+$conn = $db->connect;
+
+$search = "";
+$status = "all";
+
+$stmt = $conn->prepare("CALL GetQuizzes(?,?)");
+$stmt->bind_param("ss", $search, $status);
+$stmt->execute();
+
+$quizzes = [];
+
+if ($res1 = $stmt->get_result()){
+  while ($row = $res1->fetch_assoc()){
+    $quizzes[] = $row;
+  
+  }
+$res1->free();
+}
+$stmt->close();
+?>
 
 <div id="lecturerDashboard" class="container-fluid py-4">
 
@@ -33,8 +53,8 @@ require_once __DIR__ . "/../../php/_connect.php";
       <div class="sdm-card sdm-panel h-100 sdm-eq__card">
         <div class="sdm-panel__head">
           <div>
-            <h5 class="mb-0">Add Test</h5>
-            <div class="text-muted small">Create a new test</div>
+            <h5 class="mb-0">Add Quiz</h5>
+            <div class="text-muted small">Create a new quiz</div>
           </div>
           <span class="badge sdm-badge">Lecturer</span>
         </div>
@@ -42,40 +62,26 @@ require_once __DIR__ . "/../../php/_connect.php";
         <div class="sdm-panel__body">
           <form id="sdmAddStudentForm" class="row g-3" autocomplete="off" method="post">
 
-             <div class="col-12 col-md-6">
-              <label class="form-label" for="sdmFirstName">First name</label>
-              <input id="sdmFirstName" type="text" class="form-control" name="firstName" required>
-            </div>
-
-            <div class="col-12 col-md-6">
-              <label class="form-label" for="sdmLastName">Last name</label>
-              <input id="sdmLastName" type="text" class="form-control" name="lastName" required>
+             <div class="col-12">
+              <label class="form-label" for="tmQuizName">Quiz Name</label>
+              <input id="tmQuizName" type="text" class="form-control" name="quizName" required>
             </div>
 
             <div class="col-12">
-              <label class="form-label" for="sdmEmail">Email</label>
-              <input id="sdmEmail" type="email" class="form-control" name="email" required>
+              <label class="form-label" for="tmSubject">Subject</label>
+              <input id="tmSubject" type="text" class="form-control" name="subject" required>
             </div>
 
-            <div class="col-12">
-              <label class="form-label" for="sdmPassword">Password</label>
-              <input id="sdmPassword" type="password" class="form-control" name="password" required>
-            </div>
-
-            <div class="col-12">
-              <label class="form-label" for="sdmConfirmPassword">Confirm password</label>
-              <input id="sdmConfirmPassword" type="password" class="form-control" name="confirmPassword" required>
-            </div>
-
+            
             <div class="col-12 d-grid mt-1">
-              <button type="submit" class="btn" id="sdmCreateBtn">
-                Create Student
+              <button type="submit" class="btn" id="tmCreateBtn">
+                Create Quiz
               </button>
             </div> 
 
              <div class="col-12">
               <div class="sdm-note">
-                A welcome email will be sent with login instructions.
+                Questions can be added to the quiz after creation.
               </div>
             </div>
 
@@ -90,15 +96,80 @@ require_once __DIR__ . "/../../php/_connect.php";
 
         <div class="sdm-panel__head">
           <div>
-            <h5 class="mb-0">Students</h5>
-            <div class="text-muted small">Search and manage existing student accounts</div>
+            <h5 class="mb-0">Tests</h5>
+            <div class="text-muted small">Search and manage existing tests</div>
           </div>
         </div>
 
         <!-- Scroll region -->
-        <div class="sdm-panel__scroll flex-grow-1">
-          <div class="sdm-tableWrap">
-                Table
+               <!-- Scroll region -->
+        <div class="tm-panel__scroll flex-grow-1">
+          <div class="tm-tableWrap">
+            <table class="table table-hover align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Quiz</th>
+                  <th>Subject</th>
+                  <th>Status</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="tmSubjectsTbody">
+                <!-- JS/PHP will inject rows here -->
+                <?php if (count($quizzes) === 0): ?>
+                  <tr>
+                    <td colspan="4" class="text-muted py-4 text-center">
+                      No quizzes found.
+                    </td>
+                  </tr>
+                <?php else: ?>
+                  <?php foreach ($quizzes as $u): ?>
+                    <?php
+                      $quizUUID = $u["quizUUID"];
+                      $quizName = $u["quizName"];
+                      $subjectTitle = $u["subjectTitle"];
+                      $subjectUUID = $u["subjectUUID"];
+                      $subjectIsDisabled = (int)$u["subjectIsDisabled"];
+                    ?>
+                    <tr>
+                      <td>
+                            <div class="tm-subject__name">
+                              <?= htmlspecialchars($quizName) ?>
+                            </div>
+                            <div class="tm-subject__id">
+                              ID: <?= htmlspecialchars($quizUUID) ?>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td class="text-muted"><?= htmlspecialchars($subjectTitle) ?></td>
+
+                      <td>
+                        <?php if ($subjectIsDisabled): ?>
+                          <span class="badge tm-badge-danger">Disabled</span>
+                        <?php else: ?>
+                          <span class="badge tm-badge-success">Active</span>
+                        <?php endif; ?>
+                      </td>
+
+                      <td class="text-end">
+                        <div class="tm-actions">
+                          <!-- Edit Button -->
+                          <button class="btn btn-tm btn-outline-primary">Edit</button>
+                          <!-- Disable/Enable Button -->
+                          <button class="btn btn-tm btn-outline-warning tmToggleDisableBtn" data-subjectuuid="<?= htmlspecialchars($subjectUUID) ?>" data-disabled="<?= $subjectIsDisabled?>">
+                            <?= $subjectIsDisabled ? "Enable" : "Disable" ?>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+
+              </tbody>
+            </table>
           </div>
         </div>
 
