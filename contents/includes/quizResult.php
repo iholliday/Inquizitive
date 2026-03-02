@@ -8,7 +8,7 @@ $quizUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quiz
 $userUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_SESSION['userUUID']));
 $array = $_POST['answers'];
  $quizInstance =  htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quizInstance']));
- echo $quizInstance;
+// echo $quizInstance;
 
 
 if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
@@ -47,7 +47,7 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
 </head>
 <body>
   <div id="results-page">
-    <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion shadow" id="accordionPanelsStayOpenExample">
       <?php
        for($i=0; $i < sizeof($array); $i++)
 {
@@ -76,8 +76,8 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
     </h2>
     <div id="panelsStayOpen-collapse' . $i . '" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading' . $i . '">
       <div class="accordion-body">
-        <strong>(yours)' . $answer . '</strong><br>
-        <strong>' . $quiz->getQuestions()[$n]->getAnswer() . '</strong><br>
+        <strong>Yours: ' . $answer . '</strong><br>
+        <strong>Correct: ' . $quiz->getQuestions()[$n]->getAnswer() . '</strong><br>
 
       </div>
     </div>
@@ -111,7 +111,7 @@ if($score > 0){
   if($currencyItemUUID && $userUUID && $userCurrency)
   {
   $b = $db->Query("CALL SetUserInventoryItemQuantity(?,?,?);", [$userUUID,$currencyItemUUID,$moneyLeft]);
-  echo "you gained " . $score;
+  echo '<div class="score">you gained ' . $score . " iq points</div>";
   }
 }
 ?>

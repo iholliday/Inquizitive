@@ -1,8 +1,25 @@
 #results-page .wrong
 {
-    background-color: red !important;
+    background-color: rgb(235, 99, 99) !important;
 }
 #results-page .correct
 {
-    background-color: green !important;
+    background-color: rgb(168, 230, 171) !important;
+}
+#results-page #accordionPanelsStayOpenExample
+{
+    position:relative;
+    border-radius: 5px;
+    width:80%;
+    height:60%;
+    overflow-y: hidden;
+    overflow-x:auto;
+    top:10%;
+    left:10%;
+    margin-top: 10%;
+} 
+#results-page .score
+{
+    text-align: center;
+    width:100%;
 }
