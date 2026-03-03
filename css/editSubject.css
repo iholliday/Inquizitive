@@ -21,7 +21,7 @@
     min-width:100% !important;
     min-height: 100% !important;
     overflow: hidden;
-    background-color: var(--c-offwhite);
+    background-color: #ffffff;
 }
 #edit-subject-wrapper .txt-center
 {
@@ -53,6 +53,8 @@
 {
     border-radius: 5px;
     max-width: 40%;
+    background-color: #ffffff;
+
 }
 
 #edit-subject #smEditBtn
