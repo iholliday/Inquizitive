@@ -17,6 +17,8 @@ try {
   $email     = trim($_POST["email"] ?? "");
   $password  = $_POST["password"] ?? "";
   $confirm   = $_POST["confirmPassword"] ?? "";
+  $accessLevel   = "LECTURER";
+  $isDisabled   = 0;
 
   if ($firstName === "" || $lastName === "" || $email === "" || $password === "" || $confirm === "") {
     out(false, "Please fill in all fields.");
@@ -35,12 +37,14 @@ try {
   $db = new inquizitiveDB();
   $conn = $db->connect;
 
-  $stmt = mysqli_prepare($conn, "CALL AddLecturer(?, ?, ?, ?)");
+  $stmt = mysqli_prepare($conn, "CALL CreateAccount(?, ?, ?, ?, ?, ?)");
   if (!$stmt) {
     out(false, "Database error: " . mysqli_error($conn));
   }
 
-  mysqli_stmt_bind_param($stmt, "ssss", $email, $firstName, $lastName, $passwordHash);
+
+
+  mysqli_stmt_bind_param($stmt, "ssssss", $email, $firstName, $lastName, $passwordHash, $accessLevel, $isDisabled);
 
   try {
     mysqli_stmt_execute($stmt);

@@ -18,6 +18,7 @@
     // Allow serving static CSS and JS directories directly.
     $route->AddDir('/css', "./css/");
     $route->AddDir('/js', "./js/");
+    $route->AddDir('/img', "./contents/images/");
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
@@ -47,8 +48,21 @@
 
     $route->Route(['post'], '/testing', "./contents/includes/testingPage.php");
 
+    $route->Route(['get'], '/shop', "./contents/includes/shopPage.php");
+    $route->Route(['get'], '/shop-inventory', "./contents/includes/inventoryItemsPage.php");
+    $route->Route(['get'], '/shop-items', "./contents/includes/shopItemsPage.php");
+    $route->Route(['get'], '/shop-gacha', "./contents/includes/gachaItemsPage.php");
+    $route->Route(['post'], '/shop-buy-item', "./contents/includes/shopBuyItem.php");
+
+
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logout', "./php/logout.php");
+
+
+
+
+    $route->Route(['post'], '/quiz-result', "./contents/includes/quizResult.php");
+
 
     // Any code must be above this.
     echo $route->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
