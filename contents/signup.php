@@ -29,9 +29,9 @@
         if (!isset($_SESSION['userUUID'])) {
     ?>
 
-    <!-- Login Page -->
+    <!-- Signup Page -->
     <body class="login-page">
-        <main class="login">
+        <main class="signup">
             <div class="login-background">
                 <div class="container login-container p-4 mt-4" data-bs-theme="dark">
                     <div class="grid-container">
@@ -39,20 +39,26 @@
                             <img src="contents/images/login.png" alt="Login image">
                         </div>
                         <div class="grid-item item2">
-                            <h2 class="login-title">SIGN IN</h2>
-                            <form method="POST" id="login-form" novalidate>
-                                <div class="mb-3">
-                                    <input type="text" name="txtEmail" class="form-control login-form-control" id="email" placeholder="Email Address" required>
+                            <h2 class="login-title signup">SIGN UP</h2>
+                            <form method="POST" id="signup-form" novalidate>
+                                <div class="name-row">
+                                        <input type="text" name="txtFirstName" class="form-control login-form-control" id="firstName" placeholder="First Name" required>
+                                        <input type="text" name="txtLastName" class="form-control login-form-control" id="lastName" placeholder="Last Name" required>
                                 </div>
-                                <div class="mb-3">
-                                    <input type="password" name="txtPass" id="password" class="form-control login-form-control" placeholder="Password" aria-describedby="passwordHelpBlock" required>
+                                <div>
+                                    <input type="email" name="txtEmail" class="form-control login-form-control" id="email" placeholder="Email Address" required>
                                 </div>
-                                <p class="login-help" id="forgot-password"><a href="/">Forgot password?</a></p>
+                                <div>
+                                    <input type="password" name="txtPass" class="form-control login-form-control" id="password" placeholder="Password" required>
+                                </div>
+                                <div>
+                                    <input type="password" name="txtPassConfirm" class="form-control login-form-control" id="passwordConfirm" placeholder="Confirm Password" required>
+                                </div>
                                 <div class="g-recaptcha" data-sitekey="PLACEHOLDER" data-callback="enableSubmitBtn"></div>
                                 <!-- <div class="g-recaptcha" data-sitekey="<?= $_ENV['RECAPTCHA_SITE_KEY'] ?>" data-callback="enableSubmitBtn"></div>-->
-                                <button type="submit" id="submitBtn" class="btn btn-danger btn-signin" >SIGN IN</button> <!-- add disabled -->
+                                <button type="submit" id="submitBtn" class="btn btn-danger btn-signin">SIGN UP</button>
                                 <div class="signup-divider">
-                                    <p class="login-help" id="sign-up-help"><a href="#" id="signupLink">Don't have an account?</a></p>
+                                    <p class="login-help" id="sign-up-help"><a href="#" id="loginLink">Already have an account? Sign in</a></p>
                                 </div>
                             </form>
                         </div>
@@ -65,7 +71,7 @@
     <script>
         <?php
         // Required JS.
-        require_once ("./js/login.js");
+        require_once ("./js/createAccount.js");
         ?>
     </script>
 

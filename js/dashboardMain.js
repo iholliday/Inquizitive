@@ -23,7 +23,7 @@ const profileActions = document.getElementById("profileActions");
         if (activeId) sessionStorage.setItem("currentPage", activeId);
 
         // Allows for back and forward navigation
-        if (pushHistory) {
+        if (pushHistory && url !== "logout") {
           history.pushState({ url, activeId }, "", url);
         }
       },
@@ -62,7 +62,6 @@ const profileActions = document.getElementById("profileActions");
       // console.log removed
     });
   });
-
 
 // ==================== PROFILE MENU ====================
 
@@ -136,4 +135,37 @@ overlay?.addEventListener("click", () => {
 
 $(sidebar).ready(function(){
   
+});
+
+// ==================== LOGOUT (TA) ====================
+$("#logout").click(function(e){
+    e.preventDefault();
+
+    // Call logout.php dynamically via AJAX.
+    $.ajax({
+        url: "./logout",
+        type: "GET",
+        dataType: "json", 
+        success: function(data) {
+            if (data.status === "success") {
+                // Load login.php dynamically via AJAX.
+                /*$.ajax({
+                    url: "./login",
+                    type: "GET",
+                    success: function(html) {
+                        $("body").html(html);
+                    },
+                    error: function() {
+                        alert("Failed to load login page. Please refresh.");
+                    }
+                });*/
+                window.location.href = "./";
+            } else {
+                alert("Logout failed. Please try again.");
+            }
+        },
+        error: function() {
+            alert("Logout request failed. Please try again.");
+        }
+    });
 });
