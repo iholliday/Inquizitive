@@ -763,12 +763,22 @@ body {
 #lecturerDashboard .tm-subject__name {
   font-weight: 700;
   line-height: 1.1;
+  text-decoration: none;
+  color: var(--c-space-cadet);
+  cursor: pointer;
 }
 
 #lecturerDashboard .lm-person__id,
 #lecturerDashboard .tm-subject__id {
   font-size: 0.85rem;
   color: var(--lm-muted);
+  color: var(--c-english-violet);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#lecturerDashboard .tm-quizLink{
+  text-decoration: none;
 }
 
 #lecturerDashboard .lm-panel__scroll,
