@@ -707,14 +707,16 @@ body {
 
 
 #lecturerDashboard #sdmCreateBtn,
-#lecturerDashboard #tmCreateBtn{
+#lecturerDashboard #tmCreateBtn,
+#lecturerDashboard .btn-questions{
   margin-top:20px;
   background-color: var(--c-english-violet);
   color:white;
 }
 
 #lecturerDashboard #sdmCreateBtn:hover,
-#lecturerDashboard #tmCreateBtn:hover{
+#lecturerDashboard #tmCreateBtn:hover,
+#lecturerDashboard .btn-questions:hover{
   margin-top:20px;
   background-color: var(--c-space-cadet);
   color:white;
@@ -775,7 +777,7 @@ body {
   max-height: 450px !important;
   overflow: auto !important;
 
-  padding: 14px !important;   /* always-visible inset */
+  padding: 14px !important;
 }
 
 
@@ -824,27 +826,59 @@ body {
   width: 100%;
 }
 
+#lecturerDashboard .qm-table-wrap {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+#lecturerDashboard .qm-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#lecturerDashboard .qm-correct {
+  background: rgba(25,135,84,.12) !important; 
+  font-weight: 600;
+}
+#lecturerDashboard .qm-question {
+  min-width: 260px;
+}
+#lecturerDashboard .qm-option {
+  min-width: 180px;
+}
+#lecturerDashboard .qm-actions {
+  min-width: 140px;
+  white-space: nowrap;
+}
+
+#lecturerDashboard #backBtn{
+  margin-bottom:20px;
+}
+
+#lecturerDashboard .tblHeader{
+  width:60px;
+}
+
+
 @media (max-width: 576px) {
-  #lecturerDashboard .sdm-header {
+  #lecturerDashboard .sdm-header,
   #lecturerDashboard .tm-header {
     flex-direction: column;
     align-items: stretch;
   }
 
-  #lecturerDashboard .sdm-header__right {
+  #lecturerDashboard .sdm-header__right,
   #lecturerDashboard .tm-header__right {
     justify-content: flex-start;
   }
 
-  #lecturerDashboard .sdm-panel__head {
+  #lecturerDashboard .sdm-panel__head,
   #lecturerDashboard .tm-panel__head {
     flex-direction: column;
     align-items: stretch;
   }
 
   }
-  }
-}
-}
 
 
