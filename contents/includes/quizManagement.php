@@ -362,4 +362,16 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
       Swal.fire({ icon: "error", title: "Delete failed", text: (e.responseText || "Unknown error") });
     }
   });
+
+  $(document).on("click", "#backBtn", function(){
+
+  $.ajax({
+    url: "./test-management", // your original list page
+    type: "POST",
+    success: function(response){
+      $("#content").html(response);
+    }
+  });
+
+});
 </script>

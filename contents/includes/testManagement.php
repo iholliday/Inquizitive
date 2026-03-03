@@ -238,6 +238,18 @@ $("#tmAddQuizForm").on("submit", function(e){
     }
   });
 });
+
+$(document).on("click", "#backBtn", function(){
+
+  $.ajax({
+    url: "./test-management",
+    type: "POST",
+    success: function(response){
+      $("#content").html(response);
+    }
+  });
+
+});
   
 
 </script>
