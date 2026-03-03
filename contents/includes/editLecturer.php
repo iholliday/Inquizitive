@@ -51,7 +51,6 @@ $userUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['user
                 <option selected value ="<?= htmlspecialchars($row['accessLevel'])?>"><?= htmlspecialchars($row['accessLevel'])?></option>
                 <option value="USER">USER</option>
                 <option value="LECTURER">LECTURER</option>
-                <option value="ADMIN">ADMIN</option>
             </select>
             </div>
             <div class="col-12">
