@@ -2,8 +2,9 @@
     // If the page is accessed directly through the URL bar, block access. Only allows access if loaded via AJAX.
     require_once ("./php/blockDirectAccess.php");
 
-    // Require the database connection file.
+    // Require the connection files.
     require_once ("_connect.php");
+    require __DIR__ . "/../vendor/autoload.php";
 
     // Set response to JSON.
     header('Content-Type: application/json');
@@ -15,6 +16,27 @@
     // Check to see if session has started, if not, start one.
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
+    }
+
+    // Server-side reCAPTCHA verification.
+    if (empty($_POST['g-recaptcha-response']))
+    {
+        echo json_encode(['status' => 'error', 'message' => "reCAPTCHA not complete, please try again."]);
+        exit;
+    }
+    else
+    {
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
+        $dotenv->load();
+        $secret = $_ENV['RECAPTCHA_SECRET_KEY'];
+        $verify = file_get_contents( "https://www.google.com/recaptcha/api/siteverify?secret=" . $secret . "&response=" . $_POST['g-recaptcha-response']);
+        $response = json_decode($verify);
+
+        if (!$response || !$response->success)
+        {
+            echo json_encode(['status' => 'error', 'message' => 'reCAPTCHA verification failed, please try again.']);
+            exit;
+        }
     }
 
     // Ensure both email and password have been provided via POST.
@@ -67,6 +89,8 @@
                     echo json_encode(['status' => 'error', 'message' => 'Your account has yet to be approved by a lecturer.']);
                     exit;
                 }
+
+                
 
                 // Set session variables.             
                 $_SESSION['userUUID'] = $user['userUUID'];

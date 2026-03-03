@@ -30,7 +30,6 @@
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
-    //$route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
     $route->Route(['get'], '/signup', "./contents/signup.php");
     $route->Route(['get'], '/login', "./contents/login.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
