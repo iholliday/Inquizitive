@@ -244,7 +244,7 @@ $stmt->close();
                       <td class="text-end">
                         <div class="lm-actions">
                           <!-- Edit Button -->
-                          <button class="btn btn-sm btn-outline-primary">Edit</button>
+                          <button class="btn btn-sm btn-outline-primary smEditBtn" data-useruuid="<?= htmlspecialchars($uuid) ?>">Edit</button>
                           <!-- Disable/Enable Button -->
                           <button class="btn btn-sm btn-outline-warning lmToggleDisableBtn" data-useruuid="<?= htmlspecialchars($uuid) ?>" data-disabled="<?= $isDisabled?>">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
@@ -269,6 +269,25 @@ $stmt->close();
 </div>
 
 <script>
+
+//Mihael edit btn stuff
+$(".smEditBtn").ready(function (){
+  $(".smEditBtn").click(function (){
+    $.ajax({
+      url: './edit-lecturer', 
+      type: 'POST', 
+      data: { userUUID: $(this).attr("data-useruuid").toString() },
+      success: function(response) {
+      //console.log('Success:', response);
+        $("#content").html(response);
+      },
+      error: function(xhr, status, error) {
+        //console.log('Error:', error);
+      }
+    });            
+  })
+})
+
 document.addEventListener("submit", async (e) => {
   if (e.target.id !== "lmAddLecturerForm") return;
 
