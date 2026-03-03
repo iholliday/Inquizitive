@@ -33,6 +33,21 @@ if ($res1 = $stmt->get_result()){
 $res1->free();
 }
 $stmt->close();
+
+$subjects = [];
+if($subRes = $db->Query("CALL GetAllSubjects();", [])){
+  while ($row = mysqli_fetch_assoc($subRes)){
+    $subjects[] = $row;
+  }
+
+  mysqli_free_result($subRes);
+  while(mysqli_more_results($conn) && mysqli_next_result($conn)){
+    $junk = mysqli_store_result($conn);
+    if($junk) mysqli_free_result($junk);
+  }
+}
+
+
 ?>
 
 <div id="lecturerDashboard" class="container-fluid py-4">
@@ -67,11 +82,19 @@ $stmt->close();
               <input id="tmQuizName" type="text" class="form-control" name="quizName" required>
             </div>
 
-            <div class="col-12">
-              <label class="form-label" for="tmSubject">Subject</label>
-              <input id="tmSubject" type="text" class="form-control" name="subject" required>
-            </div>
-
+          <div class="col-12">
+            <select class="form-select" name="subjectUUID" id="subjectUUID">
+              <option value="">Select a subject...</option>
+              <?php foreach ($subjects as $s): ?>
+                <option value="<?= htmlspecialchars($s['subjectUUID'], ENT_QUOTES, 'UTF-8') ?>">
+                  <?= htmlspecialchars($s['subjectTitle'], ENT_QUOTES, 'UTF-8') ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
+          </div>
+              
+              <!-- <label class="form-label" for="tmSubject">Subject</label>
+              <input id="tmSubject" type="text" class="form-control" name="subject" required> -->
             
             <div class="col-12 d-grid mt-1">
               <button type="submit" class="btn" id="tmCreateBtn">
