@@ -40,18 +40,18 @@ const profileActions = document.getElementById("profileActions");
     });
 
 
-    $.ajax({
-      url:"./last-page",
-      type: "POST",
-      data:{lastPage:url},
-      success: function (data) {
-        console.log("Saved into session")
-      },
-      // Error message for if page is not found
-      error: function (xhr, status, error) {
-        console.error("Error loading page:", url, status, error);
-      },
-    });
+    // $.ajax({
+    //   url:"./last-page",
+    //   type: "POST",
+    //   data:{lastPage:url},
+    //   success: function (data) {
+    //     console.log("Saved into session")
+    //   },
+    //   // Error message for if page is not found
+    //   error: function (xhr, status, error) {
+    //     console.error("Error loading page:", url, status, error);
+    //   },
+    // });
   }
 
   // No .link
@@ -139,7 +139,7 @@ $(sidebar).ready(function(){
 
 // ==================== LOGOUT (TA) ====================
 $("#logout").click(function(e){
-    e.preventDefault();
+    //e.preventDefault();
 
     // Call logout.php dynamically via AJAX.
     $.ajax({
