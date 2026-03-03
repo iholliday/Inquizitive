@@ -1,0 +1,69 @@
+#content
+{
+    height: 100%;
+    width: 100%;
+}
+#edit-subject
+{
+    height:100%;
+    width: 100%;
+}
+#edit-subject #edit-subject-wrapper
+{
+    position: relative;
+    display: grid;
+
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    place-items:  center;
+    border-radius: 5px;
+    min-width:100% !important;
+    min-height: 100% !important;
+    overflow: hidden;
+    background-color: var(--c-offwhite);
+}
+#edit-subject-wrapper .txt-center
+{
+    width:100%;
+    text-align: center;
+
+}
+#edit-subject #isDisabled
+{
+    position:relative;
+}
+#edit-subject .isDisabledWrapper
+{
+    position:relative;
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+}
+#edit-subject #submitBtnWrapper
+{
+    width:100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#edit-subject #smAddSubjectForm
+{
+    border-radius: 5px;
+    max-width: 40%;
+}
+
+#edit-subject #smEditBtn
+{
+    background-color: var( --c-english-violet);
+    width:auto;
+    margin:0;
+    margin-bottom: 20px;
+    padding:5px;
+}
+#edit-subject .hidden
+{
+    display:none;
+}

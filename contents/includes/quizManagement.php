@@ -7,7 +7,7 @@ require_once("./php/_mtQuizClasses.php");
 $currentQuiz = new quiz();
 $db= new inquizitiveDB ();
 
-$quizUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['grabQuiz']));
+$quizUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quizGrab']));
 
 
 if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
