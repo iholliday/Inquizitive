@@ -75,7 +75,7 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
         </div>
 
         <div class="sdm-panel__body">
-          <form id="sdmAddStudentForm" class="row g-3" autocomplete="off" method="post">
+          <form id="tmAddQuizForm" class="row g-3" autocomplete="off" method="post">
 
              <div class="col-12">
               <label class="form-label" for="tmQuizName">Quiz Name</label>
@@ -214,5 +214,30 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
       })
     })
   })
+
+$("#tmAddQuizForm").on("submit", function(e){
+  e.preventDefault(); // VERY IMPORTANT
+
+  const formData = $(this).serialize();
+
+  $.ajax({
+    url: "./create-test",
+    method: "POST",
+    dataType: "json",
+    data: formData, // ✅ send serialized form
+    success: function(res){
+      if(res.ok){
+        Swal.fire("Created!", "Quiz has been created.", "success");
+        location.reload();
+      } else {
+        Swal.fire("Error", res.error || "Failed to create quiz.", "error");
+      }
+    },
+    error: function(xhr){
+      Swal.fire("Error", xhr.responseText || "Failed to create quiz.", "error");
+    }
+  });
+});
+  
 
 </script>
