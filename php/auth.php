@@ -67,6 +67,7 @@
                 $_SESSION['lastName'] = $user['lastName'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['accessLevel'] = $user['accessLevel'];
+                $_SESSION['userCreationDate'] = $user['userCreationDate'];
 
                 // Send success response.
                 echo json_encode(['status' => 'success', 'message' => 'Welcome to the dashboard!']);

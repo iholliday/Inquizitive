@@ -56,6 +56,7 @@
                             <div class="admin-nav">
                                 <hr class="nav-divider">
                                 <a class="nav-item link" id="lecturer-management">Lecturer Management</a>
+                                <a class="nav-item link" id="subject-management">Subject Management</a>
                             </div>
                         <?php
                         }
@@ -76,8 +77,7 @@
                 </button>
 
                 <div class="profile-actions" id="profileActions" role="menu" aria-hidden="true">
-                    <button class="profile-btn link" type="button" role="menuitem" id="profile">My Profile</button>
-                    <button class="profile-btn link" type="button" role="menuitem" id="settings">Settings</button>
+                    <button class="profile-btn link" type="button" role="menuitem" id="settings">Settings / Profile</button>
                     <button class="profile-btn link" type="button" role="menuitem" id="logoutPage">Log out</button>
                     <!-- We can add more buttons :) -->
                 </div>

@@ -462,14 +462,16 @@ body {
 }
 
 #adminDashboard #lmCreateBtn,
-#adminDashboard #smCreateBtn {
+#adminDashboard #smCreateBtn,
+#adminDashboard #updateBtn {
   margin-top:20px;
   background-color: var(--c-english-violet);
   color:white;
 }
 
 #adminDashboard #lmCreateBtn:hover,
-#adminDashboard #smCreateBtn:hover {
+#adminDashboard #smCreateBtn:hover,
+#adminDashboard #updateBtn:hover {
   margin-top:20px;
   background-color: var(--c-space-cadet);
   color:white;
@@ -595,6 +597,25 @@ body {
 #adminDashboard .lm-eq__card,
 #adminDashboard .sm-eq__card {
   width: 100%;
+}
+
+
+#adminDashboard .stat-card{
+  text-align:center;
+  padding:20px;
+  border-radius:10px;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+}
+
+#adminDashboard .stat-number{
+  font-size:26px;
+  font-weight:700;
+}
+
+#adminDashboard.stat-label{
+  font-size:13px;
+  color:#6b7280;
 }
 
 @media (max-width: 576px) {
