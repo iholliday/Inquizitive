@@ -753,6 +753,7 @@ body {
 }
 
 #lecturerDashboard .lm-badge-danger,
+#lecturerDashboard .sdm-badge-danger,
 #lecturerDashboard .tm-badge-danger {
   background: rgba(173, 20, 87, 0.10);
   color: rgba(173, 20, 87, 1);
@@ -760,6 +761,7 @@ body {
 }
 
 #lecturerDashboard .lm-person__name,
+#lecturerDashboard .sdm-person__name,
 #lecturerDashboard .tm-subject__name {
   font-weight: 700;
   line-height: 1.1;
@@ -769,6 +771,7 @@ body {
 }
 
 #lecturerDashboard .lm-person__id,
+#lecturerDashboard .sdm-person__id,
 #lecturerDashboard .tm-subject__id {
   font-size: 0.85rem;
   color: var(--lm-muted);
@@ -777,11 +780,13 @@ body {
   cursor: pointer;
 }
 
-#lecturerDashboard .tm-quizLink{
+#lecturerDashboard .tm-quizLink,
+#lecturerDashboard .sdm-quizLink{
   text-decoration: none;
 }
 
 #lecturerDashboard .lm-panel__scroll,
+#lecturerDashboard .sdm-panel__scroll,
 #lecturerDashboard .tm-panel__scroll{
   height: 450px !important;
   max-height: 450px !important;
@@ -792,7 +797,8 @@ body {
 
 
 #lecturerDashboard .lm-tableWrap,
-#lecturerDashboard .tm-tableWrap{
+#lecturerDashboard .tm-tableWrap,
+#lecturerDashboard .sdm-tableWrap{
   border: 1px solid var(--lm-border);
   border-radius: 12px;
   overflow: hidden;
@@ -813,7 +819,8 @@ body {
 }
 
 #lecturerDashboard .lm-actions,
-#lecturerDashboard .tm-actions {
+#lecturerDashboard .tm-actions,
+#lecturerDashboard .sdm-actions {
   display: inline-flex;
   gap: 8px;
   justify-content: flex-end;
@@ -821,6 +828,7 @@ body {
 }
 
 #lecturerDashboard .lm-actions .btn,
+#lecturerDashboard .sdm-actions .btn,
 #lecturerDashboard .tm-actions .btn {
   padding: 0.28rem 0.6rem;
 }

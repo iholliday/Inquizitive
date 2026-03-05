@@ -12,6 +12,21 @@ if (!$isAjax) {
 }
 
 require_once __DIR__ . "/../../php/_connect.php";
+
+$db = new inquizitiveDB();
+$conn = $db->connect;
+
+
+$stmt = $conn->prepare("CALL GetStudents()");
+
+$stmt->execute();
+
+if ($res1 = $stmt->get_result()) {
+  while ($row = $res1->fetch_assoc()) {
+    $students[] = $row;
+  }
+  $res1->free();
+}
 ?>
 
 
@@ -28,7 +43,7 @@ require_once __DIR__ . "/../../php/_connect.php";
   <!-- Main -->
   <div class="row g-4 sdm-eq">
 
-    <!-- Left: Add Lecturer -->
+    <!-- Left: Add Student -->
     <div class="col-12 col-lg-4 sdm-eq__col">
       <div class="sdm-card sdm-panel h-100 sdm-eq__card">
         <div class="sdm-panel__head">
@@ -96,8 +111,8 @@ require_once __DIR__ . "/../../php/_connect.php";
         </div>
 
      <!-- Scroll region -->
-        <div class="sm-panel__scroll flex-grow-1">
-          <div class="sm-tableWrap">
+        <div class="sdm-panel__scroll flex-grow-1">
+          <div class="sdm-tableWrap">
             <table class="table table-hover align-middle mb-0">
               <thead>
                 <tr>
@@ -110,47 +125,44 @@ require_once __DIR__ . "/../../php/_connect.php";
 </div>
   <tbody id="smSubjectsTbody">
                 <!-- JS/PHP will inject rows here -->
-                <?php if (count($quizzes) === 0): ?>
+                <?php if (count($students) === 0): ?>
                   <tr>
                     <td colspan="4" class="text-muted py-4 text-center">
-                      No quizzes found.
+                      No students found.
                     </td>
                   </tr>
                 <?php else: ?>
-                  <?php foreach ($quizzes as $u): ?>
+                  <?php foreach ($students as $s): ?>
                     <?php
-                      $quizUUID = $u["quizUUID"];
-                      $quizName = $u["quizName"];
-                      $subjectTitle = $u["subjectTitle"];
-                      $subjectUUID = $u["subjectUUID"];
-                      $subjectIsDisabled = (int)$u["subjectIsDisabled"];
+                      $userUUID = $s["userUUID"];
+                      $firstName = $s["firstName"];
+                      $lastName = $s["lastName"];
+                      $email = $s["email"];
+                      $isDisabled = (int)$s["isDisabled"];
                     ?>
                     <tr>
                       <td>
-                        <a class="tm-quizLink" id="<?= urlencode($quizUUID) ?>"
-                          data-quizuuid="<?= htmlspecialchars($quizUUID) ?>">
-                          <div class="tm-subject__name"><?= htmlspecialchars($quizName) ?></div>
-                          <div class="tm-subject__id">ID: <?= htmlspecialchars($quizUUID) ?></div>
-                        </a>
+                          <div class="sdm-subject__name"><?= htmlspecialchars($firstName) ?></div>
+                          <div class="sdm-subject__id">ID: <?= htmlspecialchars($userUUID) ?></div>
                       </td>
 
-                      <td class="text-muted"><?= htmlspecialchars($studentTitle) ?></td>
+                      <td class="text-muted"><?= htmlspecialchars($email) ?></td>
 
                       <td>
-                        <?php if ($studentIsDisabled): ?>
-                          <span class="badge sm-badge-danger">Disabled</span>
+                        <?php if ($isDisabled): ?>
+                          <span class="badge sdm-badge-danger">Disabled</span>
                         <?php else: ?>
-                          <span class="badge sm-badge-success">Active</span>
+                          <span class="badge sdm-badge-success">Active</span>
                         <?php endif; ?>
                       </td>
 
                       <td class="text-end">
-                        <div class="tm-actions">
+                        <div class="sdm-actions">
                           <!-- Edit Button -->
-                          <button class="btn btn-tm btn-outline-primary">Edit</button>
+                          <button class="btn btn-sdm btn-outline-primary">Edit</button>
                           <!-- Disable/Enable Button -->
-                          <button class="btn btn-tm btn-outline-warning tmToggleDisableBtn" data-subjectuuid="<?= htmlspecialchars($subjectUUID) ?>" data-disabled="<?= $subjectIsDisabled?>">
-                            <?= $subjectIsDisabled ? "Enable" : "Disable" ?>
+                          <button class="btn btn-sdm btn-outline-warning smToggleDisableBtn" data-userUUID="<?= htmlspecialchars($userUUID) ?>" data-disabled="<?= $isDisabled?>">
+                            <?= $isDisabled ? "Enable" : "Disable" ?>
                           </button>
                         </div>
                       </td>
@@ -170,8 +182,8 @@ require_once __DIR__ . "/../../php/_connect.php";
 </div>
 
 <script>
-  $(".tm-quizLink").ready(function(){
-    $(".tm-quizLink").click(function(){
+  $(".sdm-quizLink").ready(function(){
+    $(".sdm-quizLink").click(function(){
       $.ajax({
         url: "./test-management/editor",
         type: "POST",
@@ -185,26 +197,26 @@ require_once __DIR__ . "/../../php/_connect.php";
     })
   })
 
-$("#tmAddQuizForm").on("submit", function(e){
+$("#smStudentForm").on("submit", function(e){
   e.preventDefault(); // VERY IMPORTANT
 
   const formData = $(this).serialize();
 
   $.ajax({
-    url: "./create-test",
+    url: "./create-student",
     method: "POST",
     dataType: "json",
     data: formData, // ✅ send serialized form
     success: function(res){
       if(res.ok){
-        Swal.fire("Created!", "Quiz has been created.", "success");
+        Swal.fire("Created!", "Student has been created.", "success");
         location.reload();
       } else {
-        Swal.fire("Error", res.error || "Failed to create quiz.", "error");
+        Swal.fire("Error", res.error || "Failed to create student.", "error");
       }
     },
     error: function(xhr){
-      Swal.fire("Error", xhr.responseText || "Failed to create quiz.", "error");
+      Swal.fire("Error", xhr.responseText || "Failed to create student.", "error");
     }
   });
 });
