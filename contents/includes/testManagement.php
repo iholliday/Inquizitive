@@ -151,9 +151,9 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
                     <?php
                       $quizUUID = $u["quizUUID"];
                       $quizName = $u["quizName"];
+                      $isDisabled = $u["isDisabled"];
                       $subjectTitle = $u["subjectTitle"];
                       $subjectUUID = $u["subjectUUID"];
-                      $subjectIsDisabled = (int)$u["subjectIsDisabled"];
                     ?>
                     <tr>
                       <td>
@@ -167,7 +167,7 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
                       <td class="text-muted"><?= htmlspecialchars($subjectTitle) ?></td>
 
                       <td>
-                        <?php if ($subjectIsDisabled): ?>
+                        <?php if ($isDisabled): ?>
                           <span class="badge tm-badge-danger">Disabled</span>
                         <?php else: ?>
                           <span class="badge tm-badge-success">Active</span>
@@ -179,8 +179,8 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
                           <!-- Edit Button -->
                           <button class="btn btn-tm btn-outline-primary">Edit</button>
                           <!-- Disable/Enable Button -->
-                          <button class="btn btn-tm btn-outline-warning tmToggleDisableBtn" data-subjectuuid="<?= htmlspecialchars($subjectUUID) ?>" data-disabled="<?= $subjectIsDisabled?>">
-                            <?= $subjectIsDisabled ? "Enable" : "Disable" ?>
+                          <button class="btn btn-tm btn-outline-warning tmToggleDisableBtn" data-quizuuid="<?= htmlspecialchars($quizUUID) ?>" data-disabled="<?= $isDisabled?>">
+                            <?= $isDisabled ? "Enable" : "Disable" ?>
                           </button>
                         </div>
                       </td>
@@ -224,7 +224,7 @@ $("#tmAddQuizForm").on("submit", function(e){
     url: "./create-test",
     method: "POST",
     dataType: "json",
-    data: formData, // ✅ send serialized form
+    data: formData,
     success: function(res){
       if(res.ok){
         Swal.fire("Created!", "Quiz has been created.", "success");
@@ -253,3 +253,77 @@ $(document).on("click", "#backBtn", function(){
   
 
 </script>
+
+<script>
+    document.addEventListener("click", async (e) => {
+
+    // Check if the clicked element is a disable/enable button
+    const btn = e.target.closest(".tmToggleDisableBtn");
+    if (!btn) return;
+
+    // Retrieve user UUID and current disabled state from data attribute
+    const quizuuid = btn.dataset.quizuuid;
+    const currentlyDisabled = btn.dataset.disabled === "1";
+    
+    // Determine new state
+    const newDisabled = currentlyDisabled ? 0 : 1;
+
+    // Confirmation modal before changing anything
+    const confirm = await Swal.fire({
+      icon: "warning",
+      title: newDisabled ? "Disable user?" : "Enable user?",
+      text: newDisabled
+        ? "This will prevent the user from accessing the system."
+        : "This will allow the user to access the system again.",
+      showCancelButton: true,
+      confirmButtonText: newDisabled ? "Disable" : "Enable"
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    // Prevent duplicate requests
+    btn.disabled = true;
+
+    try {
+      const fd = new FormData();
+      fd.append("quizuuid", quizuuid);
+      fd.append("isDisabled", String(newDisabled));
+
+      // Sending AJAX request to update quiz status
+      const res = await fetch("./set-quiz-disabled", {
+        method: "POST",
+        body: fd,
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      });
+
+      const data = await res.json();
+
+      if (!data.ok) {
+        await Swal.fire({ icon: "error", title: "Update failed", text: data.message || "Error" });
+        return;
+      }
+
+      // Update button label + state
+      btn.dataset.disabled = String(newDisabled);
+      btn.textContent = newDisabled ? "Enable" : "Disable";
+
+      // Update status badge visually in the table row
+      const row = btn.closest("tr");
+      const badge = row.querySelector("td:nth-child(3) .badge");
+      if (badge) {
+        badge.className = "badge " + (newDisabled ? "sdm-badge-danger" : "sdm-badge-success");
+        badge.textContent = newDisabled ? "Disabled" : "Active";
+      }
+
+      await Swal.fire({ icon: "success", title: "Updated", text: data.message || "Done." });
+
+    } catch (err) {
+      console.error(err);
+      await Swal.fire({ icon: "error", title: "Server error", text: "Something went wrong." });
+    } finally {
+      // Re-enable button regardless of success/failure
+      btn.disabled = false;
+    }
+  });
+
+  </script>
