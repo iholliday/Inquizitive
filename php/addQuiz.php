@@ -28,6 +28,7 @@ if ($subjectUUID === ""){
 $quizNameEsc = mysqli_real_escape_string($conn, $quizName);
 $subjectEsc = mysqli_real_escape_string($conn, $subjectUUID);
 
+
 $res = $db->Query("CALL CreateQuiz(?, ?);", [$quizNameEsc, $subjectEsc]);
 
 if (!$res){

@@ -55,8 +55,8 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
   <!-- Header -->
   <div class="sdm-header mb-4">
     <div class="sdm-header__left">
-      <h3 class="sdm-title">Test Management</h3>
-      <p class="sdm-subtitle mb-0">Create, view, and manage tests</p>
+      <h3 class="sdm-title">Quiz Management</h3>
+      <p class="sdm-subtitle mb-0">Create, view, and manage quizzes</p>
     </div>
   </div>
 
@@ -120,7 +120,7 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
         <div class="sdm-panel__head">
           <div>
             <h5 class="mb-0">Tests</h5>
-            <div class="text-muted small">Search and manage existing tests</div>
+            <div class="text-muted small">Search and manage existing quizzes</div>
           </div>
         </div>
 
@@ -177,7 +177,13 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
                       <td class="text-end">
                         <div class="tm-actions">
                           <!-- Edit Button -->
-                          <button class="btn btn-tm btn-outline-primary">Edit</button>
+                          <button 
+                            class="btn btn-tm btn-outline-primary tmEditQuizBtn"
+                            data-quizuuid="<?= htmlspecialchars($quizUUID) ?>"
+                            data-quizname="<?= htmlspecialchars($quizName) ?>"
+                            data-subjectuuid="<?= htmlspecialchars($subjectUUID) ?>">
+                            Edit
+                          </button>
                           <!-- Disable/Enable Button -->
                           <button class="btn btn-tm btn-outline-warning tmToggleDisableBtn" data-quizuuid="<?= htmlspecialchars($quizUUID) ?>" data-disabled="<?= $isDisabled?>">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
@@ -198,6 +204,109 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
 
   </div>
 </div>
+
+<script>
+const tmSubjects = <?= json_encode($subjects) ?>;
+
+document.addEventListener("click", async (e) => {
+
+  const btn = e.target.closest(".tmEditQuizBtn");
+  if (!btn) return;
+
+  const quizUUID = btn.dataset.quizuuid;
+  const quizName = btn.dataset.quizname;
+  const subjectUUID = btn.dataset.subjectuuid;
+
+  // Build subject dropdown
+  let subjectOptions = `<option value="">Select Subject</option>`;
+  tmSubjects.forEach(s => {
+    subjectOptions += `
+      <option value="${s.subjectUUID}" 
+        ${s.subjectUUID === subjectUUID ? "selected" : ""}>
+        ${s.subjectTitle}
+      </option>`;
+  });
+
+  const { value: formValues } = await Swal.fire({
+    title: "Edit Quiz",
+
+    html: `
+      <div class="text-start">
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Quiz Name</label>
+          <input 
+            id="swalQuizName" 
+            class="form-control" 
+            value="${quizName}"
+            placeholder="Enter quiz name">
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label fw-semibold">Subject</label>
+          <select id="swalSubjectUUID" class="form-select">
+            ${subjectOptions}
+          </select>
+        </div>
+
+      </div>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: "Save Changes",
+
+    preConfirm: () => {
+
+      const quizName = document.getElementById("swalQuizName").value.trim();
+      const subjectUUID = document.getElementById("swalSubjectUUID").value;
+
+      if (!quizName || !subjectUUID) {
+        Swal.showValidationMessage("All fields are required");
+        return false;
+      }
+
+      return {
+        quizUUID: quizUUID,
+        quizName: quizName,
+        subjectUUID: subjectUUID
+      };
+    }
+  });
+
+  if (!formValues) return;
+
+  try {
+
+    const fd = new FormData();
+    fd.append("quizUUID", formValues.quizUUID);
+    fd.append("quizName", formValues.quizName);
+    fd.append("subjectUUID", formValues.subjectUUID);
+
+    const res = await fetch("./edit-quiz", {
+      method: "POST",
+      body: fd,
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      await Swal.fire("Error", data.message || "Failed to update quiz", "error");
+      return;
+    }
+
+    await Swal.fire("Updated!", "Quiz updated successfully.", "success");
+
+    location.reload();
+
+  } catch (err) {
+    console.error(err);
+    Swal.fire("Error", "Server error occurred.", "error");
+  }
+
+});
+
+</script>
 
 <script>
   $(".tm-quizLink").ready(function(){
@@ -327,3 +436,5 @@ $(document).on("click", "#backBtn", function(){
   });
 
   </script>
+
+  

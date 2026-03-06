@@ -31,6 +31,7 @@
 
     $route->Route(['post'], '/add-student', "./php/addStudent.php");
     $route->Route(['post'], '/set-quiz-disabled', "./php/setQuizDisabled.php");
+    $route->Route(['post'], '/edit-quiz', "./php/editQuiz.php");
 
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
