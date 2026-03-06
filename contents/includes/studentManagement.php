@@ -197,29 +197,56 @@ if ($res1 = $stmt->get_result()) {
     })
   })
 
-$("#smStudentForm").on("submit", function(e){
-  e.preventDefault(); // VERY IMPORTANT
+</script>
 
-  const formData = $(this).serialize();
+<script>
+document.addEventListener("submit", async (e) => {
+  if (e.target.id !== "sdmAddStudentForm") return;
 
-  $.ajax({
-    url: "./create-student",
-    method: "POST",
-    dataType: "json",
-    data: formData, // ✅ send serialized form
-    success: function(res){
-      if(res.ok){
-        Swal.fire("Created!", "Student has been created.", "success");
-        location.reload();
-      } else {
-        Swal.fire("Error", res.error || "Failed to create student.", "error");
-      }
-    },
-    error: function(xhr){
-      Swal.fire("Error", xhr.responseText || "Failed to create student.", "error");
+  e.preventDefault();
+
+  const form = e.target;
+  const fd = new FormData(form);
+
+  // Disable button while submitting
+  const btn = document.getElementById("sdmCreateBtn");
+  if (btn) btn.disabled = true;
+
+  try {
+    const res = await fetch("./add-student", {
+      method: "POST",
+      body: fd,
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      await Swal.fire({
+        icon: "error",
+        title: "Could not create student",
+        text: data.message || "Please try again."
+      });
+      return;
     }
-  });
-});
-  
 
+    await Swal.fire({
+      icon: "success",
+      title: "Student created",
+      text: data.message || "Success!"
+    });
+
+    form.reset();
+
+  } catch (err) {
+    await Swal.fire({
+      icon: "error",
+      title: "Server error",
+      text: "Something went wrong. Check console."
+    });
+    console.error(err);
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+});
 </script>

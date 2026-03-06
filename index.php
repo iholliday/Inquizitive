@@ -29,6 +29,9 @@
     $route->Route(['post'], '/set-subject-disabled', "./php/setSubjectDisabled.php");
     $route->Route(['post'], '/create-test', "./php/addQuiz.php");
 
+    $route->Route(['post'], '/add-student', "./php/addStudent.php");
+
+
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
     //$route->Route(['get'], '/subjectsPage', "./contents/includes/inc-SubjectsDashboardPage.php");
