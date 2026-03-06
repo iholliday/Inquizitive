@@ -31,7 +31,6 @@ if ($res1 = $stmt->get_result()) {
 
 
 <div id="lecturerDashboard" class="container-fluid py-4">
-
   <!-- Header -->
   <div class="sdm-header mb-4">
     <div class="sdm-header__left">
@@ -250,3 +249,79 @@ document.addEventListener("submit", async (e) => {
   }
 });
 </script>
+
+<!-- Disabling users -->
+  <script>
+    document.addEventListener("click", async (e) => {
+
+    // Check if the clicked element is a disable/enable button
+    const btn = e.target.closest(".smToggleDisableBtn");
+    if (!btn) return;
+
+    // Retrieve user UUID and current disabled state from data attribute
+    const userUUID = btn.dataset.useruuid;
+    const currentlyDisabled = btn.dataset.disabled === "1";
+    
+    // Determine new state
+    const newDisabled = currentlyDisabled ? 0 : 1;
+
+    // Confirmation modal before changing anything
+    const confirm = await Swal.fire({
+      icon: "warning",
+      title: newDisabled ? "Disable user?" : "Enable user?",
+      text: newDisabled
+        ? "This will prevent the user from accessing the system."
+        : "This will allow the user to access the system again.",
+      showCancelButton: true,
+      confirmButtonText: newDisabled ? "Disable" : "Enable"
+    });
+
+    // Stop execution if Admin cancels
+    if (!confirm.isConfirmed) return;
+
+    // Prevent duplicate requests
+    btn.disabled = true;
+
+    try {
+      const fd = new FormData();
+      fd.append("userUUID", userUUID);
+      fd.append("isDisabled", String(newDisabled));
+
+      // Sending AJAX request to update user status
+      const res = await fetch("./set-user-disabled", {
+        method: "POST",
+        body: fd,
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      });
+
+      const data = await res.json();
+
+      if (!data.ok) {
+        await Swal.fire({ icon: "error", title: "Update failed", text: data.message || "Error" });
+        return;
+      }
+
+      // Update button label + state
+      btn.dataset.disabled = String(newDisabled);
+      btn.textContent = newDisabled ? "Enable" : "Disable";
+
+      // Update status badge visually in the table row
+      const row = btn.closest("tr");
+      const badge = row.querySelector("td:nth-child(3) .badge");
+      if (badge) {
+        badge.className = "badge " + (newDisabled ? "sdm-badge-danger" : "sdm-badge-success");
+        badge.textContent = newDisabled ? "Disabled" : "Active";
+      }
+
+      await Swal.fire({ icon: "success", title: "Updated", text: data.message || "Done." });
+
+    } catch (err) {
+      console.error(err);
+      await Swal.fire({ icon: "error", title: "Server error", text: "Something went wrong." });
+    } finally {
+      // Re-enable button regardless of success/failure
+      btn.disabled = false;
+    }
+  });
+
+  </script>
