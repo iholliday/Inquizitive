@@ -55,7 +55,7 @@
     $route->Route(['get'], '/shop-gacha', "./contents/includes/gachaItemsPage.php");
     $route->Route(['post'], '/shop-buy-item', "./contents/includes/shopBuyItem.php");
     $route->Route(['get'], '/mfaGenerate', "./php/mfaGenerate.php");
-
+    $route->Route(['get'], '/generateBackupCode', "./php/generateBackupCode.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logout', "./php/logout.php");

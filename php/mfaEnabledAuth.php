@@ -61,7 +61,7 @@ if (!empty($user['totpSecret']) && strlen($code) === 6 && $mfa->verifyCode($user
 elseif (!empty($user['backupCode']) && password_verify($code, $user['backupCode'])) 
 {
     // Invalidate the backup code after use
-    $db->Query("CALL ClearBackupCode(?)", [$userUUID]);
+    $db->Query("CALL SetBackupCode(?, ?)", [$userUUID, NULL]);
     $mfaPassed = true;
 }
 
