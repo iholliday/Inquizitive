@@ -4,7 +4,7 @@
 
     // Require the connection files.
     require_once ("_connect.php");
-    require __DIR__ . "/../vendor/autoload.php";
+    require_once __DIR__ . "/../vendor/autoload.php";
 
     // Set response to JSON.
     header('Content-Type: application/json');
@@ -89,8 +89,16 @@
                     echo json_encode(['status' => 'error', 'message' => 'Your account has yet to be approved by a lecturer.']);
                     exit;
                 }
+            
+                // Check if MFA is enabled.
+                if ($user['mfaEnabled'] == 1) 
+                {
+                    // Store temporary session for MFA verification.
+                    $_SESSION['mfaUser'] = $user['userUUID'];
 
-                
+                    echo json_encode(['status' => 'mfaEnabled', 'message' => 'Multi-factor authentication required.']);
+                    exit;
+                }
 
                 // Set session variables.             
                 $_SESSION['userUUID'] = $user['userUUID'];

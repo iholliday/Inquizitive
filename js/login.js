@@ -34,7 +34,55 @@ $("#login-form").submit(function (event)
                         alert("Error loading the dashboard. Please try again.");
                     }
                 });
-            } 
+            }
+            else if (res.status === 'mfaEnabled') {
+                // If MFA is enabled, prompt user for TOTP/backup code.
+                Swal.fire({
+                    title: 'Multi-Factor Authentication',
+                    text: 'Enter your 6-digit TOTP code or 16-character backup code:',
+                    input: 'text',
+                    inputAttributes: { autocapitalize: 'characters', maxlength: 16 },
+                    showCancelButton: true,
+                    confirmButtonText: 'Verify',
+                    cancelButtonText: 'Cancel',
+                    inputValidator: (code) => {
+                        code = code.trim();
+                        if (!code) return 'Please enter a code.';
+                        if (code.length !== 6 && code.length !== 16) return 'Code must be 6 or 16 characters long.';
+                    }
+                }).then(function(result) {
+                    if (result.isConfirmed) {
+                        var code = result.value.trim();
+                        $.ajax({
+                            url: "./mfaEnabledAuth",
+                            type: "POST",
+                            data: { code: code },
+                            dataType: "json",
+                            success: function(mfaRes) {
+                                if (mfaRes.status === 'success') {
+                                    console.log("helllo");
+                                    $.ajax({
+                                        url: "./dashboard",
+                                        type: 'GET',
+                                        success: function(data) {
+                                            $('body').html(data);
+                                            Swal.fire(mfaRes.message);
+                                        },
+                                        error: function() { alert("Error loading dashboard."); }
+                                    });
+                                } else {
+                                    Swal.fire('MFA Failed', mfaRes.message, 'error');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("MFA AJAX Error:", status, error);
+                                console.log("Raw response:", xhr.responseText);
+                                alert("An error occurred during MFA verification.");
+                            }
+                        });
+                    }
+                });
+            }
             else 
             {
                 // Display SweetAlert error popup.
