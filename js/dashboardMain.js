@@ -138,34 +138,48 @@ $(sidebar).ready(function(){
 });
 
 // ==================== LOGOUT (TA) ====================
-$("#logout").click(function(e){
-    //e.preventDefault();
+$(document).ready(function() {
+  $("#logout").click(function(e)
+  {
+    e.preventDefault();
 
     // Call logout.php dynamically via AJAX.
     $.ajax({
-        url: "./logout",
-        type: "GET",
-        dataType: "json", 
-        success: function(data) {
-            if (data.status === "success") {
-                // Load login.php dynamically via AJAX.
-                /*$.ajax({
-                    url: "./login",
-                    type: "GET",
-                    success: function(html) {
-                        $("body").html(html);
-                    },
-                    error: function() {
-                        alert("Failed to load login page. Please refresh.");
-                    }
-                });*/
-                window.location.href = "./";
-            } else {
-                alert("Logout failed. Please try again.");
-            }
-        },
-        error: function() {
-            alert("Logout request failed. Please try again.");
+      url: "./logout",
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+        if (data.status === "success") {
+          // Show modal first, then redirect.
+          Swal.fire({
+            title: "Logout Success",
+            text: data.message || "You have logged out successfully.",
+            icon: "success",
+            confirmButtonText: "Done",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          }).then(() => {
+            // Redirect to homepage to reset page state and clear AJAX content.
+            window.location.href = "./";
+          });
+        } else {
+          Swal.fire({
+            title: "Logout Failed",
+            text: "Please try again.",
+            icon: "error",
+            confirmButtonText: "OK"
+          });
         }
+      },
+      error: function(xhr, status, error) {
+        Swal.fire({
+          title: "AJAX Error",
+          text: "Logout request failed. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK"
+        });
+        console.error("Logout AJAX error:", status, error);
+      }
     });
+  });
 });
