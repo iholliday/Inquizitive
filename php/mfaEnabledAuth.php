@@ -49,13 +49,13 @@ if (!$user)
 }
 
 // Initialise TOTP.
-$tfa = new TwoFactorAuth('Inquizitive');
+$mfa = new TwoFactorAuth('Inquizitive');
 
 // Flag to track MFA verification.
 $mfaPassed = false;
 
 // Verify TOTP/backup codes.
-if (!empty($user['totpSecret']) && strlen($code) === 6 && $tfa->verifyCode($user['totpSecret'], $code)) {
+if (!empty($user['totpSecret']) && strlen($code) === 6 && $mfa->verifyCode($user['totpSecret'], $code)) {
     $mfaPassed = true;
 }
 elseif (!empty($user['backupCode']) && password_verify($code, $user['backupCode'])) 

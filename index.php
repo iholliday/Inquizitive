@@ -28,6 +28,7 @@
     $route->Route(['post'], '/set-user-disabled', "./php/setUserDisabled.php");
     $route->Route(['post'], '/create-subject', "./php/addSubject.php");
     $route->Route(['post'], '/set-subject-disabled', "./php/setSubjectDisabled.php");
+    $route->Route(['post'], '/mfaConfirm', "./php/mfaConfirm.php");
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
@@ -53,11 +54,12 @@
     $route->Route(['get'], '/shop-items', "./contents/includes/shopItemsPage.php");
     $route->Route(['get'], '/shop-gacha', "./contents/includes/gachaItemsPage.php");
     $route->Route(['post'], '/shop-buy-item', "./contents/includes/shopBuyItem.php");
+    $route->Route(['get'], '/mfaGenerate', "./php/mfaGenerate.php");
 
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logout', "./php/logout.php");
-
+    $route->Route(['get'], '/temp', "./contents/tempMFA.php");
 
 
 
