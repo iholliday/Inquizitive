@@ -29,6 +29,9 @@
     $route->Route(['post'], '/create-subject', "./php/addSubject.php");
     $route->Route(['post'], '/set-subject-disabled', "./php/setSubjectDisabled.php");
     $route->Route(['post'], '/mfaConfirm', "./php/mfaConfirm.php");
+    $route->Route(['post'], '/sendPasswordReset', "./php/sendPasswordReset.php");
+    $route->Route(['get'], '/resetPassword', "./contents/resetPassword.php");
+
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");

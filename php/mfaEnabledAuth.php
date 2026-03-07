@@ -57,12 +57,14 @@ $mfaPassed = false;
 // Verify TOTP/backup codes.
 if (!empty($user['totpSecret']) && strlen($code) === 6 && $mfa->verifyCode($user['totpSecret'], $code)) {
     $mfaPassed = true;
+    $message = "Welcome to the dashboard!";
 }
 elseif (!empty($user['backupCode']) && password_verify($code, $user['backupCode'])) 
 {
     // Invalidate the backup code after use
     $db->Query("CALL SetBackupCode(?, ?)", [$userUUID, NULL]);
     $mfaPassed = true;
+    $message = "Backup code used!\nWelcome to the dashboard!";
 }
 
 // If user gets code wrong, give error message.
@@ -84,6 +86,6 @@ $currentTime = date("Y-m-d H:i:s");
 $db->Query("CALL UpdateLastLogin(?, ?)", [$user['userUUID'], $currentTime]);
 
 // Success response.
-echo json_encode(['status' => 'success', 'message' => 'MFA verified. Welcome to the dashboard!']);
+echo json_encode(['status' => 'success', 'message' => $message]);
 exit;
 ?>

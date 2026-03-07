@@ -16,7 +16,8 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <?php    
+    <?php
+        // Loading reCAPTCHA keys from env file.    
         require __DIR__ . "/../vendor/autoload.php";
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
         $dotenv->load();
@@ -52,9 +53,9 @@
                                 <div class="mb-3">
                                     <input type="password" name="txtPass" id="password" class="form-control login-form-control" placeholder="Password" aria-describedby="passwordHelpBlock" required>
                                 </div>
-                                <p class="login-help" id="forgot-password"><a href="/">Forgot password?</a></p>
+                                <p class="login-help" id="forgot-password"><a href="#" id="forgotPassword">Forgot password?</a></p>
                                 <div class="g-recaptcha" data-sitekey="<?= $_ENV['RECAPTCHA_SITE_KEY'] ?>" data-callback="enableSubmitBtn"></div>
-                                <button type="submit" id="submitBtn" class="btn btn-danger btn-signin" disabled>SIGN IN</button> <!-- add disabled -->
+                                <button type="submit" id="submitBtn" class="btn btn-danger btn-signin" disabled>SIGN IN</button>
                                 <div class="signup-divider">
                                     <p class="login-help" id="sign-up-help"><a href="#" id="signupLink">Don't have an account?</a></p>
                                 </div>

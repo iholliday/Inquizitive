@@ -16,7 +16,8 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <?php    
+    <?php
+        // Loading reCAPTCHA keys from env file.        
         require __DIR__ . "/../vendor/autoload.php";
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
         $dotenv->load();
