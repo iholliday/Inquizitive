@@ -14,8 +14,34 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Check to see session found.
-if (!isset($_SESSION['userUUID'])) {
+if (!isset($_SESSION['userUUID'])) 
+{
     echo json_encode(['status' => 'error', 'message' => 'No user session found.']);
+    exit;
+}
+
+$userUUID = $_SESSION['userUUID'];
+$password = $_POST['password'] ?? '';
+
+if (!$password) 
+{
+    echo json_encode(['status' => 'error', 'message' => 'Password required.']);
+    exit;
+}
+
+// Fetch hashed password from DB and check against it.
+$db = new inquizitiveDB();
+$stmt = $db->Query("CALL GetPasswordByUUID(?)", [$userUUID]);
+if (!$stmt) 
+{
+    echo json_encode(['status' => 'error', 'message' => 'Database query failed.']);
+    exit;
+}
+
+$user = mysqli_fetch_assoc($stmt);
+if (!$user || !password_verify($password, $user['password'])) 
+{
+    echo json_encode(['status' => 'error', 'message' => 'Incorrect password.']);
     exit;
 }
 
