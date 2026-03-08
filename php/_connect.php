@@ -55,6 +55,18 @@ class inquizitiveDB
             $result = mysqli_query($this->connect, $SQL);
         }
 
+        // Clears any leftover result sets from previous queries.
+        // Fixes "Commands out of sync" errors.
+        while ($this->connect->more_results() && $this->connect->next_result()) 
+        {
+            // Store current result set as if it exists.
+            if ($resultSet = $this->connect->store_result()) 
+            {
+                // Free the memory associated with the result set.
+                $resultSet->free();
+            }
+        }
+
         return $result;
     }
 

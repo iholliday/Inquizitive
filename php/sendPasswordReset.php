@@ -1,4 +1,6 @@
 <?php
+    // REQUIRES EMAIL SERVER TO WORK!!!
+
     // If the page is accessed directly through the URL bar, block access. Only allows access if loaded via AJAX.
     require_once ("./php/blockDirectAccess.php");
 
@@ -15,7 +17,7 @@
     }
 
     // Get email from POST and check it's valid.
-    $email = strtolower(trim($_POST['txtEmail'] ?? ''));
+    $email = strtolower(trim($_POST['email'] ?? ''));
     if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) 
     {
         echo json_encode(['status' => 'error', 'message' => "Invalid email address."]);
@@ -45,7 +47,8 @@
     // Insert into passwordReset table
     $db->Query("CALL CreatePasswordReset(?, ?)", [$userUUID, $hashedToken]);
 
-    $resetLink = "https://inquisitive.remote.ac/resetPassword?token=$resetToken";
+    // Direct link to file to avoid jRoute interferance.
+    $resetLink = "https://inquisitive.remote.ac/resetPassword.php?token=$resetToken";
 
     // Send email unless localhost.
     if (!isLocalHost()) {

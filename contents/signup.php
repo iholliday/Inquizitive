@@ -44,6 +44,7 @@
                         <div class="grid-item item1">
                             <img src="contents/images/login.png" alt="Login image">
                         </div>
+                        <img src="contents/images/logo.png" alt="Logo" class="login-site-logo">
                         <div class="grid-item item2">
                             <h2 class="login-title signup">SIGN UP</h2>
                             <form method="POST" id="signup-form" novalidate>

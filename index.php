@@ -31,7 +31,7 @@
     $route->Route(['post'], '/mfaConfirm', "./php/mfaConfirm.php");
     $route->Route(['post'], '/sendPasswordReset', "./php/sendPasswordReset.php");
     $route->Route(['get'], '/resetPassword', "./contents/resetPassword.php");
-
+    $route->Route(['post'], '/updatePassword', "./php/updatePassword.php");
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
