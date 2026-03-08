@@ -1,72 +1,62 @@
 <?php
-    //Required includes.
-    require_once ("./php/blockDirectAccess.php");
-    require_once ("./php/_connect.php");
+require_once ("./php/blockDirectAccess.php");
+require_once ("./php/_connect.php");
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-    // Check to see if session has started, if not, start one.
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+$db = new InquizitiveDB();
 
-    $db = new InquizitiveDB();
+// UUID for currency
+$currencyUUID = 'ec0ad14f-12c5-11f1-98eb-bc2411ac3867';
+
+// Get top 10 users by quantity
+$stmt = $db->Query("CALL GetTopUsersByCurrency(?)", [$currencyUUID]);
+
+$topUsers = [];
+while ($row = $stmt->fetch_assoc()) 
+{
+    $topUsers[] = $row;
+}
 ?>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<div id="leaderboard" class="container-fluid py-4">
-
-  <!-- Header -->
-  <div class="tm-header mb-4">
-    <div>
-      <h3 class="tm-title">Student Leaderboard</h3>
-    </div>
-  </div>
-  <div class="row g-4">
-
-    <!-- Left: Subject Selector -->
-    <div class="col-12 col-lg-4">
-      <div class="tm-card tm-panel h-100">
-        <div class="tm-panel__head">
-          <div>
-            <h5 class="mb-0">Select Subject</h5>
-            <div class="text-muted small">Choose a subject to view leaderboard</div>
-          </div>
-        </div>
-        <div class="tm-panel__body">
-          <label class="form-label">Subject</label>
-          <select id="lbSubjectSelect" class="form-select">
-            <option value="">Select Subject</option>
-            <?php
-              $stmt = $db->Query("CALL GetAllSubjects()");
-
-              while($row = $stmt->fetch_assoc()){
-                echo "<option value='{$row['subjectUUID']}'>{$row['subjectTitle']}</option>";
-              }
-            ?>
-          </select>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Right: Leaderboard -->
-    <div class="col-12 col-lg-8">
-      <div class="tm-card tm-panel h-100 d-flex flex-column">
-        <div class="tm-panel__head">
-          <div>
-            <h5 class="mb-0">Top Students</h5>
-            <div class="text-muted small">Highest scoring students</div>
-          </div>
-        </div>
-        <div class="tm-panel__body">
-          <div id="leaderboardResults">
-            <p class="text-muted text-center">
-              Select a subject to view leaderboard.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container py-5">
+    <h2 class="mb-4">Top 10 Scores</h2>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (count($topUsers) === 0): ?>
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No users found.</td>
+                </tr>
+            <?php else: ?>
+                <?php foreach ($topUsers as $index => $user): ?>
+                    <tr>
+                        <td><?= $index + 1 ?></td>
+                        <td><?= htmlspecialchars($user['firstName']) ?></td>
+                        <td><?= htmlspecialchars($user['lastName']) ?></td>
+                        <td><?= htmlspecialchars($user['score']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div>
-<script src="./js/leaderboard.js"></script>
+</body>
+</html>
