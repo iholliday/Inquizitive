@@ -36,14 +36,23 @@ $conn = $db->connect;
 
           <!-- Email -->
           <form id="formUpdateEmail" class="mb-4">
+            <input type="hidden" name="action" value="updateEmail">
+
             <div class="d-flex align-items-center justify-content-between mb-2">
               <div class="fw-semibold">Email</div>
               <span class="text-muted small">Used for login</span>
             </div>
 
             <div class="input-group">
-              <input type="email" class="form-control" name="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" placeholder="email@inquisitive.com..." required>
-              <button class="btn" id="updateBtn" type="submit">Save</button>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                value="<?= htmlspecialchars($_SESSION['email'] ?? '') ?>"
+                placeholder="email@inquisitive.com..."
+                required
+              >
+              <button class="btn styledBtn" type="submit">Save</button>
             </div>
 
             <div id="msgUpdateEmail" class="small mt-2"></div>
@@ -51,6 +60,8 @@ $conn = $db->connect;
 
           <!-- Password -->
           <form id="formUpdatePassword" class="mb-4">
+            <input type="hidden" name="action" value="updatePassword">
+
             <div class="fw-semibold mb-2">Password</div>
 
             <div class="mb-2">
@@ -68,7 +79,7 @@ $conn = $db->connect;
               <input type="password" class="form-control" name="confirmPassword" minlength="8" required>
             </div>
 
-            <button class="btn" id="updateBtn" type="submit">Update password</button>
+            <button class="btn styledBtn" type="submit">Update password</button>
             <div id="msgUpdatePassword" class="small mt-2"></div>
           </form>
 
@@ -134,12 +145,7 @@ $conn = $db->connect;
               <div class="d-flex align-items-center gap-2 flex-wrap">
                 <div class="h5 mb-0"><?= htmlspecialchars($firstFormatted . " " . $lastFormatted) ?></div>
                 <span class="badge text-bg-secondary"><?= htmlspecialchars($role) ?></span>
-
-                <?php if (!empty($user['isDisabled'])): ?>
-                  <span class="badge text-bg-danger">Disabled</span>
-                <?php else: ?>
                   <span class="badge text-bg-success">Active</span>
-                <?php endif; ?>
               </div>
               <div class="text-muted small"><?= htmlspecialchars($email) ?></div>
             </div>
@@ -193,3 +199,122 @@ $conn = $db->connect;
 
   </div>
 </div>
+
+
+<script>
+$(document).ready(function () {
+
+    $("#formUpdateEmail").on("submit", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "./update-user",
+            type: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+                if (response.status === "success") {
+                    $("#msgUpdateEmail")
+                        .text(response.message)
+                        .removeClass("text-danger")
+                        .addClass("text-success");
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Email updated",
+                        text: response.message,
+                        confirmButtonText: "OK"
+                    });
+
+                    if (response.email) {
+                        $("#formUpdateEmail input[name='email']").val(response.email);
+                    }
+                } else {
+                    $("#msgUpdateEmail")
+                        .text(response.message)
+                        .removeClass("text-success")
+                        .addClass("text-danger");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Update failed",
+                        text: response.message,
+                        confirmButtonText: "OK"
+                    });
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+
+                $("#msgUpdateEmail")
+                    .text("Something went wrong while updating email.")
+                    .removeClass("text-success")
+                    .addClass("text-danger");
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Server error",
+                    text: xhr.responseText || "Something went wrong while updating email.",
+                    confirmButtonText: "OK"
+                });
+            }
+        });
+    });
+
+    $("#formUpdatePassword").on("submit", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "./update-user",
+            type: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+                if (response.status === "success") {
+                    $("#msgUpdatePassword")
+                        .text(response.message)
+                        .removeClass("text-danger")
+                        .addClass("text-success");
+
+                    $("#formUpdatePassword")[0].reset();
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Password updated",
+                        text: response.message,
+                        confirmButtonText: "OK"
+                    });
+                } else {
+                    $("#msgUpdatePassword")
+                        .text(response.message)
+                        .removeClass("text-success")
+                        .addClass("text-danger");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Update failed",
+                        text: response.message,
+                        confirmButtonText: "OK"
+                    });
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+
+                $("#msgUpdatePassword")
+                    .text("Something went wrong while updating password.")
+                    .removeClass("text-success")
+                    .addClass("text-danger");
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Server error",
+                    text: xhr.responseText || "Something went wrong while updating password.",
+                    confirmButtonText: "OK"
+                });
+            }
+        });
+    });
+
+});
+</script>
