@@ -48,7 +48,7 @@
     $db->Query("CALL CreatePasswordReset(?, ?)", [$userUUID, $hashedToken]);
 
     // Direct link to file to avoid jRoute interferance.
-    $resetLink = "https://inquisitive.remote.ac/resetPassword.php?token=$resetToken";
+    $resetLink = "https://inquisitive.remote.ac/contents/resetPassword.php?token=$resetToken";
 
     // Send email unless localhost.
     if (!isLocalHost()) {
