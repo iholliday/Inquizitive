@@ -33,6 +33,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-danger btn-signin">RESET</button>
                             </form>
+                            <div class="signup-divider">
+                                <p class="login-help"><a href="#" id="loginLink">Back to login page</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>

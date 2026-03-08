@@ -271,6 +271,15 @@
     display: block;
 }
 
+.password-reset .signup-divider {
+    margin-top: 38px;
+    margin-left: 10px;
+}
+
+.password-reset .login-help {
+    margin-left: 105px;
+}
+
 /* ===== Mobile ===== */
 @media (max-width: 1000px) {
 

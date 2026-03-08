@@ -1,6 +1,5 @@
-
 $(document).ready(function() {
-        // Event listener for when the reset form is submitted.
+    // Event listener for when the reset form is submitted.
     $("#reset-form").submit(function(event) {
         event.preventDefault(); 
 
@@ -38,7 +37,8 @@ $(document).ready(function() {
                         icon: 'success',
                         confirmButtonText: 'Go to Login'
                     }).then(() => {
-                        window.location.href = "./login";
+                        // Full page reload to load the login page completely, ensures CSS/JS/images work correctly and URL updates.
+                        window.location.href = "../login";
                     });
                 } else {
                     // Send error message and reenable button.
@@ -48,11 +48,25 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 // Send error message and reenable button.
-                console.error("AJAX Error:", status, error);
-                    console.log("AJAX raw response:", xhr.responseText);
-
                 Swal.fire('Error', 'An unexpected error occurred. Please try again.', 'error');
                 $btn.prop("disabled", false);
+            }
+        });
+    });
+
+    // Event listener for "Back to login page" link.
+    $(document).on("click", "#loginLink", function(e) {
+        e.preventDefault(); 
+
+        $.ajax({
+            url: "../login",
+            type: 'GET',
+            success: function(data) {
+                // Full page reload to load the login page completely, ensures CSS/JS/images work correctly and URL updates.
+                window.location.href = "../login";
+            },
+            error: function() {
+                Swal.fire('Error', 'Failed to load login page. Please try again.', 'error');
             }
         });
     });
