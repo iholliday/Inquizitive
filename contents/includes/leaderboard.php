@@ -25,6 +25,18 @@
   }
 
   $db = new InquizitiveDB();
+
+  // UUID for currency
+  $currencyUUID = 'ec0ad14f-12c5-11f1-98eb-bc2411ac3867';
+
+  // Get top 10 users by quantity
+  $stmt = $db->Query("CALL GetTopUsersByCurrency(?)", [$currencyUUID]);
+
+  $topIQ = [];
+  while ($row = $stmt->fetch_assoc()) 
+  {
+      $topIQ[] = $row;
+  }
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -84,4 +96,35 @@
     </div>
   </div>
 </div>
+
+<div class="container py-5">
+    <h2 class="mb-4">Top 10 IQ Points</h2>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>IQ Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (count($topIQ) === 0): ?>
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No users found.</td>
+                </tr>
+            <?php else: ?>
+                <?php foreach ($topIQ as $index => $user): ?>
+                    <tr>
+                        <td><?= $index + 1 ?></td>
+                        <td><?= htmlspecialchars($user['firstName']) ?></td>
+                        <td><?= htmlspecialchars($user['lastName']) ?></td>
+                        <td><?= htmlspecialchars($user['score']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
 <script src="./js/leaderboard.js"></script>
