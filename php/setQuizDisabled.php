@@ -31,8 +31,8 @@ $conn = $db->connect;
 $currentUUID = $_SESSION["userUUID"] ?? "";
 
 // Prepare stored procedure call to update subject status
-$stmt = $conn->prepare("CALL GetQuizDisabled(?, ?)");
-$stmt->bind_param("si", $quizuuid, $isDisabled);
+$stmt = $conn->prepare("CALL SetQuizDisabled(?, ?)");
+$stmt->bind_param("ss", $quizuuid, $isDisabled);
 
 try {
     // Execute the stored procedure

@@ -1,5 +1,5 @@
 <?php
-echo var_dump($_POST);
+
 
 $db = new inquizitiveDB();
 $subjectUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['subjectUUID'])); 
