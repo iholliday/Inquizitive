@@ -227,3 +227,11 @@ button:hover {
     color: var(--c-offwhite);
     min-height: 100px;
 }
+
+.landing-login-btn:hover {
+    color: var(--c-yellow) !important;
+}
+
+.landing-signup-btn{
+    color: var(--c-dark-purple) !important;
+}

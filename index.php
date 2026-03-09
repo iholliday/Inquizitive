@@ -13,7 +13,7 @@
     date_default_timezone_set('Europe/London');
 
     // Default route.
-    $route->Route(['get'], '/', "./contents/login.php"); 
+    $route->Route(['get'], '/', "./contents/landingPage.php"); 
 
     // Allow serving static CSS and JS directories directly.
     $route->AddDir('/css', "./css/");
@@ -32,6 +32,7 @@
     $route->Route(['post'], '/sendPasswordReset', "./php/sendPasswordReset.php");
     $route->Route(['get'], '/resetPassword', "./contents/resetPassword.php");
     $route->Route(['post'], '/updatePassword', "./php/updatePassword.php");
+    $route->Route(['get'], '/login', "./contents/login.php"); 
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
