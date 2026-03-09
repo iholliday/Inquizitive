@@ -3,6 +3,18 @@ require_once("./php/_connect.php");
 $db = new inquizitiveDB();
 $conn = $db->connect;
 
+
+$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+          strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+$isEmbeddedInDashboard = defined('IN_DASHBOARD_SHELL');
+
+if (!$isAjax && !$isEmbeddedInDashboard) {
+  $DASH_INCLUDE = __FILE__;
+  require __DIR__ . '/../dashboardNavigation.php';
+  exit;
+}
+
 if (!isset($_POST['quizGrab'])) {
   http_response_code(400);
   echo "<div class='alert alert-danger'>Missing quizGrab</div>";

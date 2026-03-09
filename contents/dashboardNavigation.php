@@ -51,7 +51,7 @@ if (!defined('IN_DASHBOARD_SHELL')) {
                             <div class="lecturer-nav">
                                 <hr class="nav-divider">
                                 <a class="nav-item link" id="student-management">Student Management</a>
-                                <a class="nav-item link" id="test-management">Test Management</a>
+                                <a class="nav-item link" id="test-management">Quiz Management</a>
                             </div>
                         <?php
                         }
