@@ -41,6 +41,7 @@
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
+    $route->Route(['get'], '/landing-page', "./contents/landingPage.php");
     $route->Route(['get'], '/logoutPage', "./php/logout.php");
 
     // Any code must be above this.
