@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+if (!defined('IN_DASHBOARD_SHELL')) {
+    define('IN_DASHBOARD_SHELL', true);
+}
+?>
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -78,9 +84,8 @@
                 </button>
 
                 <div class="profile-actions" id="profileActions" role="menu" aria-hidden="true">
-                    <button class="profile-btn link" type="button" role="menuitem" id="profile">My Profile</button>
+                    <button class="profile-btn link" type="button" role="menuitem" id="settings">Settings / Profile</button>
                     <button class="profile-btn link" type="button" role="menuitem" id="shop">Shop</button>
-                    <button class="profile-btn link" type="button" role="menuitem" id="settings">Settings</button>
                     <button class="profile-btn" type="button" role="menuitem" id="logout">Log out</button>
                     <!-- We can add more buttons :) -->
                 </div>
@@ -91,7 +96,13 @@
             </aside>
 
             <main class="main">
-                <div id="content"></div>
+                <div id="content">
+                    <?php
+                    if (isset($DASH_INCLUDE) && file_exists($DASH_INCLUDE)) {
+                        include $DASH_INCLUDE;
+                    }
+                    ?>
+                </div>
             </main>
         </div>
 
