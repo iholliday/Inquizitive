@@ -44,7 +44,7 @@ if (!defined('IN_DASHBOARD_SHELL')) {
                     <a class="nav-item active link" id="landing">Dashboard</a>
                     <a class="nav-item link" id="quizzes">Quizzes</a>
                     <a class="nav-item link" id="subjects">Subjects</a>
-                    <a class="nav-item link" id="results">Results</a>
+                    <a class="nav-item link" id="leaderboard">Leaderboard</a>
                     <?php 
                         if (isset($_SESSION['accessLevel']) && in_array($_SESSION['accessLevel'], ["LECTURER", "ADMIN"])) {
                         ?>
