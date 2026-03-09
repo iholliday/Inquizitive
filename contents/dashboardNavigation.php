@@ -5,6 +5,22 @@
 if (!defined('IN_DASHBOARD_SHELL')) {
     define('IN_DASHBOARD_SHELL', true);
 }
+
+
+$userIcon ="";
+require_once("./php/_connect.php");
+$db = new inquizitiveDB();
+$userUUID = htmlspecialchars($_SESSION['userUUID']);
+
+$result = $db->Query("CALL GetUserByUserUUID(?)",[$userUUID]);
+$row = mysqli_fetch_assoc($result);
+$userIcon = htmlspecialchars($row['avatar']);
+
+
+
+$first = $_SESSION['firstName'];
+$last = $_SESSION["lastName"];
+$initials = mb_strtoupper($first[0] . $last[0]);
 ?>
 
 <head>
@@ -75,7 +91,19 @@ if (!defined('IN_DASHBOARD_SHELL')) {
                 <hr class="dropup-divider">
                 <button class="profile-trigger" id="profileTrigger" type="button" aria-haspopup="true" aria-expanded="false">
                     <div class="profile">
-                    <div class="avatar"></div>
+                        <img
+                        src="<?php
+                            if($userIcon !== "" && $userIcon !== " " && $userIcon !== NULL)
+                            {
+                                echo $userIcon;
+                            }else
+                            {
+                                echo "https://proficon.appserver.uk/api/initials/" . htmlspecialchars($initials);
+                            } 
+                        ?>"
+                        alt="Profile picture"
+                        class="avatar"
+                        />
                     <div class="profile-info">
                         <div class="name"><span><?php echo htmlspecialchars($_SESSION['firstName']);echo " ";echo htmlspecialchars($_SESSION['lastName']);?></span></div>
                         <div class="role"><?php echo htmlspecialchars($_SESSION['accessLevel'])?></span></div>

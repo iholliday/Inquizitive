@@ -375,16 +375,29 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
       Swal.fire({ icon: "error", title: "Delete failed", text: (e.responseText || "Unknown error") });
     }
   });
+</script>
 
-  $(document).on("click", "#backBtn", function(){
+<script>
+$(document).on("click", "#backBtn", function (e) {
+  e.preventDefault();
 
   $.ajax({
-    url: "./test-management", // your original list page
+    url: "./test-management",
     type: "POST",
-    success: function(response){
+    headers: {
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    success: function (response) {
       $("#content").html(response);
+    },
+    error: function (xhr, status, error) {
+      console.error("Failed to load quiz management page:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Could not go back",
+        text: "Failed to load the quiz management page."
+      });
     }
   });
-
 });
 </script>
