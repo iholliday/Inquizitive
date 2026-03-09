@@ -27,6 +27,12 @@
     $route->Route(['post'], '/set-user-disabled', "./php/setUserDisabled.php");
     $route->Route(['post'], '/create-subject', "./php/addSubject.php");
     $route->Route(['post'], '/set-subject-disabled', "./php/setSubjectDisabled.php");
+    $route->Route(['post'], '/create-test', "./php/addQuiz.php");
+
+    $route->Route(['post'], '/add-student', "./php/addStudent.php");
+    $route->Route(['post'], '/set-quiz-disabled', "./php/setQuizDisabled.php");
+    $route->Route(['post'], '/edit-quiz', "./php/editQuiz.php");
+
     $route->Route(['post'], '/update-user', "./php/updateUser.php");
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
