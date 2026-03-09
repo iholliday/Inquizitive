@@ -26,6 +26,7 @@
     display: flex;
     align-items: center;
     padding: 20px;
+    position: relative;
 }
 
 /* ===== Grid ===== */
@@ -69,6 +70,16 @@
 .item2 form {
     margin-top: -20px;
 }
+
+.login-site-logo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 70px;
+    height: auto;
+    display: none;
+}
+
 
 /* ===== Title ===== */
 .login-title {
@@ -209,6 +220,66 @@
     margin-left: -40px;
 }
 
+/* ===== Password Reset Page ===== */
+.password-reset-background {
+    overflow: hidden;
+}
+
+.password-reset .grid-item {
+    max-width: 97%;
+}
+
+.password-reset .name-row input {
+    flex: 1;
+}
+
+.password-reset .login-container {
+    max-width: 362px;
+}
+
+.password-reset .grid-item {
+    max-width: 97%;
+}
+
+.password-reset .grid-container {
+    grid-template-columns: 1fr;
+}
+
+.password-reset .item2 {
+    padding-left: 0;
+}
+
+.password-reset .login-title{
+    margin-top: -35px;
+    margin-bottom: 35px;
+    text-align: center;
+    margin-left: 18px;
+}
+
+.password-reset .btn {
+    width: 90px;
+    margin-top: 15px;
+    margin-bottom: -9px;
+    margin-left: 70px;
+}
+
+.password-reset .login-container {
+    position: relative;
+}
+
+.password-reset .login-site-logo {
+    display: block;
+}
+
+.password-reset .signup-divider {
+    margin-top: 38px;
+    margin-left: 10px;
+}
+
+.password-reset .login-help {
+    margin-left: 105px;
+}
+
 /* ===== Mobile ===== */
 @media (max-width: 1000px) {
 
@@ -230,6 +301,10 @@
 
     .signup .name-row input {
         flex: 1;
+    }
+
+    .login-site-logo {
+        display: block;
     }
 }
 

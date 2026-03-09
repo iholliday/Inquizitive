@@ -2,19 +2,63 @@
     // If the page is accessed directly through the URL bar, block access. Only allows access if loaded via AJAX.
     require_once ("./php/blockDirectAccess.php");
 
-    // Require the database connection file.
+    // Require the connection files.
     require_once ("_connect.php");
+    require_once __DIR__ . "/../vendor/autoload.php";
 
     // Set response to JSON.
     header('Content-Type: application/json');
 
-    // Unset and destroy session, loggin any users out.
-    session_unset();
-    session_destroy(); 
-
     // Check to see if session has started, if not, start one.
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
+    }
+
+    // ============================== PAIRED PROGRAMMING SECTION: MT & TA ==============================
+
+    // Blocks login spam attempts.
+    if (!isset($_SESSION["spamChecker"])) $_SESSION["spamChecker"] = 0;
+    if (!isset($_SESSION["lastCheck"])) $_SESSION["lastCheck"] = new DateTimeImmutable();
+
+    // Calculate minutes since last attempt
+    $attempts = $_SESSION["spamChecker"];
+    $lastAttemptTime = $_SESSION["lastCheck"];
+    $currentDate = new DateTimeImmutable();
+    $fromTime = new DateTimeImmutable($lastAttemptTime->format("Y-m-d H:i:s"));
+    $diff = date_diff($fromTime, $currentDate);
+    $diffMinutes = (int)$diff->format("%i");
+
+    // Block login if too many failed attempts (5) in short time
+    if ($attempts >= 5 && $diffMinutes < 3) {
+        echo json_encode(['status' => 'error', 'message' => "Too many wrong email or password attempts! Try again in: " . (3 - $diffMinutes) . " minutes."]);
+        exit;
+    } elseif ($diffMinutes >= 3) {
+        // Reset attempts if enough time has passed
+        $_SESSION["spamChecker"] = 0;
+    }
+
+    // =============================== END OF PAIRED PROGRAMMING SECTION ===============================
+
+    // Server-side reCAPTCHA verification.
+    if (empty($_POST['g-recaptcha-response']))
+    {
+        echo json_encode(['status' => 'error', 'message' => "reCAPTCHA not complete, please try again."]);
+        exit;
+    }
+    else
+    {
+        // Getting secret from .env file and verify with Google.
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
+        $dotenv->load();
+        $secret = $_ENV['RECAPTCHA_SECRET_KEY'];
+        $verify = file_get_contents( "https://www.google.com/recaptcha/api/siteverify?secret=" . $secret . "&response=" . $_POST['g-recaptcha-response']);
+        $response = json_decode($verify);
+
+        if (!$response || !$response->success)
+        {
+            echo json_encode(['status' => 'error', 'message' => 'reCAPTCHA verification failed, please refresh and try again.']);
+            exit;
+        }
     }
 
     // Ensure both email and password have been provided via POST.
@@ -67,6 +111,16 @@
                     echo json_encode(['status' => 'error', 'message' => 'Your account has yet to be approved by a lecturer.']);
                     exit;
                 }
+            
+                // Check if MFA is enabled.
+                if ($user['mfaEnabled'] == 1) 
+                {
+                    // Store temporary session for MFA verification.
+                    $_SESSION['mfaUser'] = $user['userUUID'];
+
+                    echo json_encode(['status' => 'mfaEnabled', 'message' => 'Multi-factor authentication required.']);
+                    exit;
+                }
 
                 // Set session variables.             
                 $_SESSION['userUUID'] = $user['userUUID'];
@@ -74,6 +128,11 @@
                 $_SESSION['lastName'] = $user['lastName'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['accessLevel'] = $user['accessLevel'];
+                $_SESSION['avatar'] = $user['avatar'];
+
+                // If password correct, reset attempts.
+                $_SESSION["spamChecker"] = 0;
+                $_SESSION["lastCheck"] = new DateTimeImmutable();
                 $_SESSION['userCreationDate'] = $user['userCreationDate'];
 
                 // Update last login on database.
@@ -86,12 +145,16 @@
             else 
             {
                 // Invalid password.
+                $_SESSION["spamChecker"]++;
+                $_SESSION["lastCheck"] = new DateTimeImmutable();
                 echo json_encode(['status' => 'error', 'message' => 'Your email or password is invalid.']);
             }
         } 
         else 
         {
             // No user found with that email.
+            $_SESSION["spamChecker"]++;
+            $_SESSION["lastCheck"] = new DateTimeImmutable();
             echo json_encode(['status' => 'error', 'message' => 'Your email or password is invalid.']);
         }
     } 

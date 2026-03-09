@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inquizitive - educational quizzes</title>
-    <link rel="stylesheet" href="../css/landingPage.css">
-    <link rel="stylesheet" href="../css/colours.css">
-    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="./css/landingPage.css">
+    <link rel="stylesheet" href="./css/colours.css">
+    <link rel="stylesheet" href="./css/global.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +19,8 @@
     <div id="header">
         <div id="logo"><div class="l1">i</div><div class="l2">Q</div></div>
         <div>
-            <button class="sm-hide">Login</button>
-            <button class="bold-button">Create an account</button>
+            <button class="sm-hide"> <a href="./login" class="landing-login-btn">Login</a></button>
+            <button class="bold-button"> <a href="./signup" class="landing-signup-btn">Create an account</a></button>
         </div>
     </div>
     
@@ -33,7 +33,7 @@
                 <button>Find out more</button>
             </div>
             <div>
-                <img class="large-section-img" src="../images/sampleimage.png" alt="picture of app">
+                <img class="large-section-img" src="./images/sampleimage.png" alt="picture of app">
             </div>
         </div>
     </section>
@@ -42,7 +42,7 @@
     <section id="second-row" class="flex-row lp-row">
         <div class="lp-row-internal halves-row 100w md-collapse">
             <div>
-                <img class="large-section-img" src="../images/sampleimage.png" alt="student using app">
+                <img class="large-section-img" src="./images/sampleimage.png" alt="student using app">
             </div>
             <div class="textbox-lg">
                 <h3>Who It’s For</h3>
@@ -61,22 +61,22 @@
     <section id="guide-row" class="flex-row lp-row 100vw">
         <div class="lp-row-internal thirds-row md-collapse">
             <div class="flex-col">
-                <img src="../images/sampleimage.png" alt="sample">
+                <img src="./images/sampleimage.png" alt="sample">
                 <div class="textbox">
                     <h2>1: Create an account</h2>
-                    <p>Click <a class="a" href="">Create an Account</a> in the top right to start!</p>
+                    <p>Click <a class="a" href="./signup">Create an Account</a> in the top right to start!</p>
                 </div>
                 
             </div>
             <div class="flex-col">
-                <img src="../images/sampleimage.png" alt="sample">
+                <img src="./images/sampleimage.png" alt="sample">
                 <div class="textbox">
                     <h2>2: Join a course</h2>
                     <p>Teachers can create classes for their students, or you can join a class created by your teacher.</p>
                 </div>
             </div>
             <div class="flex-col">
-                <img src="../images/sampleimage.png" alt="sample">
+                <img src="./images/sampleimage.png" alt="sample">
                 <div class="textbox">
                     <h2>3: Start quizzing!</h2>
                     <p>Learn in a fun environment and track your progress.</p>
