@@ -18,6 +18,11 @@ require_once __DIR__ . "/../../php/_connect.php";
 $db = new inquizitiveDB();
 $conn = $db->connect;
 
+$userUUID = htmlspecialchars($_SESSION['userUUID']);
+$result = $db->Query("CALL GetUserByUserUUID(?)",[$userUUID]);
+$row = mysqli_fetch_assoc($result);
+$userIcon = htmlspecialchars($row['avatar']);
+
 ?>
 
 <div id="adminDashboard" class="container-fluid py-4">
@@ -138,11 +143,20 @@ $conn = $db->connect;
                 $userCreationDateFormatted = date("d-m-Y", strtotime($userCreationDate));
                 $initials = mb_strtoupper($first[0] . $last[0]);
             ?>
-            <img
-              src="https://proficon.appserver.uk/api/initials/<?= htmlspecialchars($initials) ?>.svg"alt="<?= htmlspecialchars($initials) ?>"
+              <img
+              src="<?php
+                  if($userIcon !== "" && $userIcon !== " " && $userIcon !== NULL)
+                  {
+                      echo $userIcon;
+                  }else
+                  {
+                      echo "https://proficon.appserver.uk/api/initials/" . htmlspecialchars($initials);
+                  } 
+              ?>"
               alt="Profile picture"
+              class="avatar"
               style="width:72px;height:72px;border-radius:16px;object-fit:cover;"
-            />
+              />
             <div class="flex-grow-1">
               <div class="d-flex align-items-center gap-2 flex-wrap">
                 <div class="h5 mb-0"><?= htmlspecialchars($firstFormatted . " " . $lastFormatted) ?></div>
