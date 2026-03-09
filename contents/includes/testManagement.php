@@ -188,6 +188,7 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
                           <button class="btn btn-tm btn-outline-warning tmToggleDisableBtn" data-quizuuid="<?= htmlspecialchars($quizUUID) ?>" data-disabled="<?= $isDisabled?>">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
                           </button>
+                           <button class="btn btn-sdm btn-outline-danger tmDeleteBtn">Delete</button>
                         </div>
                       </td>
                     </tr>
@@ -204,6 +205,7 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
 
   </div>
 </div>
+
 
 <script>
 const tmSubjects = <?= json_encode($subjects) ?>;
