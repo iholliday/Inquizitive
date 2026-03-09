@@ -2,8 +2,9 @@
     // If the page is accessed directly through the URL bar, block access. Only allows access if loaded via AJAX.
     require_once ("./php/blockDirectAccess.php");
 
-    // Require the database connection file.
+    // Require the connection files.
     require_once ("_connect.php");
+    require __DIR__ . "/../vendor/autoload.php";
 
     // Required for sending confirmation email.
     require_once ("confirmationEmail.php");
@@ -15,6 +16,27 @@
     // Check to see if session has started, if not, start one.
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
+    }
+
+    // Server-side reCAPTCHA verification.
+    if (empty($_POST['g-recaptcha-response']))
+    {
+        echo json_encode(['status' => 'error', 'message' => "reCAPTCHA not complete, please try again."]);
+        exit;
+    }
+    else
+    {
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
+        $dotenv->load();
+        $secret = $_ENV['RECAPTCHA_SECRET_KEY'];
+        $verify = file_get_contents( "https://www.google.com/recaptcha/api/siteverify?secret=" . $secret . "&response=" . $_POST['g-recaptcha-response']);
+        $response = json_decode($verify);
+
+        if (!$response || !$response->success)
+        {
+            echo json_encode(['status' => 'error', 'message' => 'reCAPTCHA verification failed, please try again.']);
+            exit;
+        }
     }
 
     // Ensure required fields are provided via POST.
@@ -81,9 +103,9 @@
             // Create the email subject and body for the confirmation message.
             $emailSubject = "Welcome to Inquizitive!";
             $emailBody = "Hello $sanitisedFirstName $sanitisedLastName,\n\n"
-                    . "Your account has been successfully created!\n"
-                    . "Student created accounts require lecturer approval prior to accessing the platform.\n\n"
-                    . "This is an automated message — please do not reply.";
+                       . "Your account has been successfully created!\n"
+                       . "Student created accounts require lecturer approval prior to accessing the platform.\n\n"
+                       . "This is an automated message — please do not reply.";
             sendEmail($email, $sanitisedFirstName, $sanitisedLastName, $emailSubject, $emailBody);
         }
 

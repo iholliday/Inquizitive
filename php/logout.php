@@ -7,12 +7,14 @@
         session_start();
     }
 
+    // Set response to JSON.
+    header('Content-Type: application/json');
+
     // Destroy the session.
     session_unset();
     session_destroy(); 
 
     // Send a JSON response and exit statement.
-    header('Content-Type: application/json');
     echo json_encode(['status' => 'success']);
     exit();
 ?>

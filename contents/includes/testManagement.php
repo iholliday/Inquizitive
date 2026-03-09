@@ -190,6 +190,7 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
                           <button class="btn btn-tm btn-outline-warning tmToggleDisableBtn" data-quizuuid="<?= htmlspecialchars($quizUUID) ?>" data-disabled="<?= $isDisabled?>">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
                           </button>
+                           <button class="btn btn-sdm btn-outline-danger tmDeleteBtn" data-quizuuid="<?= htmlspecialchars($quizUUID)?>">Delete</button>
                         </div>
                       </td>
                     </tr>
@@ -206,6 +207,80 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
 
   </div>
 </div>
+
+
+<script>
+  document.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".tmDeleteBtn");
+    if (!btn) return;
+
+    const quizUUID = btn.dataset.quizuuid;
+
+    if (!quizUUID) {
+      await Swal.fire({
+        icon: "error",
+        title: "Missing quiz UUID",
+        text: "Could not find the quiz UUID from the delete button."
+      });
+      return;
+    }
+
+    const confirm = await Swal.fire({
+      icon: "warning",
+      title: "Delete quiz?",
+      text: "This action is permanent and cannot be undone.",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      confirmButtonColor: "#d33"
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    btn.disabled = true;
+
+    try {
+      const fd = new FormData();
+      fd.append("quizUUID", quizUUID);
+
+      const res = await fetch("./delete-quiz", {
+        method: "POST",
+        body: fd,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      });
+
+      const data = await res.json();
+
+      if (!data.ok) {
+        await Swal.fire({
+          icon: "error",
+          title: "Delete failed",
+          text: data.message || "Something went wrong."
+        });
+        return;
+      }
+
+      await Swal.fire({
+        icon: "success",
+        title: "Quiz deleted",
+        text: data.message || "Quiz removed successfully."
+      });
+
+      btn.closest("tr").remove();
+
+    } catch (err) {
+      console.error(err);
+      await Swal.fire({
+        icon: "error",
+        title: "Server error",
+        text: "Something went wrong."
+      });
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
 
 <script>
 const tmSubjects = <?= json_encode($subjects) ?>;
