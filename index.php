@@ -61,7 +61,10 @@
     $route->Route(['get'], '/shop-items', "./contents/includes/shopItemsPage.php");
     $route->Route(['get'], '/shop-gacha', "./contents/includes/gachaItemsPage.php");
     $route->Route(['post'], '/shop-buy-item', "./contents/includes/shopBuyItem.php");
-
+    $route->Route(['post'], '/editSubject', "./php/editSubject.php");
+    $route->Route(['post'], '/edit-subject', "./contents/includes/editSubject.php");
+    $route->Route(['post'], '/editLecturer', "./php/editLecturer.php");
+    $route->Route(['post'], '/edit-lecturer', "./contents/includes/editLecturer.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logout', "./php/logout.php");
