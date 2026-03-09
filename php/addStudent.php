@@ -17,7 +17,7 @@ try {
   $email     = trim($_POST["email"] ?? "");
   $password  = $_POST["password"] ?? "";
   $confirm   = $_POST["confirmPassword"] ?? "";
-  $accessLevel   = "LECTURER";
+  $accessLevel   = "USER";
   $isDisabled   = 0;
 
   if ($firstName === "" || $lastName === "" || $email === "" || $password === "" || $confirm === "") {
@@ -59,7 +59,7 @@ try {
     }
   }
 
-  out(true, "Lecturer created successfully.");
+  out(true, "User created successfully.");
 
 } catch (Throwable $e) {
   http_response_code(500);
