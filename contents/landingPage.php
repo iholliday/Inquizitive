@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="flex-col">
-                <img src="./images/QuizScreenshot.png" alt="sample">
+                <img src="./images/QuizzesScreenshotWider.png" alt="sample">
                 <div class="textbox">
                     <h2>3: Start quizzing!</h2>
                     <p>Learn in a fun environment and track your progress.</p>
