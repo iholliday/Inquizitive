@@ -52,7 +52,7 @@
     $route->Route(['get'], '/subjects', "./contents/includes/subjectsPage.php");
     $route->Route(['get'], '/results', "./contents/includes/resultsPage.php");
     $route->Route(['get'], '/student-management', "./contents/includes/studentManagement.php");
-    $route->Route(['get'], '/test-management', "./contents/includes/testManagement.php");
+    $route->Route(['get', 'post'], '/test-management', "./contents/includes/testManagement.php");
     $route->Route(['post'], '/test-management/editor', "./contents/includes/quizManagement.php");
     $route->Route(['get'], '/lecturer-management', "./contents/includes/admLecturerManagement.php");
     $route->Route(['get'], '/subject-management', "./contents/includes/admSubjectManagement.php");
