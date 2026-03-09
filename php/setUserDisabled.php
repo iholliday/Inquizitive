@@ -6,8 +6,7 @@
     // Start session if session is not already active
     if(session_status() === PHP_SESSION_NONE) session_start();
 
-    // Checking to make sure that the user is admin, as only the admin can modify account status (At the moment)
-    if (!isset($_SESSION["accessLevel"]) || $_SESSION["accessLevel"] !== "ADMIN") {
+    if (!isset($_SESSION["accessLevel"])) {
     echo json_encode(["ok" => false, "message" => "Unauthorized."]);
     exit;
     }
