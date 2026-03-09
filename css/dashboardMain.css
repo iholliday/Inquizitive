@@ -470,14 +470,16 @@ body {
 }
 
 #adminDashboard #lmCreateBtn,
-#adminDashboard #smCreateBtn {
+#adminDashboard #smCreateBtn,
+#adminDashboard .styledBtn {
   margin-top:20px;
   background-color: var(--c-english-violet);
   color:white;
 }
 
 #adminDashboard #lmCreateBtn:hover,
-#adminDashboard #smCreateBtn:hover {
+#adminDashboard #smCreateBtn:hover,
+#adminDashboard .styledBtn:hover {
   margin-top:20px;
   background-color: var(--c-space-cadet);
   color:white;
@@ -605,6 +607,25 @@ body {
   width: 100%;
 }
 
+
+#adminDashboard .stat-card{
+  text-align:center;
+  padding:20px;
+  border-radius:10px;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+}
+
+#adminDashboard .stat-number{
+  font-size:26px;
+  font-weight:700;
+}
+
+#adminDashboard.stat-label{
+  font-size:13px;
+  color:#6b7280;
+}
+
 @media (max-width: 576px) {
   #adminDashboard .lm-header,
   #adminDashboard .sm-header {
@@ -707,14 +728,16 @@ body {
 
 
 #lecturerDashboard #sdmCreateBtn,
-#lecturerDashboard #tmCreateBtn{
+#lecturerDashboard #tmCreateBtn,
+#lecturerDashboard .btn-questions{
   margin-top:20px;
   background-color: var(--c-english-violet);
   color:white;
 }
 
 #lecturerDashboard #sdmCreateBtn:hover,
-#lecturerDashboard #tmCreateBtn:hover{
+#lecturerDashboard #tmCreateBtn:hover,
+#lecturerDashboard .btn-questions:hover{
   margin-top:20px;
   background-color: var(--c-space-cadet);
   color:white;
@@ -751,6 +774,7 @@ body {
 }
 
 #lecturerDashboard .lm-badge-danger,
+#lecturerDashboard .sdm-badge-danger,
 #lecturerDashboard .tm-badge-danger {
   background: rgba(173, 20, 87, 0.10);
   color: rgba(173, 20, 87, 1);
@@ -758,29 +782,44 @@ body {
 }
 
 #lecturerDashboard .lm-person__name,
+#lecturerDashboard .sdm-person__name,
 #lecturerDashboard .tm-subject__name {
   font-weight: 700;
   line-height: 1.1;
+  text-decoration: none;
+  color: var(--c-space-cadet);
+  cursor: pointer;
 }
 
 #lecturerDashboard .lm-person__id,
+#lecturerDashboard .sdm-person__id,
 #lecturerDashboard .tm-subject__id {
   font-size: 0.85rem;
   color: var(--lm-muted);
+  color: var(--c-english-violet);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#lecturerDashboard .tm-quizLink,
+#lecturerDashboard .sdm-quizLink{
+  text-decoration: none;
 }
 
 #lecturerDashboard .lm-panel__scroll,
+#lecturerDashboard .sdm-panel__scroll,
 #lecturerDashboard .tm-panel__scroll{
   height: 450px !important;
   max-height: 450px !important;
   overflow: auto !important;
 
-  padding: 14px !important;   /* always-visible inset */
+  padding: 14px !important;
 }
 
 
 #lecturerDashboard .lm-tableWrap,
-#lecturerDashboard .tm-tableWrap{
+#lecturerDashboard .tm-tableWrap,
+#lecturerDashboard .sdm-tableWrap{
   border: 1px solid var(--lm-border);
   border-radius: 12px;
   overflow: hidden;
@@ -801,7 +840,8 @@ body {
 }
 
 #lecturerDashboard .lm-actions,
-#lecturerDashboard .tm-actions {
+#lecturerDashboard .tm-actions,
+#lecturerDashboard .sdm-actions {
   display: inline-flex;
   gap: 8px;
   justify-content: flex-end;
@@ -809,6 +849,7 @@ body {
 }
 
 #lecturerDashboard .lm-actions .btn,
+#lecturerDashboard .sdm-actions .btn,
 #lecturerDashboard .tm-actions .btn {
   padding: 0.28rem 0.6rem;
 }
@@ -824,22 +865,60 @@ body {
   width: 100%;
 }
 
+#lecturerDashboard .qm-table-wrap {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+#lecturerDashboard .qm-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#lecturerDashboard .qm-correct {
+  background: rgba(25,135,84,.12) !important; 
+  font-weight: 600;
+}
+#lecturerDashboard .qm-question {
+  min-width: 260px;
+}
+#lecturerDashboard .qm-option {
+  min-width: 180px;
+}
+#lecturerDashboard .qm-actions {
+  min-width: 140px;
+  white-space: nowrap;
+}
+
+#lecturerDashboard #backBtn{
+  margin-bottom:20px;
+}
+
+#lecturerDashboard .tblHeader{
+  width:60px;
+}
+
+
 @media (max-width: 576px) {
-  #lecturerDashboard .sdm-header {
+  #lecturerDashboard .sdm-header,
   #lecturerDashboard .tm-header {
     flex-direction: column;
     align-items: stretch;
   }
 
-  #lecturerDashboard .sdm-header__right {
+  #lecturerDashboard .sdm-header__right,
   #lecturerDashboard .tm-header__right {
     justify-content: flex-start;
   }
 
-  #lecturerDashboard .sdm-panel__head {
+  #lecturerDashboard .sdm-panel__head,
   #lecturerDashboard .tm-panel__head {
     flex-direction: column;
     align-items: stretch;
   }
 
-}
+  }
+
+
+

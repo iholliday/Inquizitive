@@ -27,6 +27,13 @@
     $route->Route(['post'], '/set-user-disabled', "./php/setUserDisabled.php");
     $route->Route(['post'], '/create-subject', "./php/addSubject.php");
     $route->Route(['post'], '/set-subject-disabled', "./php/setSubjectDisabled.php");
+    $route->Route(['post'], '/create-test', "./php/addQuiz.php");
+
+    $route->Route(['post'], '/add-student', "./php/addStudent.php");
+    $route->Route(['post'], '/set-quiz-disabled', "./php/setQuizDisabled.php");
+    $route->Route(['post'], '/edit-quiz', "./php/editQuiz.php");
+
+    $route->Route(['post'], '/update-user', "./php/updateUser.php");
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
@@ -45,6 +52,7 @@
     $route->Route(['get'], '/subject-management', "./contents/includes/admSubjectManagement.php");
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
+    $route->Route(['get', 'post'], '/last-page', "./contents/includes/pageSession.php");
 
     $route->Route(['post'], '/testing', "./contents/includes/testingPage.php");
     $route->Route(['get'], '/leaderboard', "./contents/includes/leaderboard.php");
@@ -53,6 +61,10 @@
     $route->Route(['get'], '/shop-items', "./contents/includes/shopItemsPage.php");
     $route->Route(['get'], '/shop-gacha', "./contents/includes/gachaItemsPage.php");
     $route->Route(['post'], '/shop-buy-item', "./contents/includes/shopBuyItem.php");
+    $route->Route(['post'], '/editSubject', "./php/editSubject.php");
+    $route->Route(['post'], '/edit-subject', "./contents/includes/editSubject.php");
+    $route->Route(['post'], '/editLecturer', "./php/editLecturer.php");
+    $route->Route(['post'], '/edit-lecturer', "./contents/includes/editLecturer.php");
     $route->Route(['get'], '/getLeaderboard', "./php/getLeaderboard.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
