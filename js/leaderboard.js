@@ -47,6 +47,7 @@ $(document).ready(function()
                         }
                         else medal = index + 1; 
 
+                        // All data escaped with htmlspecialchars in getLeaderboard.php.
                         html += `<tr>
                                     <td><strong>${medal}</strong></td>
                                     <td class="py-2">${student.firstName}</td>

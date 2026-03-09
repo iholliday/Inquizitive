@@ -87,7 +87,6 @@
       </div>
     </div>
 
-
     <!-- Subject Leaderboard -->
     <div class="col-12 col-lg-8 tm-eq__col">
       <div class="tm-card tm-panel h-100 tm-eq__card d-flex flex-column leaderboard-container">
@@ -107,56 +106,54 @@
       </div>
     </div>
 
-
     <!-- Top IQ Points Leaderboard -->
     <div class="row mt-4">
       <div class="col-12">
-        <div class="tm-card tm-panel">
+        <div class="tm-card tm-panel top-10">
           <div class="tm-panel__head">
             <div>
               <h5 class="mb-0">Top 10 IQ Points</h5>
               <div class="text-muted small">Students with the highest IQ point totals</div>
             </div>
           </div>
-          <div class="tm-panel__scroll">
             <div class="tm-tableWrap">
-              <table class="table table-striped align-middle mb-0">
-                <thead class="table-dark">
-                  <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>IQ Points</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php if (count($topIQ) === 0): ?>
+                <table class="table table-striped align-middle mb-0">
+                  <thead class="table-dark">
                     <tr>
-                      <td colspan="4" class="text-center text-muted py-4">No users found.</td>
+                      <th>#</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>IQ Points</th>
                     </tr>
-                  <?php else: ?>
-                    <?php foreach ($topIQ as $index => $user): ?>
-                    <tr>
-                      <td>        
-                        <strong>
-                          <?php
-                            // Top 3 get trophies instead of numbers.
-                            if ($index === 0) echo '<span class="material-icons trophy-gold">emoji_events</span>'; 
-                            elseif ($index === 1) echo '<span class="material-icons trophy-silver">emoji_events</span>'; 
-                            elseif ($index === 2) echo '<span class="material-icons trophy-bronze">emoji_events</span>'; 
-                            else echo $index + 1;
-                          ?>
-                        </strong>
-                      </td>
-                      <td class="py-2"><?= htmlspecialchars($user['firstName']) ?></td>
-                      <td class="py-2"><?= htmlspecialchars($user['lastName']) ?></td>
-                      <td class="py-2"><?= htmlspecialchars($user['score']) ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                  <?php endif; ?>
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    <?php if (count($topIQ) === 0): ?>
+                      <tr>
+                        <td colspan="4" class="text-center text-muted py-4">No users found.</td>
+                      </tr>
+                    <?php else: ?>
+                      <?php foreach ($topIQ as $index => $user): ?>
+                      <tr>
+                        <td>        
+                          <strong>
+                            <?php
+                              // Top 3 get trophies instead of numbers.
+                              if ($index === 0) echo '<span class="material-icons trophy-gold">emoji_events</span>'; 
+                              elseif ($index === 1) echo '<span class="material-icons trophy-silver">emoji_events</span>'; 
+                              elseif ($index === 2) echo '<span class="material-icons trophy-bronze">emoji_events</span>'; 
+                              else echo $index + 1;
+                            ?>
+                          </strong>
+                        </td>
+                        <!-- htmlspecialchars to prevent XSS -->
+                        <td class="py-2"><?= htmlspecialchars($user['firstName']) ?></td>
+                        <td class="py-2"><?= htmlspecialchars($user['lastName']) ?></td>
+                        <td class="py-2"><?= htmlspecialchars($user['score']) ?></td>
+                      </tr>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                  </tbody>
+                </table>
           </div>
         </div>
       </div>
