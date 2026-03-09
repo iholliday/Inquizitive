@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+if (!defined('IN_DASHBOARD_SHELL')) {
+    define('IN_DASHBOARD_SHELL', true);
+}
+?>
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,7 +96,13 @@
             </aside>
 
             <main class="main">
-                <div id="content"></div>
+                <div id="content">
+                    <?php
+                    if (isset($DASH_INCLUDE) && file_exists($DASH_INCLUDE)) {
+                        include $DASH_INCLUDE;
+                    }
+                    ?>
+                </div>
             </main>
         </div>
 
