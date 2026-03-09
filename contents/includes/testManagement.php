@@ -63,7 +63,6 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
   <!-- Main -->
   <div class="row g-4 sdm-eq">
 
-    <!-- Left: Add Lecturer -->
     <div class="col-12 col-lg-4 sdm-eq__col">
       <div class="sdm-card sdm-panel h-100 sdm-eq__card">
         <div class="sdm-panel__head">
