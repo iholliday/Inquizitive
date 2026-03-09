@@ -52,8 +52,10 @@ $stmt->bind_param("ss", $userUUID, $currentUUID);
 
 
 if (!$stmt->execute()) {
-    echo json_encode(["ok" => false, "message" => "Database error."]);
-    $stmt->close();
+    echo json_encode([
+        "ok" => false,
+        "message" => $conn->error
+    ]);
     exit;
 }
 

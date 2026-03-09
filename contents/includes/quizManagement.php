@@ -9,6 +9,7 @@ $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
 
 $isEmbeddedInDashboard = defined('IN_DASHBOARD_SHELL');
 
+$quizUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quizGrab']));
 if (!$isAjax && !$isEmbeddedInDashboard) {
   $DASH_INCLUDE = __FILE__;
   require __DIR__ . '/../dashboardNavigation.php';

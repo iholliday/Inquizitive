@@ -25,6 +25,7 @@
     $route->Route(['post'], '/mfaEnabledAuth', "./php/mfaEnabledAuth.php");
     $route->Route(['post'], '/add-lecturer', "./php/addLecturer.php");
     $route->Route(['post'], '/delete-user', "./php/deleteUser.php");
+    $route->Route(['post'], '/delete-quiz', "./php/deleteQuiz.php");
     $route->Route(['post'], '/set-user-disabled', "./php/setUserDisabled.php");
     $route->Route(['post'], '/create-subject', "./php/addSubject.php");
     $route->Route(['post'], '/set-subject-disabled', "./php/setSubjectDisabled.php");
@@ -60,7 +61,7 @@
     $route->Route(['get', 'post'], '/last-page', "./contents/includes/pageSession.php");
 
     $route->Route(['post'], '/testing', "./contents/includes/testingPage.php");
-
+    $route->Route(['get'], '/leaderboard', "./contents/includes/leaderboard.php");
     $route->Route(['get'], '/shop', "./contents/includes/shopPage.php");
     $route->Route(['get'], '/shop-inventory', "./contents/includes/inventoryItemsPage.php");
     $route->Route(['get'], '/shop-items', "./contents/includes/shopItemsPage.php");
@@ -68,6 +69,11 @@
     $route->Route(['post'], '/shop-buy-item', "./contents/includes/shopBuyItem.php");
     $route->Route(['post'], '/mfaGenerate', "./php/mfaGenerate.php");
     $route->Route(['post'], '/generateBackupCode', "./php/generateBackupCode.php");
+    $route->Route(['post'], '/editSubject', "./php/editSubject.php");
+    $route->Route(['post'], '/edit-subject', "./contents/includes/editSubject.php");
+    $route->Route(['post'], '/editLecturer', "./php/editLecturer.php");
+    $route->Route(['post'], '/edit-lecturer', "./contents/includes/editLecturer.php");
+    $route->Route(['get'], '/getLeaderboard', "./php/getLeaderboard.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logout', "./php/logout.php");
