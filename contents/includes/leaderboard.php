@@ -92,7 +92,7 @@
       <div class="tm-card tm-panel h-100 tm-eq__card d-flex flex-column leaderboard-container">
         <div class="tm-panel__head top-5-results">
           <div>
-            <h5 class="mb-0">Top 5 Students</h5>
+            <h5 class="mb-0">Top 5 Total Score</h5>
             <div class="text-muted small">Highest scoring students by subject</div>
           </div>
         </div>
@@ -113,7 +113,7 @@
           <div class="tm-panel__head">
             <div>
               <h5 class="mb-0">Top 10 IQ Points</h5>
-              <div class="text-muted small">Students with the highest IQ point totals</div>
+              <div class="text-muted small">Students with the highest IQ Point totals</div>
             </div>
           </div>
             <div class="tm-tableWrap">
