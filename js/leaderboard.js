@@ -1,4 +1,4 @@
-/*$(document).ready(function(){
+$(document).ready(function(){
 
     $("#lbSubjectSelect").change(function(){
 
@@ -76,4 +76,4 @@
 
     });
 
-});*/
+});
