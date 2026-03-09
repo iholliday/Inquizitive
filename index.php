@@ -40,6 +40,11 @@
     $route->Route(['post'], '/set-quiz-disabled', "./php/setQuizDisabled.php");
     $route->Route(['post'], '/edit-quiz', "./php/editQuiz.php");
 
+    $route->Route(['post'], '/get-student-subjects', "./php/getStudentSubjects.php");
+    $route->Route(['post'], '/add-student-subject', "./php/addStudentSubjects.php");
+    $route->Route(['post'], '/remove-student-subject', "./php/removeStudentSubjects.php");
+    $route->Route(['post'], '/edit-student', "./php/editStudent.php");
+
     $route->Route(['post'], '/update-user', "./php/updateUser.php");
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
@@ -52,7 +57,7 @@
     $route->Route(['get'], '/subjects', "./contents/includes/subjectsPage.php");
     $route->Route(['get'], '/results', "./contents/includes/resultsPage.php");
     $route->Route(['get'], '/student-management', "./contents/includes/studentManagement.php");
-    $route->Route(['get'], '/test-management', "./contents/includes/testManagement.php");
+    $route->Route(['get', 'post'], '/test-management', "./contents/includes/testManagement.php");
     $route->Route(['post'], '/test-management/editor', "./contents/includes/quizManagement.php");
     $route->Route(['get'], '/lecturer-management', "./contents/includes/admLecturerManagement.php");
     $route->Route(['get'], '/subject-management', "./contents/includes/admSubjectManagement.php");
@@ -73,7 +78,7 @@
     $route->Route(['post'], '/edit-subject', "./contents/includes/editSubject.php");
     $route->Route(['post'], '/editLecturer', "./php/editLecturer.php");
     $route->Route(['post'], '/edit-lecturer', "./contents/includes/editLecturer.php");
-    $route->Route(['get'], '/getLeaderboard', "./php/getLeaderboard.php");
+    $route->Route(['post'], '/getLeaderboard', "./php/getLeaderboard.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logout', "./php/logout.php");

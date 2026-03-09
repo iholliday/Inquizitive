@@ -7,7 +7,7 @@ $score =0;
 $quizUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quizUUID'])); // Unnecessary since we use prepared statements anyway but why not?
 $userUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_SESSION['userUUID']));
 $array = $_POST['answers'];
- $quizInstance =  htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['quizInstance']));
+$quizInstance =  mysqli_real_escape_string($db->connect,$_POST['quizInstance']);
 // echo $quizInstance;
 
 
@@ -56,6 +56,7 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
     $style = "";
     for($n=0; $n < sizeof($quiz->getQuestions()); $n++)
     {
+
       if($questionUUID == $quiz->getQuestions()[$n]->getUUID())
       {
         if($answer == $quiz->getQuestions()[$n]->getAnswer())
@@ -117,9 +118,20 @@ if($score > 0){
   if(!is_null($currencyItemUUID) && !is_null($userUUID) && !is_null($userCurrency))
   {
     $db= new inquizitiveDB ();
-    $b = $db->Query("CALL SetUserInventoryItemQuantity(?,?,?);", [$userUUID,$currencyItemUUID,$moneyLeft]);
+    $b = $db->Query("CALL SetUserInventoryItemQuantity(?,?,?);", [$userUUID,$currencyItemUUID,$moneyLeft]); 
     echo '<div class="score">you gained ' . $score . " iq points</div>";
   }
+}
+
+if($score <0){$score = 0;};
+$updateQuizInstanceResult = $db->Query("CALL UpdateQuizInstanceByUUID(?,?);", [$quizInstance,$score]); 
+for($n=0; $n < sizeof($quiz->getQuestions()); $n++)
+{
+  $qAnswer = $quiz->getQuestions()[$n]->getAnswer();
+  $qUUID = $quiz->getQuestions()[$n]->getUUID();
+  $db = new inquizitiveDB();
+  $createQuizInstance =$db->Query("CALL CreateQuestionInstance(?,?,?,?)",[$quizInstance,$qUUID,$n,$qAnswer]);
+
 }
 ?>
 

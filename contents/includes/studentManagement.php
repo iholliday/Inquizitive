@@ -1,7 +1,5 @@
 <?php
 
-// include __DIR__ . "/../../php/blockDirectAccess.php";
-
 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 
@@ -18,8 +16,14 @@ require_once __DIR__ . "/../../php/_connect.php";
 $db = new inquizitiveDB();
 $conn = $db->connect;
 
+$students = [];
+$subjects = [];
 
+/* Get students */
 $stmt = $conn->prepare("CALL GetStudents()");
+if (!$stmt) {
+  die("Prepare failed for GetStudents(): " . $conn->error);
+}
 
 $stmt->execute();
 
@@ -28,6 +32,33 @@ if ($res1 = $stmt->get_result()) {
     $students[] = $row;
   }
   $res1->free();
+}
+$stmt->close();
+
+while (mysqli_more_results($conn) && mysqli_next_result($conn)) {
+  $extra = mysqli_store_result($conn);
+  if ($extra) mysqli_free_result($extra);
+}
+
+/* Get subjects */
+$stmt2 = $conn->prepare("CALL GetAllActiveSubjects()");
+if (!$stmt2) {
+  die("Prepare failed for GetAllActiveSubjects(): " . $conn->error);
+}
+
+$stmt2->execute();
+
+if ($res2 = $stmt2->get_result()) {
+  while ($row = $res2->fetch_assoc()) {
+    $subjects[] = $row;
+  }
+  $res2->free();
+}
+$stmt2->close();
+
+while (mysqli_more_results($conn) && mysqli_next_result($conn)) {
+  $extra = mysqli_store_result($conn);
+  if ($extra) mysqli_free_result($extra);
 }
 ?>
 
@@ -118,7 +149,7 @@ if ($res1 = $stmt->get_result()) {
               <thead>
                 <tr>
                   <th>First Name</th>
-                  <th>Last Name</th>
+                  <th>Email</th>
                   <th>Status</th>
                   <th class="text-end">Actions</th>
                 </tr>
@@ -160,7 +191,14 @@ if ($res1 = $stmt->get_result()) {
                       <td class="text-end">
                         <div class="sdm-actions">
                           <!-- Edit Button -->
-                          <button class="btn btn-sdm btn-outline-primary">Edit</button>
+                          <button
+                            class="btn btn-sdm btn-outline-primary sdmEditStudentBtn"
+                            data-useruuid="<?= htmlspecialchars($userUUID) ?>"
+                            data-firstname="<?= htmlspecialchars($firstName) ?>"
+                            data-lastname="<?= htmlspecialchars($lastName) ?>"
+                            data-email="<?= htmlspecialchars($email) ?>">
+                            Edit
+                          </button>
                           <!-- Disable/Enable Button -->
                           <button class="btn btn-sdm btn-outline-warning smToggleDisableBtn" data-userUUID="<?= htmlspecialchars($userUUID) ?>" data-disabled="<?= $isDisabled?>">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
@@ -401,3 +439,253 @@ document.addEventListener("submit", async (e) => {
   });
 
   </script>
+
+<script>
+const sdmSubjects = <?= json_encode($subjects) ?>;
+
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".sdmEditStudentBtn");
+  if (!btn) return;
+
+  const userUUID = btn.dataset.useruuid;
+  const firstName = btn.dataset.firstname;
+  const lastName = btn.dataset.lastname;
+  const email = btn.dataset.email;
+
+  let enrolledSubjects = [];
+
+  try {
+    const fd = new FormData();
+    fd.append("userUUID", userUUID);
+
+    const res = await fetch("./get-student-subjects", {
+      method: "POST",
+      body: fd,
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    });
+
+    const data = await res.json();
+
+    if (data.ok && Array.isArray(data.subjects)) {
+      enrolledSubjects = data.subjects;
+    }
+  } catch (err) {
+    console.error("Failed to load student subjects", err);
+  }
+
+  const buildSubjectOptions = () => {
+    let html = `<option value="">Select subject</option>`;
+
+    sdmSubjects.forEach(subject => {
+      const alreadyEnrolled = enrolledSubjects.some(es => es.subjectUUID === subject.subjectUUID);
+      if (!alreadyEnrolled) {
+        html += `<option value="${subject.subjectUUID}">${subject.subjectTitle}</option>`;
+      }
+    });
+
+    return html;
+  };
+
+  const buildEnrolledTable = () => {
+    if (enrolledSubjects.length === 0) {
+      return `<tr><td colspan="2" class="text-muted text-center py-3">No enrolled subjects.</td></tr>`;
+    }
+
+    return enrolledSubjects.map(subject => `
+      <tr>
+        <td>${subject.subjectTitle}</td>
+        <td class="text-end">
+          <button type="button"
+                  class="btn btn-sm btn-outline-danger sdmRemoveSubjectBtn"
+                  data-subjectuuid="${subject.subjectUUID}">
+            Remove
+          </button>
+        </td>
+      </tr>
+    `).join("");
+  };
+
+  const renderModalHtml = () => `
+    <div class="text-start">
+
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-6">
+          <label class="form-label fw-semibold">First Name</label>
+          <input id="swalStudentFirstName" class="form-control" value="${firstName}">
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label fw-semibold">Last Name</label>
+          <input id="swalStudentLastName" class="form-control" value="${lastName}">
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-semibold">Email</label>
+          <input id="swalStudentEmail" class="form-control" value="${email}">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Add Subject</label>
+        <div class="d-flex gap-2">
+          <select id="swalSubjectUUID" class="form-select">
+            ${buildSubjectOptions()}
+          </select>
+          <button type="button" class="btn btn-primary" id="swalAddSubjectBtn">+</button>
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label fw-semibold">Enrolled Subjects</label>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th class="text-end">Action</th>
+              </tr>
+            </thead>
+            <tbody id="swalEnrolledSubjectsBody">
+              ${buildEnrolledTable()}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  const modal = await Swal.fire({
+    title: "Edit Student",
+    html: renderModalHtml(),
+    width: 800,
+    showCancelButton: true,
+    confirmButtonText: "Save Changes",
+    didOpen: () => {
+      const popup = Swal.getPopup();
+
+      popup.addEventListener("click", async (event) => {
+        const addBtn = event.target.closest("#swalAddSubjectBtn");
+        const removeBtn = event.target.closest(".sdmRemoveSubjectBtn");
+
+        if (addBtn) {
+          const select = popup.querySelector("#swalSubjectUUID");
+          const subjectUUID = select.value;
+
+          if (!subjectUUID) {
+            Swal.showValidationMessage("Please select a subject.");
+            return;
+          }
+
+          try {
+            const fd = new FormData();
+            fd.append("userUUID", userUUID);
+            fd.append("subjectUUID", subjectUUID);
+
+            const res = await fetch("./add-student-subject", {
+              method: "POST",
+              body: fd,
+              headers: { "X-Requested-With": "XMLHttpRequest" }
+            });
+
+            const data = await res.json();
+
+            if (!data.ok) {
+              await Swal.fire("Error", data.message || "Failed to add subject.", "error");
+              return;
+            }
+
+            const addedSubject = sdmSubjects.find(s => s.subjectUUID === subjectUUID);
+            if (addedSubject) {
+              enrolledSubjects.push(addedSubject);
+            }
+
+            popup.querySelector("#swalSubjectUUID").innerHTML = buildSubjectOptions();
+            popup.querySelector("#swalEnrolledSubjectsBody").innerHTML = buildEnrolledTable();
+
+          } catch (err) {
+            console.error(err);
+            await Swal.fire("Error", "Server error.", "error");
+          }
+        }
+
+        if (removeBtn) {
+          const subjectUUID = removeBtn.dataset.subjectuuid;
+
+          try {
+            const fd = new FormData();
+            fd.append("userUUID", userUUID);
+            fd.append("subjectUUID", subjectUUID);
+
+            const res = await fetch("./remove-student-subject", {
+              method: "POST",
+              body: fd,
+              headers: { "X-Requested-With": "XMLHttpRequest" }
+            });
+
+            const data = await res.json();
+
+            if (!data.ok) {
+              await Swal.fire("Error", data.message || "Failed to remove subject.", "error");
+              return;
+            }
+
+            enrolledSubjects = enrolledSubjects.filter(s => s.subjectUUID !== subjectUUID);
+
+            popup.querySelector("#swalSubjectUUID").innerHTML = buildSubjectOptions();
+            popup.querySelector("#swalEnrolledSubjectsBody").innerHTML = buildEnrolledTable();
+
+          } catch (err) {
+            console.error(err);
+            await Swal.fire("Error", "Server error.", "error");
+          }
+        }
+      });
+    },
+    preConfirm: async () => {
+      const firstNameValue = document.getElementById("swalStudentFirstName").value.trim();
+      const lastNameValue = document.getElementById("swalStudentLastName").value.trim();
+      const emailValue = document.getElementById("swalStudentEmail").value.trim();
+
+      if (!firstNameValue || !lastNameValue || !emailValue) {
+        Swal.showValidationMessage("All fields are required.");
+        return false;
+      }
+
+      try {
+        const fd = new FormData();
+        fd.append("userUUID", userUUID);
+        fd.append("firstName", firstNameValue);
+        fd.append("lastName", lastNameValue);
+        fd.append("email", emailValue);
+
+        const res = await fetch("./edit-student", {
+          method: "POST",
+          body: fd,
+          headers: { "X-Requested-With": "XMLHttpRequest" }
+        });
+
+        const data = await res.json();
+
+        if (!data.ok) {
+          Swal.showValidationMessage(data.message || "Failed to update student.");
+          return false;
+        }
+
+        return true;
+      } catch (err) {
+        console.error(err);
+        Swal.showValidationMessage("Server error.");
+        return false;
+      }
+    }
+  });
+
+  if (modal.isConfirmed) {
+    await Swal.fire("Updated!", "Student updated successfully.", "success");
+    location.reload();
+  }
+});
+</script>
