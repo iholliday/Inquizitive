@@ -5,7 +5,9 @@
 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 
-if (!$isAjax) {
+$isEmbeddedInDashboard = defined('IN_DASHBOARD_SHELL');
+
+if (!$isAjax && !$isEmbeddedInDashboard) {
   $DASH_INCLUDE = __FILE__;
   require __DIR__ . '/../dashboardNavigation.php';
   exit;
@@ -208,17 +210,23 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
 
 <script>
   document.addEventListener("click", async (e) => {
-    // Check if the clicked element is a delete button
     const btn = e.target.closest(".tmDeleteBtn");
     if (!btn) return;
 
-    // Get the UUID stored in the buttons data attribute
-    const quizUUID = btn.dataset.quizUUID;
+    const quizUUID = btn.dataset.quizuuid;
 
-    // Ask the Admin User to confirm, warning that this action is permenant, a way to delete not permenantly will be disabling
+    if (!quizUUID) {
+      await Swal.fire({
+        icon: "error",
+        title: "Missing quiz UUID",
+        text: "Could not find the quiz UUID from the delete button."
+      });
+      return;
+    }
+
     const confirm = await Swal.fire({
       icon: "warning",
-      title: "Delete user?",
+      title: "Delete quiz?",
       text: "This action is permanent and cannot be undone.",
       showCancelButton: true,
       confirmButtonText: "Delete",
@@ -227,7 +235,6 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
 
     if (!confirm.isConfirmed) return;
 
-    // Used to prevent double-clicking or duplicate requests
     btn.disabled = true;
 
     try {
@@ -259,7 +266,6 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
         text: data.message || "Quiz removed successfully."
       });
 
-      // Remove the deleted row from the table immediately
       btn.closest("tr").remove();
 
     } catch (err) {
@@ -272,8 +278,8 @@ if($subRes = $db->Query("CALL GetAllSubjects();", [])){
     } finally {
       btn.disabled = false;
     }
-  }); 
-  </script>
+  });
+</script>
 
 <script>
 const tmSubjects = <?= json_encode($subjects) ?>;

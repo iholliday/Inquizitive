@@ -61,10 +61,10 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
         if($answer == $quiz->getQuestions()[$n]->getAnswer())
         {
           $style ="correct";
-          $score +=30;
+          $score = $score + 30;
         }else
         {
-          $score -=10;
+          $score =$score - 10;
           $style="wrong";
         }
 
@@ -103,15 +103,22 @@ if($score > 0){
       if ($rowCount > 0) {
           $row = mysqli_fetch_assoc($result);
           $userCurrency = htmlspecialchars($row['quantity']);
+      }else
+      {
+        // No item found therefore base currency is set to 0
+        $db= new inquizitiveDB ();
+        $userCurrency =0;
+        $result = $db->Query("CALL AddItemToGivenAccountInventory(?,?,?);", [$userUUID,$currencyItemUUID,$userCurrency]);
+
       }
   }
 
-  $db= new inquizitiveDB ();
-  $moneyLeft =  (int)$userCurrency + $score;
-  if($currencyItemUUID && $userUUID && $userCurrency)
+  $moneyLeft =  (int)$userCurrency + (int)$score;
+  if(!is_null($currencyItemUUID) && !is_null($userUUID) && !is_null($userCurrency))
   {
-  $b = $db->Query("CALL SetUserInventoryItemQuantity(?,?,?);", [$userUUID,$currencyItemUUID,$moneyLeft]);
-  echo '<div class="score">you gained ' . $score . " iq points</div>";
+    $db= new inquizitiveDB ();
+    $b = $db->Query("CALL SetUserInventoryItemQuantity(?,?,?);", [$userUUID,$currencyItemUUID,$moneyLeft]);
+    echo '<div class="score">you gained ' . $score . " iq points</div>";
   }
 }
 ?>

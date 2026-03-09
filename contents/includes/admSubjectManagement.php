@@ -215,7 +215,7 @@ $stmt->close();
                       <td class="text-end">
                         <div class="sm-actions">
                           <!-- Edit Button -->
-                          <button class="btn btn-sm btn-outline-primary">Edit</button>
+                          <button class="btn btn-sm btn-outline-primary smEditBtn" data-subjectuuid= <?= htmlspecialchars($subjectUUID) ?>>Edit</button>
                           <!-- Disable/Enable Button -->
                           <button class="btn btn-sm btn-outline-warning smToggleDisableBtn" data-subjectuuid="<?= htmlspecialchars($subjectUUID) ?>" data-disabled="<?= $isDisabled?>">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
@@ -239,6 +239,26 @@ $stmt->close();
 
 <!-- SUBJECT MANAGEMENT: CREATE SUBJECT -->
 <script>
+//Mihael edit btn stuff
+$(".smEditBtn").ready(function (){
+  $(".smEditBtn").click(function (){
+    $.ajax({
+      url: './edit-subject', 
+      type: 'POST', 
+      data: { subjectUUID: $(this).attr("data-subjectuuid").toString() },
+      success: function(response) {
+      //console.log('Success:', response);
+        $("#content").html(response);
+      },
+      error: function(xhr, status, error) {
+        //console.log('Error:', error);
+      }
+    });            
+  })
+})
+
+
+
 document.addEventListener("submit", async (e) => {
   if (e.target.id !== "smAddSubjectForm") return;
 
