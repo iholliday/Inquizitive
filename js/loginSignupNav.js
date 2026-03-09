@@ -9,10 +9,11 @@ $(document).ready(function()
             success: function(data) {
                 // If successful, load html.
                 $('body').html(data);
+                history.pushState({ page: page }, "", page); 
             },
             error: function() {
                 // Else display error.
-                alert("Error loading dashboard. Please try again.");
+                alert("Error loading page. Please try again.");
             }
         });
     }

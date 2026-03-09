@@ -13,6 +13,6 @@
 
     // Send a JSON response and exit statement.
     header('Content-Type: application/json');
-    echo json_encode(['status' => 'success', 'message' => 'Logged out successfully']);
+    echo json_encode(['status' => 'success']);
     exit();
 ?>

@@ -24,6 +24,13 @@
         $email = $email = strtolower(trim($_POST['txtEmail']));
         $password = $_POST['txtPass'];
 
+        // Check for blank entries.
+        if (empty($email) || empty($password))
+        {
+            echo json_encode(['status' => 'error', 'message' => "Missing entries."]);
+            exit;
+        }
+
         // Validate email format, send error if invalid.
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
         {
@@ -68,6 +75,10 @@
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['accessLevel'] = $user['accessLevel'];
                 $_SESSION['userCreationDate'] = $user['userCreationDate'];
+
+                // Update last login on database.
+                $currentTime = date("Y-m-d H:i:s");
+                $stmt = $db->Query("CALL UpdateLastLogin(?, ?)", [$_SESSION['userUUID'], $currentTime]);
 
                 // Send success response.
                 echo json_encode(['status' => 'success', 'message' => 'Welcome to the dashboard!']);
