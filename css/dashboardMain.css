@@ -1005,3 +1005,69 @@ body {
   color: #3d4b63;
 }
 
+/* --------------------------------------------------- */
+  /* LEADERBOARD PAGE */
+/* --------------------------------------------------- */
+
+#leaderboard thead {
+  background-color: var(--c-english-violet) !important;
+  color: white;
+}
+
+#leaderboard table td {
+  white-space: nowrap;       
+  overflow: hidden;          
+  text-overflow: ellipsis;   
+  max-width: 150px;          
+}
+
+#leaderboard .tm-badge {
+    border-color: var(--c-yellow) !important;
+    color: var(--c-yellow) !important; 
+    background-color: #FFF9D6;
+}
+
+#leaderboard .leaderboard-container {
+  height: 400px !important;
+}
+
+.lb-gold {
+  color: yellow;
+}
+
+#leaderboard .row.mt-4 {
+    margin-top: -22px !important; 
+}
+
+#leaderboard .material-icons{
+  vertical-align: middle;
+}
+
+#leaderboard .trophy-gold{
+  color: #CD7F32;
+}
+
+#leaderboard .trophy-silver{
+  color: #C0C0C0;
+}
+
+#leaderboard .trophy-bronze{
+  color: #FDC300;
+}
+
+#leaderboardResults .placeholder-text {
+  margin-top: 4rem; 
+  display: inline-block; 
+}
+
+#leaderboard table th,
+#leaderboard table td {
+    text-align: center;
+}
+
+/* Smaller screen adaptation for leaderboard */
+@media (max-width: 576px) {
+  #leaderboard table td {
+    max-width: 90px;
+  }
+}
