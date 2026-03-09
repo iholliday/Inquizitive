@@ -34,6 +34,11 @@
     $route->Route(['post'], '/set-quiz-disabled', "./php/setQuizDisabled.php");
     $route->Route(['post'], '/edit-quiz', "./php/editQuiz.php");
 
+    $route->Route(['post'], '/get-student-subjects', "./php/getStudentSubjects.php");
+    $route->Route(['post'], '/add-student-subject', "./php/addStudentSubjects.php");
+    $route->Route(['post'], '/remove-student-subject', "./php/removeStudentSubjects.php");
+    $route->Route(['post'], '/edit-student', "./php/editStudent.php");
+
     $route->Route(['post'], '/update-user', "./php/updateUser.php");
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");

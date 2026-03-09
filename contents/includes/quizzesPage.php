@@ -55,7 +55,7 @@ $userUUID = $_SESSION['userUUID'] ?? null;
 
       <div class="row g-3">
         <?php
-          if ($result = $db->Query("CALL GetAllQuizzes();", [])) {
+          if ($result = $db->Query("CALL GetQuizzesBySubjectLink(?);", [$userUUID])) {
             if (mysqli_num_rows($result) > 0) {
               while($row = mysqli_fetch_assoc($result)) {
 
