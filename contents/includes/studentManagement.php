@@ -163,6 +163,7 @@ if ($res1 = $stmt->get_result()) {
                           <button class="btn btn-sdm btn-outline-warning smToggleDisableBtn" data-userUUID="<?= htmlspecialchars($userUUID) ?>" data-disabled="<?= $isDisabled?>">
                             <?= $isDisabled ? "Enable" : "Disable" ?>
                           </button>
+                          <!-- Delete Button -->
                            <button class="btn btn-sdm btn-outline-danger sdmDeleteBtn" data-useruuid="<?= htmlspecialchars($userUUID)?>">Delete</button>
                         </div>
                       </td>
