@@ -1,3 +1,4 @@
+
 <?php
 
 // include __DIR__ . "/../../php/blockDirectAccess.php";

@@ -24,6 +24,7 @@
     $route->Route(['post'], '/auth', "./php/auth.php");
     $route->Route(['post'], '/add-lecturer', "./php/addLecturer.php");
     $route->Route(['post'], '/delete-user', "./php/deleteUser.php");
+    $route->Route(['post'], '/delete-quiz', "./php/deleteQuiz.php");
     $route->Route(['post'], '/set-user-disabled', "./php/setUserDisabled.php");
     $route->Route(['post'], '/create-subject', "./php/addSubject.php");
     $route->Route(['post'], '/set-subject-disabled', "./php/setSubjectDisabled.php");
