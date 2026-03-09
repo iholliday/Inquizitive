@@ -33,6 +33,13 @@
     $route->Route(['get'], '/resetPassword', "./contents/resetPassword.php");
     $route->Route(['post'], '/updatePassword', "./php/updatePassword.php");
     $route->Route(['get'], '/login', "./contents/login.php"); 
+    $route->Route(['post'], '/create-test', "./php/addQuiz.php");
+
+    $route->Route(['post'], '/add-student', "./php/addStudent.php");
+    $route->Route(['post'], '/set-quiz-disabled', "./php/setQuizDisabled.php");
+    $route->Route(['post'], '/edit-quiz', "./php/editQuiz.php");
+
+    $route->Route(['post'], '/update-user', "./php/updateUser.php");
 
     $route->Route(['post'], '/createAccount', "./php/createAccount.php");
     $route->Route(['get'], '/dashboard', "./contents/dashboardNavigation.php");
@@ -50,6 +57,7 @@
     $route->Route(['get'], '/subject-management', "./contents/includes/admSubjectManagement.php");
     $route->Route(['get'], '/settings', "./contents/includes/settingsPage.php");
     $route->Route(['get'], '/profile', "./contents/includes/profilePage.php");
+    $route->Route(['get', 'post'], '/last-page', "./contents/includes/pageSession.php");
 
     $route->Route(['post'], '/testing', "./contents/includes/testingPage.php");
 
