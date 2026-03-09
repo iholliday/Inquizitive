@@ -78,9 +78,8 @@
                 </button>
 
                 <div class="profile-actions" id="profileActions" role="menu" aria-hidden="true">
-                    <button class="profile-btn link" type="button" role="menuitem" id="profile">My Profile</button>
+                    <button class="profile-btn link" type="button" role="menuitem" id="settings">Settings / Profile</button>
                     <button class="profile-btn link" type="button" role="menuitem" id="shop">Shop</button>
-                    <button class="profile-btn link" type="button" role="menuitem" id="settings">Settings</button>
                     <button class="profile-btn" type="button" role="menuitem" id="logout">Log out</button>
                     <!-- We can add more buttons :) -->
                 </div>

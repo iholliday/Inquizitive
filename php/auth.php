@@ -74,6 +74,7 @@
                 $_SESSION['lastName'] = $user['lastName'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['accessLevel'] = $user['accessLevel'];
+                $_SESSION['userCreationDate'] = $user['userCreationDate'];
 
                 // Update last login on database.
                 $currentTime = date("Y-m-d H:i:s");
