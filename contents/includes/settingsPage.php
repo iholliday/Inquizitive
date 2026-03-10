@@ -183,6 +183,7 @@ $userIcon = htmlspecialchars($row['avatar']);
 
           <hr class="my-4">
 
+          <!-- MFA (TA) -->
               <?php
                 // Checking if MFA is enabled, if it's NULL, declare as 0.
                 $mfaEnabled = $_SESSION['mfaEnabled'] ?? 0;
@@ -214,6 +215,7 @@ $userIcon = htmlspecialchars($row['avatar']);
                   <?php } ?>
                 </div>
               </div>
+              <!-- END OF MFA (TA) -->
         </div>
       </div>
     </div>
