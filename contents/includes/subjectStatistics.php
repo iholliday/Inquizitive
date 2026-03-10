@@ -10,7 +10,7 @@ $result = $db-Query("CALL GetTotalScorePerSubjectByUserUUID(?,?)" , [$userUUID,$
 $dataArray = [['Price','Size']];
 if(mysqli_num_rows($result) > 0 )
 {
-    array_push($dataArray,$row['totalScore'])
+    array_push($dataArray,[$row['score'],$row['completionDate']]);
 }
 
 echo json_encode([['Price', 'Size'],
