@@ -40,42 +40,40 @@
 
             <div class="flex-row subject-row" style="min-height: 1000px">
                 <div class="flex-col flex-grow-2">
-                    <div class="card">How many Subjects
-                        <div><?php echo htmlspecialchars(sizeof($dataArray)) ?></div>
+                    <div class="card"><h4>How many Subjects</h4>
+                        <div><h2><?php echo htmlspecialchars(sizeof($dataArray)) ?></h2></div>
                     </div>
-                    <div class="card height-100">Table of Subjects
+                    <div class="card height-fit-content"><h4>Table of Subjects</h4>
                         <div>
                             <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Author</th>
-                                <th scope="col">View Stats</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            foreach ($dataArray as $item) {
-                                ?><tr>
-                                    <th scope="row"><?=htmlspecialchars($item["subjectTitle"]) ?></th>
-                                    <td><?=htmlspecialchars($item["subjectDescription"]) ?></td>
-                                    <td><?=htmlspecialchars($item["authorName"]) ?></td>
-                                    <td><button data="<?=htmlspecialchars($item["authorName"]) ?>"><i class="material-symbols-outlined">
-equalizer
-</i></button></td>
-                                </tr><?php
-                            }
-                            //fdfhjdsfhsof
-                            ?>
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Author</th>
+                                    <th scope="col">View Stats</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                foreach ($dataArray as $item) {
+                                    ?><tr>
+                                        <th scope="row"><?=htmlspecialchars($item["subjectTitle"]) ?></th>
+                                        <td><?=htmlspecialchars($item["subjectDescription"]) ?></td>
+                                        <td><?=htmlspecialchars($item["authorName"]) ?></td>
+                                        <td><button data="<?=htmlspecialchars($item["authorName"]) ?>"><i class="material-symbols-outlined">equalizer</i></button></td>
+                                    </tr><?php
+                                }
+                                ?>
 
-                            </tbody>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
                 <div class="flex-col flex-grow-1">
-                    <div class="card height-100">Statistics</div>
+                    <div class="card height-fit-content"><h4>Statistics</h4></div>
+                    <div></div>
                 </div>
             </div>
             <div class="flex-row">
