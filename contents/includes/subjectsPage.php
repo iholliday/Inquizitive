@@ -66,7 +66,9 @@ equalizer
 </i></button></td>
                                 </tr><?php
                             }
+                            //fdfhjdsfhsof
                             ?>
+
                             </tbody>
                             </table>
                         </div>
