@@ -34,7 +34,7 @@
 
         if (!$response || !$response->success)
         {
-            echo json_encode(['status' => 'error', 'message' => 'reCAPTCHA verification failed, please try again.']);
+            echo json_encode(['status' => 'error', 'message' => 'reCAPTCHA verification failed, please refresh and try again.']);
             exit;
         }
     }

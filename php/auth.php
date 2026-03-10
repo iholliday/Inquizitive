@@ -129,11 +129,12 @@
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['accessLevel'] = $user['accessLevel'];
                 $_SESSION['avatar'] = $user['avatar'];
+                $_SESSION['userCreationDate'] = $user['userCreationDate'];
+                $_SESSION['mfaEnabled'] = $user['mfaEnabled'];
 
                 // If password correct, reset attempts.
                 $_SESSION["spamChecker"] = 0;
                 $_SESSION["lastCheck"] = new DateTimeImmutable();
-                $_SESSION['userCreationDate'] = $user['userCreationDate'];
 
                 // Update last login on database.
                 $currentTime = date("Y-m-d H:i:s");

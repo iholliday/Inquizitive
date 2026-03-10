@@ -183,40 +183,45 @@ $userIcon = htmlspecialchars($row['avatar']);
 
           <hr class="my-4">
 
-            <div class="row mt-4 g-3">
+              <?php
+                // Checking if MFA is enabled, if it's NULL, declare as 0.
+                $mfaEnabled = $_SESSION['mfaEnabled'] ?? 0;
+              ?>
 
-            <div class="col">
-                <div class="stat-card">
-                <div class="stat-number">14</div>
-                <div class="stat-label">Quizzes Taken</div>
+              <div class="col-12">
+                <div class="sm-card p-3 border rounded mfa-block">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="fw-semibold">Multi-Factor Authentication</div>
+                    <span class="text-muted small">Account security</span>
+                  </div>
+
+                  <?php if ($mfaEnabled == 0){ ?>
+
+                    <!-- Displays if MFA is disabled. -->
+                    <div class="text-muted small mb-3">You have not enabled MFA on your account.</div>
+                    <button id="enable-mfa" class="btn styledBtn">Enable Multi-Factor Authentication</button>
+
+                  <?php } else{ ?>
+
+                    <!-- Displays if MFA is enabled -->
+                    <div class="text-muted small mb-0">MFA is currently enabled for your account.</div>
+                    <div class="text-muted small mb-3">Admins cannot remove MFA - use a backup code if you lose access.</div>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button id="enable-mfa" class="btn styledBtn flex-fill text-center">Change MFA</button>
+                      <button id="remove-mfa" class="btn styledBtn red flex-fill text-center btn-outline-danger">Remove MFA</button>
+                      <button id="generate-backup" class="btn styledBtn grey flex-fill text-center">Generate Backup Code</button> 
+                    </div>
+                  <?php } ?>
                 </div>
-            </div>
-
-            <div class="col">
-                <div class="stat-card">
-                <div class="stat-number">82%</div>
-                <div class="stat-label">Average Score</div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="stat-card">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Subjects</div>
-                </div>
-            </div>
-
-            </div>
-
+              </div>
         </div>
-
       </div>
     </div>
-
   </div>
 </div>
 
 
+<script src="./js/mfaHandling.js"></script>
 <script>
 $(document).ready(function () {
 

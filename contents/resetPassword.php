@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <!-- Separate CSS files faster loading as password-reset doesn't require platform-wide styling  -->
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/colours.css" />
     <link rel="stylesheet" href="../css/login.css" />

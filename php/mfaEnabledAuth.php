@@ -80,6 +80,13 @@ $_SESSION['firstName'] = $user['firstName'];
 $_SESSION['lastName'] = $user['lastName'];
 $_SESSION['email'] = $user['email'];
 $_SESSION['accessLevel'] = $user['accessLevel'];
+$_SESSION['mfaEnabled'] = $user['mfaEnabled'];
+$_SESSION['avatar'] = $user['avatar'];
+$_SESSION['userCreationDate'] = $user['userCreationDate'];
+
+// If password correct, reset attempts.
+$_SESSION["spamChecker"] = 0;
+$_SESSION["lastCheck"] = new DateTimeImmutable();
 
 // Update last login time on database.
 $currentTime = date("Y-m-d H:i:s");
