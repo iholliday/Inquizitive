@@ -14,9 +14,17 @@
     // Getting POST data.
     $token = $_POST['token'] ?? '';
     $password = $_POST['txtPassword'] ?? '';
+    $confirmPassword = $_POST['txtConfirmPassword'] ?? '';
 
     if (!$token || !$password) {
         echo json_encode(['status' => 'error', 'message' => 'Invalid request.']);
+        exit;
+    }
+
+    // Server-side check if passwords match.
+    if ($password !== $confirmPassword) 
+    {
+        echo json_encode(['status' => 'error','message' => 'Passwords do not match.']);
         exit;
     }
 
