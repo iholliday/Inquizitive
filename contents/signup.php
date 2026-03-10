@@ -57,8 +57,9 @@
                                 <div>
                                     <input type="email" name="txtEmail" class="form-control login-form-control" id="email" placeholder="Email Address" required>
                                 </div>
-                                <div>
+                                <div class="signup-password">
                                     <input type="password" name="txtPass" class="form-control login-form-control" id="password" placeholder="Password" required>
+                                    <span id="password-indicator" ></span>
                                 </div>
                                 <div>
                                     <input type="password" name="txtPassConfirm" class="form-control login-form-control" id="passwordConfirm" placeholder="Confirm Password" required>

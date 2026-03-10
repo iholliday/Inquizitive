@@ -1,4 +1,6 @@
-/* ===== General ===== */
+/* --------------------------------------------------- */
+  /* GENERAL */
+/* --------------------------------------------------- */
 .login-page {
     margin: 0;
     padding: 0;
@@ -15,7 +17,9 @@
     justify-content: center;
 }
 
-/* ===== Container ===== */
+/* --------------------------------------------------- */
+  /* CONTAINER */
+/* --------------------------------------------------- */
 .login-container {
     background-color: var(--sidebar-bg);
     width: 800px;
@@ -29,7 +33,9 @@
     position: relative;
 }
 
-/* ===== Grid ===== */
+/* --------------------------------------------------- */
+  /* GRID */
+/* --------------------------------------------------- */
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -38,7 +44,9 @@
     height: 100%;
 }
 
-/* ===== Items ===== */
+/* --------------------------------------------------- */
+  /* ITEMS */
+/* --------------------------------------------------- */
 .grid-item {
     display: flex;
     justify-content: center;
@@ -81,7 +89,9 @@
 }
 
 
-/* ===== Title ===== */
+/* --------------------------------------------------- */
+  /* TITLE */
+/* --------------------------------------------------- */
 .login-title {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -90,10 +100,16 @@
     color: var(--text);
 }
 
-/* ===== Form ===== */
+/* --------------------------------------------------- */
+  /* FORM */
+/* --------------------------------------------------- */
 #login-form {
     width: 100%;
     max-width: 350px;
+}
+
+.login-page input {
+    font-family: var(--font-primary);
 }
 
 .login-form-control {
@@ -146,7 +162,9 @@
     background-color: var(--c-english-violet);
 }
 
-/* ===== Button ===== */
+/* --------------------------------------------------- */
+  /* BUTTON */
+/* --------------------------------------------------- */
 .btn {
     width: 80px;
     padding: 10px;
@@ -172,7 +190,13 @@
     color: white;
 }
 
-/* ===== Google reCAPTXHA ===== */
+.login-page .btn{
+    font-family: var(--font-primary);
+}
+
+/* --------------------------------------------------- */
+  /* GOOGLE RECAPTCHA */
+/* --------------------------------------------------- */
 .g-recaptcha {
     margin-top: 7%;
     margin-left: 20px;
@@ -180,7 +204,9 @@
     transform-origin: left;
 }
 
-/* ===== Signup ===== */
+/* --------------------------------------------------- */
+  /* SIGNUP */
+/* --------------------------------------------------- */
 .signup .login-title{
     margin-top: -35px;
 }
@@ -210,6 +236,11 @@
     width: 90px;
     margin-top: 15px;
     margin-bottom: -9px;
+    font-family: var(--font-primary);
+}
+
+.signup input {
+    font-family: var(--font-primary);
 }
 
 .signup .signup-divider {
@@ -220,7 +251,30 @@
     margin-left: -40px;
 }
 
-/* ===== Password Reset Page ===== */
+.signup #password-indicator {
+    position: absolute;
+    right: -27px;
+    top: 21px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #9c9c9c;
+}
+
+.signup .signup-password {
+    position: relative; 
+    display: inline-block; 
+    width: 85%;
+}
+
+.signup .signup-password input {
+    padding-right: 30px;
+}
+
+/* --------------------------------------------------- */
+  /* PASSWORD RESET PAGE */
+/* --------------------------------------------------- */
 .password-reset-background {
     overflow: hidden;
 }
@@ -280,7 +334,9 @@
     margin-left: 105px;
 }
 
-/* ===== Mobile ===== */
+/* --------------------------------------------------- */
+  /* MOBILE */
+/* --------------------------------------------------- */
 @media (max-width: 1000px) {
 
     .login-background {
