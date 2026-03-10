@@ -251,7 +251,7 @@
     margin-left: -40px;
 }
 
-.signup #password-indicator {
+#password-indicator {
     position: absolute;
     right: -27px;
     top: 21px;
@@ -262,13 +262,13 @@
     background-color: #9c9c9c;
 }
 
-.signup .signup-password {
+.signup-password {
     position: relative; 
     display: inline-block; 
     width: 85%;
 }
 
-.signup .signup-password input {
+.signup-password input {
     padding-right: 30px;
 }
 
@@ -332,6 +332,10 @@
 
 .password-reset .login-help {
     margin-left: 105px;
+}
+
+.password-reset .signup-password {
+    width: 91%;
 }
 
 /* --------------------------------------------------- */
