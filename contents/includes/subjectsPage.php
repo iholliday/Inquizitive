@@ -81,5 +81,10 @@ equalizer
             </div>
         </div>
     </div>
+    <script>
+
+
+    //code here test
+    </script>
 </body>
 </html>
