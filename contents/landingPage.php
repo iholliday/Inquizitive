@@ -42,7 +42,7 @@
     <section id="second-row" class="flex-row lp-row">
         <div class="lp-row-internal halves-row 100w md-collapse">
             <div>
-                <img class="large-section-img" src="./images/sampleimage.png" alt="student using app">
+                <img class="large-section-img" src="./images/StudentLaptopPhoto.jpg" alt="student using app">
             </div>
             <div class="textbox-lg">
                 <h3>Who It’s For</h3>
