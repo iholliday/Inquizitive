@@ -1,40 +1,21 @@
-<!DOCTYPE html>
-<html>
-<script src="https://www.gstatic.com/charts/loader.js"></script>
-<body>
-<div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
 
-<script>
-google.charts.load('current',{packages:['corechart']});
-google.charts.setOnLoadCallback(drawChart);
 
-function drawChart() {
+<?php
+header('Content-type: application/json');
 
-// Set Data
-const data = google.visualization.arrayToDataTable([
-  ['Price', 'Size'],
+$db = new inquizitiveDB();
+$userUUID = $_SESSION['userUUID'];
+$subjectUUID = $_POST['subjectUUID'];
+$result = $db-Query("CALL GetTotalScorePerSubjectByUserUUID(?,?)" , [$userUUID,$subjectUUID]);
+$dataArray = [['Price','Size']];
+if(mysqli_num_rows($result) > 0 )
+{
+    array_push($dataArray,[$row['score'],$row['completionDate']]);
+}
+
+echo json_encode([['Price', 'Size'],
   [50,7],[60,8],[70,8],[80,9],[90,9],
   [100,9],[110,10],[120,11],
-  [130,14],[140,14],[150,15]
-]);
-
-// Set Options
-const options = {
-  title: 'House Prices vs. Size',
-  hAxis: {title: 'Square Meters'},
-  vAxis: {title: 'Price in Millions'},
-  legend: 'none'
-};
-
-// Draw
-const chart = new google.visualization.LineChart(document.getElementById('myChart'));
-chart.draw(data, options);
-
-}
-</script>
-
-</body>
-</html>
-
-
+  [130,14],[140,14],[150,15]]);
+  ?>
 

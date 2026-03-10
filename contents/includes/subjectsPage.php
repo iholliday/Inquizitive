@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="./css/subjects.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=equalizer" />
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
     <title>Subjects Page</title>
 </head>
@@ -46,25 +47,26 @@
                     <div class="card height-fit-content"><h4>Table of Subjects</h4>
                         <div>
                             <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Author</th>
-                                    <th scope="col">View Stats</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                foreach ($dataArray as $item) {
-                                    ?><tr>
-                                        <th scope="row"><?=htmlspecialchars($item["subjectTitle"]) ?></th>
-                                        <td><?=htmlspecialchars($item["subjectDescription"]) ?></td>
-                                        <td><?=htmlspecialchars($item["authorName"]) ?></td>
-                                        <td><button data="<?=htmlspecialchars($item["authorName"]) ?>"><i class="material-symbols-outlined">equalizer</i></button></td>
-                                    </tr><?php
-                                }
-                                ?>
+                            <thead>
+                                <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">View Stats</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($dataArray as $item) {
+                                ?><tr>
+                                    <th scope="row"><?=htmlspecialchars($item["subjectTitle"]) ?></th>
+                                    <td><?=htmlspecialchars($item["subjectDescription"]) ?></td>
+                                    <td><?=htmlspecialchars($item["authorName"]) ?></td>
+                                    <td><button class = "view-data-chart" data="<?=htmlspecialchars($item["authorName"]) ?>"><i class="material-symbols-outlined">equalizer</i></button></td>
+                                </tr><?php
+                            }
+                            //fdfhjdsfhsof
+                            ?>
 
                                 </tbody>
                             </table>
@@ -72,8 +74,13 @@
                     </div>
                 </div>
                 <div class="flex-col flex-grow-1">
-                    <div class="card height-fit-content"><h4>Statistics</h4></div>
-                    <div></div>
+                    <div class="card height-fit-content">
+                        <div>
+                            Statistics
+                        </div>
+                        <div id="statsChart"><div id="myChart" style="max-width:100%; "></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="flex-row">
@@ -84,7 +91,46 @@
     <script>
 
 
-    //code here test
+google.charts.load('current',{packages:['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart(arr) {
+
+// Set Data
+const data = google.visualization.arrayToDataTable(arr);
+
+// Set Options
+const options = {
+  title: 'House Prices vs. Size',
+  hAxis: {title: 'Square Meters'},
+  vAxis: {title: 'Price in Millions'},
+  legend: 'none'
+};
+
+// Draw
+const chart = new google.visualization.LineChart(document.getElementById('myChart'));
+chart.draw(data, options);
+
+}
+        $(".view-data-chart").ready(function(){
+            $(".view-data-chart").click(function (){
+                $.ajax({
+                    url: "./subjectStatistics",
+                    type:"POST",
+                    data: {subjectUUID: $(this).attr("data").toString()},
+                    success: function(response)
+                    {
+                        console.log(response)
+                        drawChart(response);
+                    },
+                    error: function(e)
+                    {
+
+                    }
+                })
+            })
+        })
+
     </script>
 </body>
 </html>
