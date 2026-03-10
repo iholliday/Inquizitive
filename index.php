@@ -85,7 +85,7 @@
     $route->Route(['get'], '/temp', "./contents/tempMFA.php");
 
 
-
+    $route->Route(['post'], '/subjectStatistics', "./contents/includes/subjectStatistics.php");
     $route->Route(['post'], '/quiz-result', "./contents/includes/quizResult.php");
 
 
