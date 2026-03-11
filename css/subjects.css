@@ -76,8 +76,14 @@
     }
 
 
-    @media (max-width: 757) {
-        .md-collapse {}
+    /* Responsiveness for mobile */
+    @media (max-width: 757px) {
+        .md-collapse {
+            flex-direction: column !important;
+        }
 
+        .md-flex-grow-0 {
+            flex-grow: 0;
+        }
     }
 }

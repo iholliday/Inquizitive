@@ -39,8 +39,8 @@
         <div class="flex-col main-column">
             <h2>Your Subjects</h2>
 
-            <div class="flex-row subject-row" style="min-height: 1000px">
-                <div class="flex-col flex-grow-2">
+            <div class="flex-row subject-row md-collapse">
+                <div class="flex-col flex-grow-2 md-flex-grow-0">
                     <div class="card"><h4>How many Subjects</h4>
                         <div><h2><?php echo htmlspecialchars(sizeof($dataArray)) ?></h2></div>
                     </div>
@@ -65,7 +65,7 @@
                                     <td><button class = "view-data-chart" data="<?=htmlspecialchars($item["authorName"]) ?>"><i class="material-symbols-outlined">equalizer</i></button></td>
                                 </tr><?php
                             }
-                            //fdfhjdsfhsof
+                            
                             ?>
 
                                 </tbody>
