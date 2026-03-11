@@ -128,8 +128,16 @@ $initials = mb_strtoupper($first[0] . $last[0]);
             <main class="main">
                 <div id="content">
                     <?php
-                    if (isset($DASH_INCLUDE) && file_exists($DASH_INCLUDE)) {
+                    if (!isset($DASH_INCLUDE)) {
+                        $DASH_INCLUDE = __DIR__ . "/includes/dashboardMain.php";
+                    }
+
+                    // Loads the landing page ont the dashboard
+                    if (file_exists($DASH_INCLUDE)) {
                         include $DASH_INCLUDE;
+                        
+                    } else {
+                        echo "<div style='padding:16px;'>Default dashboard page could not be loaded.</div>";
                     }
                     ?>
                 </div>

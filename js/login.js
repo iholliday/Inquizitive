@@ -21,17 +21,22 @@ $("#login-form").submit(function (event)
             if (res.status === 'success') 
             {
                 // If auth is successful, redirect user to dashboard page via AJAX.
+                sessionStorage.setItem("currentPage", "landing");
+
                 $.ajax({
-                    url: "./dashboard", 
-                    type: 'GET',
+                    url: "./dashboard",
+                    type: "GET",
                     success: function(data) {
-                        // Replace the content of the body with the dashboard.
-                        $('body').html(data); 
-                        Swal.fire(res.message);
+                        $("body").html(data);
+                        Swal.fire({ 
+                            title: "Login Successful",
+                            text: res.message || "Welcome back.",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        });
                     },
                     error: function() {
-                        // Display error.
-                        alert("Error loading the dashboard. Please try again.");
+                        Swal.fire("Error", "Error loading the dashboard. Please try again.", "error");
                     }
                 });
             }

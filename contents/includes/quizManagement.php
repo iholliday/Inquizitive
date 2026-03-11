@@ -94,7 +94,7 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
                 <th class="qm-option">B</th>
                 <th class="qm-option">C</th>
                 <th class="qm-option">D</th>
-                <th class="tblHeader;">Points</th>
+                <th class="tblHeader;">Timer Duration</th>
                 <th class="qm-actions text-end">Actions</th>
               </tr>
             </thead>
@@ -224,7 +224,7 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
             <div class="form-text">We store the full text in <code>correctAnswer</code> (same as your DB).</div>
           </div>
           <div class="col-4">
-            <label class="form-label">Points</label>
+            <label class="form-label">Timer Duration</label>
             <input id="sw_points" type="number" min="1" class="form-control" value="${points}">
           </div>
         </div>
