@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <!-- Separate CSS files faster loading as password-reset doesn't require platform-wide styling  -->
+    <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/colours.css" />
     <link rel="stylesheet" href="../css/login.css" />
@@ -25,8 +28,9 @@
                         <div class="grid-item item2">
                             <h2 class="login-title">RESET<br>PASSWORD</h2>
                             <form id="reset-form" method="POST" novalidate>
-                                <div class="mb-3">
-                                    <input type="password" name="txtPassword" id="password" class="form-control login-form-control" placeholder="New Password" required>
+                                <div class="signup-password">
+                                    <input type="password" name="txtPass" class="form-control login-form-control" id="password" placeholder="New Password" required>
+                                    <span id="password-indicator" ></span>
                                 </div>
                                 <div class="mb-3">
                                     <input type="password" name="txtConfirmPassword" id="confirmPassword" class="form-control login-form-control" placeholder="Confirm Password" required>
@@ -47,6 +51,7 @@
         <?php
         // Required JS.
         require_once ("../js/resetPassword.js");
+        require_once ("../js/createAccount.js");
         ?>
     </script> 
 </html>

@@ -27,7 +27,7 @@ $(document).ready(function() {
         $.ajax({
             url: "../updatePassword",
             type: "POST",
-            data: { token: token, txtPassword: password },
+            data: { token: token, txtPassword: password, txtConfirmPassword: password },
             dataType: "json",
             success: function(res) {
                 if (res.status === "success") {

@@ -182,10 +182,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .name {
     font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .role {
@@ -484,6 +488,27 @@ body {
   background-color: var(--c-space-cadet);
   color:white;
   transition:ease-in-out 0.2s;
+}
+
+#adminDashboard .styledBtn.grey {
+    background-color: #5a6268;
+    color: white;
+    border-color: grey;
+}
+#adminDashboard .styledBtn.grey:hover {
+    background-color: #454c52;
+    border-color: #5a6268;
+}
+
+#adminDashboard .styledBtn.red {
+    background-color: #dc3545; 
+    color: white;
+    border-color: #b02a37; 
+}
+
+#adminDashboard .styledBtn.red:hover {
+    background-color: #b02a37; 
+    border-color: #dc3545; 
 }
 
 #adminDashboard .form-control,

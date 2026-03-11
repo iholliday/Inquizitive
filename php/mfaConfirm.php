@@ -37,5 +37,6 @@ $db->Query("CALL SetTotpSecret(?,?)", [$_SESSION['userUUID'], $secret]);
 
 // Remove temp secret and return success message.
 unset($_SESSION['mfaTempSecret']);
+$_SESSION['mfaEnabled'] = 1;
 echo json_encode(['status'=>'success','message'=>'MFA successfully added!']);
 exit; 

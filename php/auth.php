@@ -39,25 +39,28 @@
 
     // =============================== END OF PAIRED PROGRAMMING SECTION ===============================
 
-    // Server-side reCAPTCHA verification.
-    if (empty($_POST['g-recaptcha-response']))
+    // Perform server-side reCAPTCHA verification only after 3 failed login attempts to minimise unneeded prompts for legitimate users.
+    if ($_SESSION["spamChecker"] >= 3)
     {
-        echo json_encode(['status' => 'error', 'message' => "reCAPTCHA not complete, please try again."]);
-        exit;
-    }
-    else
-    {
-        // Getting secret from .env file and verify with Google.
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
-        $dotenv->load();
-        $secret = $_ENV['RECAPTCHA_SECRET_KEY'];
-        $verify = file_get_contents( "https://www.google.com/recaptcha/api/siteverify?secret=" . $secret . "&response=" . $_POST['g-recaptcha-response']);
-        $response = json_decode($verify);
-
-        if (!$response || !$response->success)
+        if (empty($_POST['g-recaptcha-response']))
         {
-            echo json_encode(['status' => 'error', 'message' => 'reCAPTCHA verification failed, please refresh and try again.']);
+            echo json_encode(['status' => 'error', 'message' => "reCAPTCHA not complete, please try again."]);
             exit;
+        }
+        else
+        {
+            // Getting secret from .env file and verify with Google.
+            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
+            $dotenv->load();
+            $secret = $_ENV['RECAPTCHA_SECRET_KEY'];
+            $verify = file_get_contents( "https://www.google.com/recaptcha/api/siteverify?secret=" . $secret . "&response=" . $_POST['g-recaptcha-response']);
+            $response = json_decode($verify);
+
+            if (!$response || !$response->success)
+            {
+                echo json_encode(['status' => 'error', 'message' => 'reCAPTCHA verification failed, please refresh and try again.']);
+                exit;
+            }
         }
     }
 
@@ -129,11 +132,12 @@
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['accessLevel'] = $user['accessLevel'];
                 $_SESSION['avatar'] = $user['avatar'];
+                $_SESSION['userCreationDate'] = $user['userCreationDate'];
+                $_SESSION['mfaEnabled'] = $user['mfaEnabled'];
 
                 // If password correct, reset attempts.
                 $_SESSION["spamChecker"] = 0;
                 $_SESSION["lastCheck"] = new DateTimeImmutable();
-                $_SESSION['userCreationDate'] = $user['userCreationDate'];
 
                 // Update last login on database.
                 $currentTime = date("Y-m-d H:i:s");
