@@ -34,7 +34,7 @@
                 <button>Find out more</button>
             </div>
             <div>
-                <img class="large-section-img" src="./images/sampleimage.png" alt="picture of app">
+                <img class="large-section-img" src="./images/quiz.png" alt="Quiz in Progress">
             </div>
         </div>
     </section>
@@ -62,7 +62,7 @@
     <section id="guide-row" class="flex-row lp-row 100vw ">
         <div class="lp-row-internal thirds-row md-collapse">
             <div class="flex-col">
-                <img src="./images/sampleimage.png" alt="sample">
+                <img src="./images/signup.png" alt="sample">
                 <div class="textbox">
                     <h2>1: Create an account</h2>
                     <p>Click <a class="a" href="">Sign Up</a> in the top right to start!</p>
@@ -70,7 +70,7 @@
                 
             </div>
             <div class="flex-col">
-                <img src="./images/sampleimage.png" alt="sample">
+                <img src="./images/quizlist.png" alt="sample">
                 <div class="textbox">
                     <h2>2: Join a subject</h2>
                     <p>Teachers can create classes for their students, or you can join a class created by your teacher.</p>
