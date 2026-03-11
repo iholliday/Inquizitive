@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=equalizer" />
     <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <title>Subjects Page</title>
 </head>
 <body>
     <div id="subjects-page" class="container-fluid py-4">
@@ -60,7 +62,7 @@
                                     <th scope="row"><?=htmlspecialchars($item["subjectTitle"]) ?></th>
                                     <td><?=htmlspecialchars($item["subjectDescription"]) ?></td>
                                     <td><?=htmlspecialchars($item["authorName"]) ?></td>
-                                    <td><button class = "view-data-chart" data="<?=htmlspecialchars($item["authorName"]) ?>"><i class="material-symbols-outlined">equalizer</i></button></td>
+                                    <td><button class = "view-data-chart" data="<?=htmlspecialchars($item["subjectUUID"]) ?>"><i class="material-symbols-outlined">equalizer</i></button></td>
                                 </tr><?php
                             }
                             
@@ -88,7 +90,6 @@
         </div>
     </div>
     <script>
-
 
 google.charts.load('current',{packages:['corechart']});
 google.charts.setOnLoadCallback(drawChart);
@@ -129,6 +130,8 @@ chart.draw(data, options);
                 })
             })
         })
+
+
 
     </script>
 </body>
