@@ -55,7 +55,14 @@ $userUUID = $_SESSION['userUUID'] ?? null;
 
       <div class="row g-3">
         <?php
-          if ($result = $db->Query("CALL GetQuizzesBySubjectLink(?);", [$userUUID])) {
+          $result;
+          if($_SESSION['accessLevel'] == "ADMIN" || $_SESSION['accessLevel'] == "LECTURER")
+            {
+              $result = $db->Query("CALL GetAllQuizzes();");
+            }else{
+              $result = $db->Query("CALL GetQuizzesBySubjectLink(?);", [$userUUID]);
+            }
+          if ($result) {
             if (mysqli_num_rows($result) > 0) {
               while($row = mysqli_fetch_assoc($result)) {
 
@@ -146,7 +153,7 @@ $userUUID = $_SESSION['userUUID'] ?? null;
                           <div class="mt-auto pt-3 d-grid">
                             <button
                               class="review-quiz-btn btn btn-outline-primary"
-                              data-quiz-id="'.htmlspecialchars($row['quizUUID']).'">
+                              data-quiz-id="'.htmlspecialchars($row['quizInstanceUUID']).'">
                               View attempt
                             </button>
                           </div>
@@ -199,7 +206,9 @@ $(document).ready(function () {
   });
 
   // TAKE QUIZ BUTTON
-  $(document).on('click', '.take-quiz-btn', function () {
+  $(".take-quiz-btn").ready(function(){
+    $(".take-quiz-btn").click(function(){
+
     $.ajax({
       url: './testing',
       type: 'POST',
@@ -215,22 +224,25 @@ $(document).ready(function () {
       }
     });
   });
+});
 
   // review completed quiz
-  $(document).on('click', '.review-quiz-btn', function () {
-    $.ajax({
-      url: './reviewQuizAttempt',
-      type: 'POST',
-      data: {
-        quizID: $(this).data('quiz-id').toString()
-      },
-      success: function (response) {
-        $('#content').html(response);
-      },
-      error: function (xhr, status, error) {
-        console.log('Error:', error);
-      }
-    });
-  });
+  $(".review-quiz-btn").ready(function(){
+    $(".review-quiz-btn").click(function(){
+        $.ajax({
+          url: './reviewQuizAttempt',
+          type: 'POST',
+          data: {
+            quizInstanceID: $(this).data('quiz-id').toString()
+          },
+          success: function (response) {
+            $('#content').html(response);
+          },
+          error: function (xhr, status, error) {
+            console.log('Error:', error);
+          }
+      });
+    })
+  })
 });
 </script>

@@ -42,7 +42,7 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quiz Result</title>
     <link rel="stylesheet" href="./css/results.css" />
 </head>
 <body>
@@ -125,14 +125,27 @@ if($score > 0){
 
 if($score <0){$score = 0;};
 $updateQuizInstanceResult = $db->Query("CALL UpdateQuizInstanceByUUID(?,?);", [$quizInstance,$score]); 
-for($n=0; $n < sizeof($quiz->getQuestions()); $n++)
-{
-  $qAnswer = $quiz->getQuestions()[$n]->getAnswer();
-  $qUUID = $quiz->getQuestions()[$n]->getUUID();
-  $db = new inquizitiveDB();
-  $createQuizInstance =$db->Query("CALL CreateQuestionInstance(?,?,?,?)",[$quizInstance,$qUUID,$n,$qAnswer]);
 
+
+for($i=0; $i < sizeof($array); $i++)
+{
+    $questionUUID =  htmlspecialchars($array[$i]["questionUUID"]);
+    $answer =  htmlspecialchars($array[$i]["answer"]);
+    $style = "";
+    for($n=0; $n < sizeof($quiz->getQuestions()); $n++)
+    {
+
+      if($questionUUID == $quiz->getQuestions()[$n]->getUUID())
+      {
+        $qAnswer = $array[$i]["answer"];
+        $qUUID = $quiz->getQuestions()[$n]->getUUID();
+        $db = new inquizitiveDB();
+        $createQuizInstance =$db->Query("CALL CreateQuestionInstance(?,?,?,?)",[$quizInstance,$qUUID,$i,$qAnswer]);
+
+      }
+    }
 }
+
 ?>
 
 </div>

@@ -110,7 +110,6 @@ $shop->sortRarities();
                         {
                             
                             Swal.fire({
-                            position: "top-end",
                             icon: "success",
                             title: response.message,
                             showConfirmButton: false,
@@ -120,7 +119,6 @@ $shop->sortRarities();
                         }else if(response.status == "money404")
                         {
                             Swal.fire({
-                            position: "top-end",
                             icon: "error",
                             title: response.message,
                             showConfirmButton: false,

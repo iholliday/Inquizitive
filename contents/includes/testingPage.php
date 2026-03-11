@@ -38,6 +38,7 @@ if ($result = $db->Query("CALL GetQuizQuestionsByID(?);",[$quizUUID])) {
             $question->addOption(htmlspecialchars($row['answerC']));
             $question->addOption(htmlspecialchars($row['answerD']));
             $question->updateUUID(htmlspecialchars($row['questionUUID']));
+            $question->updateTimer(htmlspecialchars($row['difficultyPoints']));
 
             $currentQuiz->addQuestion($question);
         }
@@ -67,7 +68,7 @@ $currentQuiz->shuffleQuestions();
                 for($n=0; $n < sizeof($currentQuiz->getQuestions());$n++)
                 {
                     echo '
-                    <div id="' . $currentQuiz->getQuestions()[$n]->getUUID() . '" class="question-wrapper hidden"> 
+                    <div id="' . $currentQuiz->getQuestions()[$n]->getUUID() . '" class="question-wrapper hidden" data-timer = "' . $currentQuiz->getQuestions()[$n]->getTimer() . '"> 
                         <div class="question-text shadow">
                             <div class="question-num">QUESTION ' . ($n+1) .'/' . sizeof($currentQuiz->getQuestions()) . '</div>
                             <div class="divider-small">
@@ -88,6 +89,7 @@ $currentQuiz->shuffleQuestions();
     </section>
     <script>
         var questions = new Array();
+        var timers = new Array();
         var answered = new Array();
         var currentQuestion =0;
         var quizTimeout =setTimeout(() => {}, 10);
@@ -139,6 +141,16 @@ $currentQuiz->shuffleQuestions();
 
         function quizTimer()
         {
+            if(timers[currentQuestion] <= 0)
+            {
+                timeLeft = 100000000000000;
+                $("#quiz-timer-wrapper").addClass("hidden");
+            }else
+            {
+                timeLeft = timers[currentQuestion] * 1000;
+                $("#quiz-timer-wrapper").removeClass("hidden");
+
+            }
             percent = ((timeLeft-timeSpent) / timeLeft) * 100;
             $("#quiz-timer").css("width",percent+"%");
             if(timeLeft-(timeSpent+100)>0)
@@ -174,7 +186,6 @@ $currentQuiz->shuffleQuestions();
                 currentQuestion+=1;
                 $(".question-wrapper").addClass("hidden");
                 $("#"+questions[currentQuestion]).removeClass("hidden");
-                timeLeft = 20000;
                 timeSpent =0;
                 if( typeof quizTimeout !== 'undefined')
                 {
@@ -195,6 +206,7 @@ $currentQuiz->shuffleQuestions();
         $("#testing-page").ready(function(){
             $(".question-wrapper").each(function(index, element){
                 questions.push($(this).attr("id").toString());
+                timers.push($(this).attr("data-timer").toString());
             })
             console.log(questions);
 
@@ -222,6 +234,7 @@ $currentQuiz->shuffleQuestions();
         $("#"+questions[currentQuestion]).removeClass("hidden");
         quizTimer();
         completionBarUpdate();
+        console.log(timers);
         
         })
     </script>

@@ -91,6 +91,8 @@
     $route->Route(['post'], '/editLecturer', "./php/editLecturer.php");
     $route->Route(['post'], '/edit-lecturer', "./contents/includes/editLecturer.php");
     $route->Route(['post'], '/getLeaderboard', "./php/getLeaderboard.php");
+    $route->Route(['post'], '/updateAvatar', "./php/updateAvatar.php");
+    $route->Route(['post'], '/reviewQuizAttempt', "./contents/includes/reviewQuiz.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
     $route->Route(['get'], '/logout', "./php/logout.php");
