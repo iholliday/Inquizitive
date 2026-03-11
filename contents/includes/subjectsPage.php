@@ -31,8 +31,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=equalizer" />
     <script src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <title>Subjects Page</title>
 </head>
 <body>
     <div id="subjects-page" class="container-fluid py-4">

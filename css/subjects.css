@@ -13,7 +13,6 @@
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: var(--);
 
     .flex-col {
         display: flex;
@@ -85,5 +84,9 @@
         .md-flex-grow-0 {
             flex-grow: 0;
         }
+    }
+
+    .table {
+        min-width: 60%;
     }
 }
