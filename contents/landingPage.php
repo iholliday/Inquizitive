@@ -18,7 +18,7 @@
 
 <body id="landing-page" class="body">
     <div id="header">
-        <div id="logo"><div class="l1">i</div><div class="l2">Q</div></div>
+        <div id="logo"><img src="./contents/images/logo.png" alt="Inquizitive"></div>
         <div>
             <button class="sm-hide">Login</button>
             <button class="bold-button">Sign Up</button>
@@ -42,7 +42,7 @@
     <!-- Second row -->
     <section id="second-row" class="flex-row lp-row">
         <div class="lp-row-internal halves-row 100w md-collapse">
-            <div>
+            <div class="image-wrapper">
                 <img class="large-section-img" src="./images/StudentLaptopPhoto.jpg" alt="student using app">
             </div>
             <div class="textbox-lg">
@@ -90,8 +90,8 @@
         <form method="post" action="sendEnquiryEmail.php">
             <label for="email">Have an enquiry?</label>
             <div class="flex-col">
-                <input id="email" type="email" name="emailAddress" placeholder="Your email">
-                <input id="message" type="text" name="message" placeholder="Hi Inquizitive...">
+                <input id="email" class="email" type="email" name="emailAddress" placeholder="Your email">
+                <textarea id="message" class="message" type="textarea" name="message">Hi Inquizitive...</textarea>
                 <i type="submit" value="" class="material-symbols-outlined">send</i>
             </div>
         </form>

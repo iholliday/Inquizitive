@@ -80,13 +80,23 @@ lp stands for landing page
         }
     }
 
-    @media (max-width: 950px) {
+    @media (max-width: 1350px) {
         .md-collapse {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
         }
 
         .md-hide {
             display: none;
+        }
+
+        img {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #second-row .image-wrapper {
+            width: fit-content;
+            margin: auto;
         }
     }
 
@@ -143,7 +153,7 @@ lp stands for landing page
 
     /* IDs */
     #header {
-        width: 100vw;
+        width: 100%;
         min-height: 30px;
         background-color: var(--c-dark-purple);
         background-image: linear-gradient(to right, var(--c-english-violet), var(--c-dark-purple), var(--c-dark-purple));
@@ -176,12 +186,9 @@ lp stands for landing page
         align-content: center;
     }
 
-    #logo .l1 {
-        color: var(--c-yellow)
-    }
-
-    #logo .l2 {
-        color: var(--c-english-violet) 
+    #logo img {
+        height: 40px;
+        width: 40px;
     }
 
     #first-row {
@@ -219,11 +226,11 @@ lp stands for landing page
     }
 
     #guide-row .a:hover {
-        color: var(--c-dark-purple)
+        color: var(--c-dark-purple) !important;
     }
 
     #bottom-row {
-        width: 100vw;
+        width: 100%;
         background-color: var(--c-dark-purple);
         color: var(--c-offwhite);
         min-height: 100px;
@@ -231,31 +238,28 @@ lp stands for landing page
 
     form {
         padding: 15px;
+        color: var(--c-offwhite);
+        width: 520px;
     }
 
-    form label {
-
+    form input, textarea {
+        width: 500px;
+        max-width: 100%;
+        border: none;
+        background-color: var(--c-space-cadet);
+        color: var(--c-offwhite);
     }
 
-    form input {
-        width: 400px;
-    }
+
 
     form i {
         transition: 0.3s;
         color: var(--c-offwhite);
+        margin-left: auto;
+        margin-right: 3px;
     }
 
-    form .email {
-
-    }
-
-    form .message {
-        
-    }
-
-    form i:active {
-        margin-left: 3px;
+    form i:hover {
         transition: 0.3s;
         color: var(--c-yellow);
     }
