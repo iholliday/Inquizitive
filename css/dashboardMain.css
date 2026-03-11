@@ -1029,3 +1029,111 @@ body {
   border: 1px solid #dde3ee;
   color: #3d4b63;
 }
+
+/* --------------------------------------------------- */
+  /* LEADERBOARD PAGE */
+/* --------------------------------------------------- */
+
+#leaderboard thead {
+  background-color: var(--c-english-violet) !important;
+  color: white;
+}
+
+#leaderboard table td {
+  white-space: nowrap;       
+  overflow: hidden;          
+  text-overflow: ellipsis;   
+  max-width: 150px;          
+}
+
+#leaderboard .tm-badge {
+    border-color: var(--c-yellow) !important;
+    color: var(--c-yellow) !important; 
+    background-color: #FFF9D6;
+}
+
+#leaderboard .leaderboard-container {
+  height: 400px !important;
+}
+
+.lb-gold {
+  color: yellow;
+}
+
+#leaderboard .row.mt-4 {
+    margin-top: -22px !important; 
+}
+
+#leaderboard .material-icons{
+  vertical-align: middle;
+}
+
+#leaderboard .trophy-gold{
+  color: #FDC300;
+}
+
+#leaderboard .trophy-silver{
+  color: #C0C0C0;
+}
+
+#leaderboard .trophy-bronze{
+  color: #CD7F32
+}
+
+#leaderboardResults .placeholder-text {
+  margin-top: 4rem; 
+  display: inline-block; 
+}
+
+#leaderboard .top-10{
+  height: 670px;
+}
+
+#leaderboard .top-10 table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;         
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+}
+
+#leaderboard .top-10 table td,
+#leaderboard .top-10 table th {
+    padding: 0.75rem 1.5rem; 
+    text-align: center;
+    
+}
+
+#leaderboard .top-10 .tm-tableWrap {
+    padding: 0 1.5rem; 
+    overflow-x: auto; 
+}
+
+/* Smaller screen adaptations for leaderboards */
+@media (max-width: 768px) {
+  #leaderboard .top-10 .tm-tableWrap {
+      padding: 0 1rem;  
+  }
+  #leaderboard .top-10 table td,
+  #leaderboard .top-10 table th {
+      padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #leaderboard .top-10 .tm-tableWrap {
+      padding: 0 0.5rem; 
+  }
+  #leaderboard .top-10 table td,
+  #leaderboard .top-10 table th {
+      padding: 0.4rem 0.5rem; 
+      font-size: 0.85rem;    
+  }
+    
+  #leaderboard table td {
+  max-width: 90px;
+  }
+}
