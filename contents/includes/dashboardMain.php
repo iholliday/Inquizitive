@@ -61,8 +61,58 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
 						<button class="bottom right">Take Quiz</button>
 					</div>
 				</div>
+                <div class = "view-data-chart" data="<?=htmlspecialchars($item["subjectUUID"]) ?>"></div>
 			</div>
 			<div class="flex-row"></div>
         </div>
     </div>
+
+
+    <div id="statsChart"><div id="myChart"></div></div>
+<script>
+
+google.charts.load('current',{packages:['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart(arr) {
+
+// Set Data
+const data = google.visualization.arrayToDataTable(arr);
+
+// Set Options
+const options = {
+  title: 'Score over Time Across All Subjects',
+  hAxis: {title: 'Date'},
+  vAxis: {title: 'Score'},
+  legend: 'none'
+};
+
+// Draw
+const chart = new google.visualization.LineChart(document.getElementById('myChart'));
+chart.draw(data, options);
+
+}
+
+$(".student-dashboard").ready(function(){
+
+    $.ajax({
+        url: "./dashboardStatistics",
+        type:"GET",
+        success: function(response)
+        {
+            console.log(response)
+            drawChart(response);
+        },
+        error: function(e)
+        {
+
+        }
+    })
+
+})
+
+
+
+
+    </script>
 </body>
