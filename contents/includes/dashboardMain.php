@@ -31,9 +31,6 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
             $row = mysqli_fetch_assoc($result)
         ){array_push($quizData, $row);}
     }
-
-	print_r($quizData);
-
 ?>
 
 <!DOCTYPE html>
@@ -49,26 +46,67 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
 <body>
     <div id="student-dashboard" class="container-fluid py-4">
         <div class="flex-col main-column">
-            <h1>Welcome <!--<?=$dataArray["firstName"] ?>--></h2>
+            <h1>Welcome</h2>
 			<div class="underline"></div>
 			<div class="flex-col">
-				<h3>Tests to complete</h2>
+				<h2>Quizzes to complete</h2>
+				<a href="">View quizzes</a>
 				<div class="flex-row">
-					<div class="card quiz-card">
-						<div><h2><?=$dataArray["subjectTitle"] ?></h2></div>
+					<?php
+					for ($i = 0; $i <= 6 && $i < count($quizData); $i++) {
+					?><div class="card quiz-card">
+						<div><h2><?=htmlspecialchars($quizData[$i]["subjectTitle"]) ?></h2></div>
 						<div class="underline"></div>
-						<div><?=$dataArray["subjectDescription"] ?></div>
+						<div><?=htmlspecialchars($quizData[$i]["quizName"]) ?></div>
 						<button class="bottom right">Take Quiz</button>
 					</div>
+					<?php
+					}
+					?>
 				</div>
-                <div class = "view-data-chart" data="<?=htmlspecialchars($item["subjectUUID"]) ?>"></div>
 			</div>
-			<div class="flex-row"></div>
+
+			<div class="underline"></div>
+
+			<div class="flex-row md-collapse">
+				<div class="card">
+					<h2>Enrolled Subjects</h2>
+					<a href="">View subjects</a>
+					<div>
+						<table class="table table-hover">
+                            <thead>
+                                <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Author</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($subjectData as $item) {
+                                ?><tr>
+                                    <th scope="row"><?=htmlspecialchars($item["subjectTitle"]) ?></th>
+                                    <td><?=htmlspecialchars($item["authorName"]) ?></td>
+                                </tr><?php
+                            }
+                            
+                            ?>
+
+                            </tbody>
+                        </table>
+
+					</div>
+				</div>
+				<div class="card">
+					<h2>Overall Score Over Time</h2>
+					<div class="graph-container">
+                		<div class="view-data-chart" data="<?=htmlspecialchars($item["subjectUUID"]) ?>"></div>
+						<div id="statsChart"><div id="myChart"></div></div>
+					</div>
+				</div>
+			</div>
         </div>
     </div>
-
-
-    <div id="statsChart"><div id="myChart"></div></div>
+    
 <script>
 
 google.charts.load('current',{packages:['corechart']});

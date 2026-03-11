@@ -1097,6 +1097,10 @@ body {
         min-width: 60%;
     }
 
+	.quiz-card-wrapper {
+		display: grid;
+	}
+
 	.quiz-card {
 		height: 200px;
 		width: 200px;
@@ -1116,5 +1120,32 @@ body {
 	.right {
 		margin-left: auto;
 	}
+
+	.graph-container * {
+		max-width: 400px;
+	}
+
+	.flex-grow-1 {
+		flex-grow: 1;
+	} 
+
+	a {
+		color: var(--c-english-violet)
+	}
+
+	a:hover {
+		color: var(--c-yellow)
+	}
+	
+	/* Responsiveness for mobile */
+    @media (max-width: 757px) {
+        .md-collapse {
+            flex-direction: column !important;
+        }
+
+        .md-flex-grow-0 {
+            flex-grow: 0;
+        }
+    }
 }
 
