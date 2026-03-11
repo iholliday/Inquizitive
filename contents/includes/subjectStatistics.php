@@ -7,16 +7,18 @@ $db = new inquizitiveDB();
 $userUUID = $_SESSION['userUUID'];
 $subjectUUID = $_POST['subjectUUID'];
 $result = $db->Query("CALL GetTotalScorePerSubjectByUserUUID(?,?)" , [$userUUID,$subjectUUID]);
-$dataArray = [['Price','Size']];
+$dataArray = [['Date','Price']];
+
 if(mysqli_num_rows($result) > 0 )
 {
-    $arr =
-    array_push($dataArray,[$row['score'],$row['completionDate']]);
+    $arr =[$row['completionDate'],$row['score']];
+    array_push($dataArray,$arr);
+}else
+{
+    $arr =[date("h:i:s"),0];
+    array_push($dataArray,$arr);
 }
   
-echo json_encode([['Price', 'Size'],
-  [50,7],[60,8],[70,8],[80,9],[90,9],
-  [100,9],[110,10],[120,11],
-  [130,14],[140,14],[150,15]]);
+echo json_encode($dataArray);
   ?>
 

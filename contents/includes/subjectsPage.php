@@ -79,7 +79,7 @@
                             <h4>Statistics</h4>
                             <p>Click on the statistics button on a subject to show it's statistics.</p>
                         </div>
-                        <div id="statsChart"><div id="myChart" style="max-width:100%; "></div>
+                        <div id="statsChart"><div id="myChart"></div>
                         </div>
                     </div>
                 </div>
@@ -102,9 +102,9 @@ const data = google.visualization.arrayToDataTable(arr);
 
 // Set Options
 const options = {
-  title: 'House Prices vs. Size',
-  hAxis: {title: 'Square Meters'},
-  vAxis: {title: 'Price in Millions'},
+  title: 'Score over Time',
+  hAxis: {title: 'Date'},
+  vAxis: {title: 'Score'},
   legend: 'none'
 };
 
