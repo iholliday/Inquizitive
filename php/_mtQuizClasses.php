@@ -6,7 +6,7 @@ class question
     private $options;
     private $questionUUID;
     private $answer;
-
+    private $timer;
     public function __construct()
     {
         $this->options = Array();
@@ -26,6 +26,10 @@ class question
     public function updateDescription($description)
     {
         $this->description=$description;
+    }
+    public function updateTimer($timer)
+    {
+        $this->timer=$timer;
     }
         public function updateUUID($UUID)
     {
@@ -67,6 +71,10 @@ class question
     public function getAnswer()
     {
         return $this->answer;        
+    }
+    public function getTimer()
+    {
+        return $this->timer;        
     }
 };
 class quiz
