@@ -13,9 +13,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Mogra&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pacifico&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=send" />
 </head>
 
-<body class="body landing-page">
+<body id="landing-page" class="body">
     <div id="header">
         <div id="logo"><div class="l1">i</div><div class="l2">Q</div></div>
         <div>
@@ -86,11 +87,13 @@
     </section>
     
     <div id="bottom-row">
-        <form action="post" class="flex-row">
+        <form action="post">
             <label for="email">Enter your email:</label>
-            <input type="email" id="email" name="email">
-            <input type="text" name="" id="">
-            <input type="submit" value=""><i>></i></input>
+            <div class="flex-row">
+                <input type="email" id="email" name="email">
+                <input type="text" name="" id="">
+                <i type="submit" value="" class="material-symbols-outlined">send</i>
+            </div>
         </form>
     </div>
 </body>
