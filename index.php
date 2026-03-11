@@ -95,6 +95,8 @@
     $route->Route(['post'], '/reviewQuizAttempt', "./contents/includes/reviewQuiz.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
+    $route->Route(['get'], '/landing-page', "./contents/landingPage.php");
+  
     $route->Route(['get'], '/logout', "./php/logout.php");
 
 
