@@ -1,3 +1,36 @@
+// Password indicator to see if new password meets requirements before subission.
+function setupPasswordIndicator(passwordSelector, indicatorSelector) {
+    const passwordInput = document.querySelector(passwordSelector);
+    const indicator = document.querySelector(indicatorSelector);
+
+    if (!passwordInput || !indicator) return;
+
+    // Checks to see if password meets rules, testing each character and length.
+    passwordInput.addEventListener("input", function () {
+        const val = passwordInput.value;
+
+        const minLength = val.length >= 8;
+        const uppercase = /[A-Z]/.test(val);
+        const lowercase = /[a-z]/.test(val);
+        const number = /[0-9]/.test(val);
+        const special = /[^\w]/.test(val);
+
+        const valid = minLength && uppercase && lowercase && number && special;
+
+        // Empty password shows as grey, illegal red, and legal green.
+        if (val.length === 0) {
+            indicator.style.backgroundColor = "#9c9c9c";
+        } else if (valid) {
+            indicator.style.backgroundColor = "#79df60";
+        } else {
+            indicator.style.backgroundColor = "rgb(247, 85, 85)";
+        }
+    });
+}
+
+// Call function for password indicator.
+setupPasswordIndicator("#password", "#password-indicator");
+
 // Event listener for create account form.
 $('#signup-form').submit(function (e) 
 {

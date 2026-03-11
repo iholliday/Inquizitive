@@ -264,3 +264,11 @@ lp stands for landing page
         color: var(--c-yellow);
     }
 }
+
+.landing-login-btn:hover {
+    color: var(--c-yellow) !important;
+}
+
+.landing-signup-btn{
+    color: var(--c-dark-purple) !important;
+}

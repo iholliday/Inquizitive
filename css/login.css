@@ -1,4 +1,6 @@
-/* ===== General ===== */
+/* --------------------------------------------------- */
+  /* GENERAL */
+/* --------------------------------------------------- */
 .login-page {
     margin: 0;
     padding: 0;
@@ -15,7 +17,9 @@
     justify-content: center;
 }
 
-/* ===== Container ===== */
+/* --------------------------------------------------- */
+  /* CONTAINER */
+/* --------------------------------------------------- */
 .login-container {
     background-color: var(--sidebar-bg);
     width: 800px;
@@ -26,9 +30,12 @@
     display: flex;
     align-items: center;
     padding: 20px;
+    position: relative;
 }
 
-/* ===== Grid ===== */
+/* --------------------------------------------------- */
+  /* GRID */
+/* --------------------------------------------------- */
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -37,7 +44,9 @@
     height: 100%;
 }
 
-/* ===== Items ===== */
+/* --------------------------------------------------- */
+  /* ITEMS */
+/* --------------------------------------------------- */
 .grid-item {
     display: flex;
     justify-content: center;
@@ -70,7 +79,19 @@
     margin-top: -20px;
 }
 
-/* ===== Title ===== */
+.login-site-logo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 70px;
+    height: auto;
+    display: none;
+}
+
+
+/* --------------------------------------------------- */
+  /* TITLE */
+/* --------------------------------------------------- */
 .login-title {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -79,10 +100,16 @@
     color: var(--text);
 }
 
-/* ===== Form ===== */
+/* --------------------------------------------------- */
+  /* FORM */
+/* --------------------------------------------------- */
 #login-form {
     width: 100%;
     max-width: 350px;
+}
+
+.login-page input {
+    font-family: var(--font-primary);
 }
 
 .login-form-control {
@@ -135,7 +162,9 @@
     background-color: var(--c-english-violet);
 }
 
-/* ===== Button ===== */
+/* --------------------------------------------------- */
+  /* BUTTON */
+/* --------------------------------------------------- */
 .btn {
     width: 80px;
     padding: 10px;
@@ -161,7 +190,13 @@
     color: white;
 }
 
-/* ===== Google reCAPTXHA ===== */
+.login-page .btn{
+    font-family: var(--font-primary);
+}
+
+/* --------------------------------------------------- */
+  /* GOOGLE RECAPTCHA */
+/* --------------------------------------------------- */
 .g-recaptcha {
     margin-top: 7%;
     margin-left: 20px;
@@ -169,7 +204,9 @@
     transform-origin: left;
 }
 
-/* ===== Signup ===== */
+/* --------------------------------------------------- */
+  /* SIGNUP */
+/* --------------------------------------------------- */
 .signup .login-title{
     margin-top: -35px;
 }
@@ -199,6 +236,11 @@
     width: 90px;
     margin-top: 15px;
     margin-bottom: -9px;
+    font-family: var(--font-primary);
+}
+
+.signup input {
+    font-family: var(--font-primary);
 }
 
 .signup .signup-divider {
@@ -209,7 +251,96 @@
     margin-left: -40px;
 }
 
-/* ===== Mobile ===== */
+#password-indicator {
+    position: absolute;
+    right: -27px;
+    top: 21px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #9c9c9c;
+}
+
+.signup-password {
+    position: relative; 
+    display: inline-block; 
+    width: 85%;
+}
+
+.signup-password input {
+    padding-right: 30px;
+}
+
+/* --------------------------------------------------- */
+  /* PASSWORD RESET PAGE */
+/* --------------------------------------------------- */
+.password-reset-background {
+    overflow: hidden;
+}
+
+.password-reset .grid-item {
+    max-width: 97%;
+}
+
+.password-reset .name-row input {
+    flex: 1;
+}
+
+.password-reset .login-container {
+    max-width: 362px;
+}
+
+.password-reset .grid-item {
+    max-width: 97%;
+}
+
+.password-reset .grid-container {
+    grid-template-columns: 1fr;
+}
+
+.password-reset .item2 {
+    padding-left: 0;
+}
+
+.password-reset .login-title{
+    margin-top: -35px;
+    margin-bottom: 35px;
+    text-align: center;
+    margin-left: 18px;
+}
+
+.password-reset .btn {
+    width: 90px;
+    margin-top: 15px;
+    margin-bottom: -9px;
+    margin-left: 70px;
+}
+
+.password-reset .login-container {
+    position: relative;
+}
+
+.password-reset .login-site-logo {
+    display: block;
+}
+
+.password-reset .signup-divider {
+    margin-top: 38px;
+    margin-left: 10px;
+}
+
+.password-reset .login-help {
+    margin-left: 105px;
+}
+
+.password-reset .signup-password {
+    width: 91%;
+}
+
+/* --------------------------------------------------- */
+  /* MOBILE */
+/* --------------------------------------------------- */
 @media (max-width: 1000px) {
 
     .login-background {
@@ -230,6 +361,10 @@
 
     .signup .name-row input {
         flex: 1;
+    }
+
+    .login-site-logo {
+        display: block;
     }
 }
 

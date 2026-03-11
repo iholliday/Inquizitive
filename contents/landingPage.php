@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inquizitive - educational quizzes</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/landingPage.css">
     <link rel="stylesheet" href="./css/colours.css">
     <link rel="stylesheet" href="./css/global.css">
@@ -20,8 +22,8 @@
     <div id="header">
         <div id="logo"><img src="./contents/images/logo.png" alt="Inquizitive"></div>
         <div>
-            <button class="sm-hide">Login</button>
-            <button class="bold-button">Sign Up</button>
+            <button class="sm-hide"> <a href="./login" class="landing-login-btn">Login</a></button>
+            <button class="bold-button"> <a href="./signup" class="landing-signup-btn">Create an account</a></button>
         </div>
     </div>
     
@@ -65,7 +67,7 @@
                 <img src="./images/signup.png" alt="sample">
                 <div class="textbox">
                     <h2>1: Create an account</h2>
-                    <p>Click <a class="a" href="">Sign Up</a> in the top right to start!</p>
+                    <p>Click <a class="a" href="./signup">Sign Up</a> in the top right to start!</p>
                 </div>
                 
             </div>

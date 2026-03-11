@@ -182,10 +182,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .name {
     font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .role {
@@ -360,6 +364,14 @@ body {
     }
 }
 
+/* Student Management CSS */
+
+/* Example for multiple dashboards with the same stying
+#lecturerDashboard .sdm-title,
+#lecturerDashboard .tm-title{ <- Test Management
+*/
+
+
 /* =========================================
    Lecturer Management (page-scoped)
    ========================================= */
@@ -462,18 +474,41 @@ body {
 }
 
 #adminDashboard #lmCreateBtn,
-#adminDashboard #smCreateBtn {
+#adminDashboard #smCreateBtn,
+#adminDashboard .styledBtn {
   margin-top:20px;
   background-color: var(--c-english-violet);
   color:white;
 }
 
 #adminDashboard #lmCreateBtn:hover,
-#adminDashboard #smCreateBtn:hover {
+#adminDashboard #smCreateBtn:hover,
+#adminDashboard .styledBtn:hover {
   margin-top:20px;
   background-color: var(--c-space-cadet);
   color:white;
   transition:ease-in-out 0.2s;
+}
+
+#adminDashboard .styledBtn.grey {
+    background-color: #5a6268;
+    color: white;
+    border-color: grey;
+}
+#adminDashboard .styledBtn.grey:hover {
+    background-color: #454c52;
+    border-color: #5a6268;
+}
+
+#adminDashboard .styledBtn.red {
+    background-color: #dc3545; 
+    color: white;
+    border-color: #b02a37; 
+}
+
+#adminDashboard .styledBtn.red:hover {
+    background-color: #b02a37; 
+    border-color: #dc3545; 
 }
 
 #adminDashboard .form-control,
@@ -597,6 +632,25 @@ body {
   width: 100%;
 }
 
+
+#adminDashboard .stat-card{
+  text-align:center;
+  padding:20px;
+  border-radius:10px;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+}
+
+#adminDashboard .stat-number{
+  font-size:26px;
+  font-weight:700;
+}
+
+#adminDashboard.stat-label{
+  font-size:13px;
+  color:#6b7280;
+}
+
 @media (max-width: 576px) {
   #adminDashboard .lm-header,
   #adminDashboard .sm-header {
@@ -625,5 +679,461 @@ body {
   #adminDashboard .sm-controls .form-control,
   #adminDashboard .sm-controls .form-select {
     width: 100%;
+  }
+}
+
+/* Student Management CSS */
+
+/* Example for multiple dashboards with the same stying
+#lecturerDashboard .sdm-title,
+#lecturerDashboard .tm-title{ <- Test Management
+*/
+
+
+#lecturerDashboard {
+  --sdm-surface: #ffffff;
+  --sdm-border: rgba(0, 0, 0, 0.08);
+  --sdm-muted: rgba(0, 0, 0, 0.55);
+  --sdm-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  --sdm-radius: 16px;
+}
+
+#lecturerDashboard .sdm-header,
+#lecturerDashboard .tm-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#lecturerDashboard .sdm-header__right,
+#lecturerDashboard .tm-header__right {
+
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#lecturerDashboard .sdm-title,
+#lecturerDashboard .tm-title{    
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+#lecturerDashboard .sdm-subtitle,
+#lecturerDashboard tm-subtitle {    
+  color: var(--sdm-muted);
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+#lecturerDashboard .sdm-card,
+#lecturerDashboard .tm-card {
+  background: var(--sdm-surface);
+  border: 1px solid var(--sdm-border);
+  border-radius: var(--sdm-radius);
+  box-shadow: var(--sdm-shadow);
+}
+
+#lecturerDashboard .sdm-panel__head,
+#lecturerDashboard .tm-panel__head {
+  padding: 18px 18px 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--lm-border);
+}
+
+#lecturerDashboard .sdm-panel__body,
+#lecturerDashboard .tm-panel__body {
+
+  padding: 18px;
+}
+
+
+#lecturerDashboard #sdmCreateBtn,
+#lecturerDashboard #tmCreateBtn,
+#lecturerDashboard .btn-questions{
+  margin-top:20px;
+  background-color: var(--c-english-violet);
+  color:white;
+}
+
+#lecturerDashboard #sdmCreateBtn:hover,
+#lecturerDashboard #tmCreateBtn:hover,
+#lecturerDashboard .btn-questions:hover{
+  margin-top:20px;
+  background-color: var(--c-space-cadet);
+  color:white;
+  transition:ease-in-out 0.2s;
+}
+
+#lecturerDashboard .form-control,
+#lecturerDashboard .form-select {
+  border-radius: 10px;
+}
+
+#lecturerDashboard .btn {
+  border-radius: 10px;
+}
+
+#lecturerDashboard .sdm-note,
+#lecturerDashboard .tm-note {
+  font-size: 0.9rem;
+  color: var(--lm-muted);
+}
+
+#lecturerDashboard .sdm-badge,
+#lecturerDashboard .tm-badge {
+  background: rgba(13, 110, 253, 0.12);
+  color: rgba(13, 110, 253, 1);
+  border: 1px solid rgba(13, 110, 253, 0.25);
+}
+
+#lecturerDashboard .sdm-badge-success,
+#lecturerDashboard .tm-badge-success {
+  background: rgba(25, 135, 84, 0.12);
+  color: rgba(25, 135, 84, 1);
+  border: 1px solid rgba(25, 135, 84, 0.25);
+}
+
+#lecturerDashboard .lm-badge-danger,
+#lecturerDashboard .sdm-badge-danger,
+#lecturerDashboard .tm-badge-danger {
+  background: rgba(173, 20, 87, 0.10);
+  color: rgba(173, 20, 87, 1);
+  border: 1px solid rgba(173, 20, 87, 0.25);
+}
+
+#lecturerDashboard .lm-person__name,
+#lecturerDashboard .sdm-person__name,
+#lecturerDashboard .tm-subject__name {
+  font-weight: 700;
+  line-height: 1.1;
+  text-decoration: none;
+  color: var(--c-space-cadet);
+  cursor: pointer;
+}
+
+#lecturerDashboard .lm-person__id,
+#lecturerDashboard .sdm-person__id,
+#lecturerDashboard .tm-subject__id {
+  font-size: 0.85rem;
+  color: var(--lm-muted);
+  color: var(--c-english-violet);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#lecturerDashboard .tm-quizLink,
+#lecturerDashboard .sdm-quizLink{
+  text-decoration: none;
+}
+
+#lecturerDashboard .lm-panel__scroll,
+#lecturerDashboard .sdm-panel__scroll,
+#lecturerDashboard .tm-panel__scroll{
+  height: 450px !important;
+  max-height: 450px !important;
+  overflow: auto !important;
+
+  padding: 14px !important;
+}
+
+
+#lecturerDashboard .lm-tableWrap,
+#lecturerDashboard .tm-tableWrap,
+#lecturerDashboard .sdm-tableWrap{
+  border: 1px solid var(--lm-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#lecturerDashboard .table thead th{
+  top: 14px;
+}
+
+#lecturerDashboard .table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.02);
+  color: var(--lm-muted);
+  font-size: 0.86rem;
+  border-bottom: 1px solid var(--lm-border);
+}
+
+#lecturerDashboard .lm-actions,
+#lecturerDashboard .tm-actions,
+#lecturerDashboard .sdm-actions {
+  display: inline-flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+#lecturerDashboard .lm-actions .btn,
+#lecturerDashboard .sdm-actions .btn,
+#lecturerDashboard .tm-actions .btn {
+  padding: 0.28rem 0.6rem;
+}
+
+#lecturerDashboard .sdm-eq > .sdm-eq__col,
+#lecturerDashboard .tm-eq > .tm-eq__col {
+  display: flex;
+  padding-bottom:50px;
+}
+
+#lecturerDashboard .sdm-eq__card,
+#lecturerDashboard .tm-eq__card {
+  width: 100%;
+}
+
+#lecturerDashboard .qm-table-wrap {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+#lecturerDashboard .qm-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#lecturerDashboard .qm-correct {
+  background: rgba(25,135,84,.12) !important; 
+  font-weight: 600;
+}
+#lecturerDashboard .qm-question {
+  min-width: 260px;
+}
+#lecturerDashboard .qm-option {
+  min-width: 180px;
+}
+#lecturerDashboard .qm-actions {
+  min-width: 140px;
+  white-space: nowrap;
+}
+
+#lecturerDashboard #backBtn{
+  margin-bottom:20px;
+}
+
+#lecturerDashboard .tblHeader{
+  width:60px;
+}
+
+
+@media (max-width: 576px) {
+  #lecturerDashboard .sdm-header,
+  #lecturerDashboard .tm-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #lecturerDashboard .sdm-header__right,
+  #lecturerDashboard .tm-header__right {
+    justify-content: flex-start;
+  }
+
+  #lecturerDashboard .sdm-panel__head,
+  #lecturerDashboard .tm-panel__head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  }
+
+/* --------------------------------------------------- */
+  /* QUIZZES PAGE */
+/* --------------------------------------------------- */
+
+#quizzesPage .quizCard{
+  border-radius: 16px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#quizzesPage .quizCard:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.10) !important;
+}
+#quizzesPage .btn-primary{
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 600;
+  background-color:#524A71;
+  border-color:#524A71;
+}
+#quizzesPage .btn-outline-primary{
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 600;
+  color:#524A71;
+  border-color:#524A71;
+}
+#quizzesPage .btn-outline-primary:hover,
+#quizzesPage .btn-outline-primary.active{
+  background-color:#524A71;
+  border-color:#524A71;
+  color:#fff;
+}
+
+#quizzesPage .tab-switcher{
+  background: #f5f5f9;
+  border-radius: 14px;
+  padding: 4px;
+  display: inline-flex;
+  gap: 6px;
+}
+
+#quizzesPage .quiz-panels-wrapper{
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+#quizzesPage .quiz-panel{
+  width: 100%;
+  transition: opacity .28s ease, transform .28s ease;
+}
+
+#quizzesPage .quiz-panel.is-hidden{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateX(30px);
+  pointer-events: none;
+}
+
+#quizzesPage .quiz-panel.is-active{
+  position: relative;
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+#quizzesPage .quiz-panel.to-left{
+  transform: translateX(-30px);
+}
+
+#quizzesPage .section-subtitle{
+  color: #6c757d;
+  margin-bottom: 0;
+}
+
+#quizzesPage .result-pill{
+  font-size: .8rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef1f7;
+  border: 1px solid #dde3ee;
+  color: #3d4b63;
+}
+
+/* --------------------------------------------------- */
+  /* LEADERBOARD PAGE */
+/* --------------------------------------------------- */
+
+#leaderboard thead {
+  background-color: var(--c-english-violet) !important;
+  color: white;
+}
+
+#leaderboard table td {
+  white-space: nowrap;       
+  overflow: hidden;          
+  text-overflow: ellipsis;   
+  max-width: 150px;          
+}
+
+#leaderboard .tm-badge {
+    border-color: var(--c-yellow) !important;
+    color: var(--c-yellow) !important; 
+    background-color: #FFF9D6;
+}
+
+#leaderboard .leaderboard-container {
+  height: 400px !important;
+}
+
+.lb-gold {
+  color: yellow;
+}
+
+#leaderboard .row.mt-4 {
+    margin-top: -22px !important; 
+}
+
+#leaderboard .material-icons{
+  vertical-align: middle;
+}
+
+#leaderboard .trophy-gold{
+  color: #FDC300;
+}
+
+#leaderboard .trophy-silver{
+  color: #C0C0C0;
+}
+
+#leaderboard .trophy-bronze{
+  color: #CD7F32
+}
+
+#leaderboardResults .placeholder-text {
+  margin-top: 4rem; 
+  display: inline-block; 
+}
+
+#leaderboard .top-10{
+  height: 670px;
+}
+
+#leaderboard .top-10 table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;         
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+}
+
+#leaderboard .top-10 table td,
+#leaderboard .top-10 table th {
+    padding: 0.75rem 1.5rem; 
+    text-align: center;
+    
+}
+
+#leaderboard .top-10 .tm-tableWrap {
+    padding: 0 1.5rem; 
+    overflow-x: auto; 
+}
+
+/* Smaller screen adaptations for leaderboards */
+@media (max-width: 768px) {
+  #leaderboard .top-10 .tm-tableWrap {
+      padding: 0 1rem;  
+  }
+  #leaderboard .top-10 table td,
+  #leaderboard .top-10 table th {
+      padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #leaderboard .top-10 .tm-tableWrap {
+      padding: 0 0.5rem; 
+  }
+  #leaderboard .top-10 table td,
+  #leaderboard .top-10 table th {
+      padding: 0.4rem 0.5rem; 
+      font-size: 0.85rem;    
+  }
+    
+  #leaderboard table td {
+  max-width: 90px;
   }
 }

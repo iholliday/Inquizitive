@@ -23,7 +23,7 @@ const profileActions = document.getElementById("profileActions");
         if (activeId) sessionStorage.setItem("currentPage", activeId);
 
         // Allows for back and forward navigation
-        if (pushHistory) {
+        if (pushHistory && url !== "logout") {
           history.pushState({ url, activeId }, "", url);
         }
       },
@@ -40,18 +40,18 @@ const profileActions = document.getElementById("profileActions");
     });
 
 
-    $.ajax({
-      url:"./last-page",
-      type: "POST",
-      data:{lastPage:url},
-      success: function (data) {
-        console.log("Saved into session")
-      },
-      // Error message for if page is not found
-      error: function (xhr, status, error) {
-        console.error("Error loading page:", url, status, error);
-      },
-    });
+    // $.ajax({
+    //   url:"./last-page",
+    //   type: "POST",
+    //   data:{lastPage:url},
+    //   success: function (data) {
+    //     console.log("Saved into session")
+    //   },
+    //   // Error message for if page is not found
+    //   error: function (xhr, status, error) {
+    //     console.error("Error loading page:", url, status, error);
+    //   },
+    // });
   }
 
   // No .link
@@ -62,7 +62,6 @@ const profileActions = document.getElementById("profileActions");
       // console.log removed
     });
   });
-
 
 // ==================== PROFILE MENU ====================
 
@@ -136,4 +135,51 @@ overlay?.addEventListener("click", () => {
 
 $(sidebar).ready(function(){
   
+});
+
+// ==================== LOGOUT (TA) ====================
+$(document).ready(function() {
+  $("#logout").click(function(e)
+  {
+    e.preventDefault();
+
+    // Call logout.php dynamically via AJAX.
+    $.ajax({
+      url: "./logout",
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+        if (data.status === "success") {
+          // Show modal first, then redirect.
+          Swal.fire({
+            title: "Logout Success",
+            text: data.message || "You have logged out successfully.",
+            icon: "success",
+            confirmButtonText: "Done",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          }).then(() => {
+            // Redirect to homepage to reset page state and clear AJAX content.
+            window.location.href = "./";
+          });
+        } else {
+          Swal.fire({
+            title: "Logout Failed",
+            text: "Please try again.",
+            icon: "error",
+            confirmButtonText: "OK"
+          });
+        }
+      },
+      error: function(xhr, status, error) {
+        Swal.fire({
+          title: "AJAX Error",
+          text: "Logout request failed. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK"
+        });
+        console.error("Logout AJAX error:", status, error);
+      }
+    });
+  });
 });
