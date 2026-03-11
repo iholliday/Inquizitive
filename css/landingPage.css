@@ -233,15 +233,25 @@ lp stands for landing page
         padding: 15px;
     }
 
-    form label
+    form label {
+
+    }
 
     form input {
-
+        width: 400px;
     }
 
     form i {
         transition: 0.3s;
         color: var(--c-offwhite);
+    }
+
+    form .email {
+
+    }
+
+    form .message {
+        
     }
 
     form i:active {

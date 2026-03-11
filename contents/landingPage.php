@@ -59,7 +59,7 @@
     </section>
     
     <!-- Third row - how to use Inquizitive -->
-    <section id="guide-row" class="flex-row lp-row 100vw">
+    <section id="guide-row" class="flex-row lp-row 100vw ">
         <div class="lp-row-internal thirds-row md-collapse">
             <div class="flex-col">
                 <img src="./images/sampleimage.png" alt="sample">
@@ -87,11 +87,11 @@
     </section>
     
     <div id="bottom-row">
-        <form action="post">
-            <label for="email">Enter your email:</label>
-            <div class="flex-row">
-                <input type="email" id="email" name="email">
-                <input type="text" name="" id="">
+        <form method="post" action="sendEnquiryEmail.php">
+            <label for="email">Have an enquiry?</label>
+            <div class="flex-col">
+                <input id="email" type="email" name="emailAddress" placeholder="Your email">
+                <input id="message" type="text" name="message" placeholder="Hi Inquizitive...">
                 <i type="submit" value="" class="material-symbols-outlined">send</i>
             </div>
         </form>
