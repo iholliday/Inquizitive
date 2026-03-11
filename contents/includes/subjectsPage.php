@@ -76,7 +76,8 @@
                 <div class="flex-col flex-grow-1">
                     <div class="card height-fit-content">
                         <div>
-                            Statistics
+                            <h4>Statistics</h4>
+                            <p>Click on the statistics button on a subject to show it's statistics.</p>
                         </div>
                         <div id="statsChart"><div id="myChart" style="max-width:100%; "></div>
                         </div>
