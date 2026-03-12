@@ -37,6 +37,7 @@ if (!$stmt)
     exit;
 }
 
+// Password incorrect return error.
 $user = mysqli_fetch_assoc($stmt);
 if (!$user || !password_verify($password, $user['password'])) 
 {

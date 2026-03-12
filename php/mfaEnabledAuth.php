@@ -73,7 +73,7 @@ if (!$mfaPassed) {
     exit;
 }
 
-// MFA passed → set full session
+// MFA passed, set full session details.
 unset($_SESSION['mfaUser']);
 $_SESSION['userUUID'] = $user['userUUID'];
 $_SESSION['firstName'] = $user['firstName'];
