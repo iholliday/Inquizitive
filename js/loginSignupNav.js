@@ -21,7 +21,6 @@ $(document).ready(function()
     // Modal popup asking for email to send passowrd reset token.
     $(document).on("click", "#forgotPassword", function(e) {
         e.preventDefault();
-        console.log("Forgot password clicked!");
 
         Swal.fire({
             title: 'Reset Password',
@@ -54,7 +53,6 @@ $(document).ready(function()
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.log("Raw response:", xhr.responseText);
                         Swal.fire('Error', 'An error occurred while sending the reset link.', 'error');
                     }
                 });

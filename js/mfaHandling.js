@@ -1,7 +1,7 @@
 $(document).ready(function(){
   
     // Generate MFA with an authenticator app.
-    $("#enable-mfa").click(function (event) 
+    $(document).on("click", "#enable-mfa", function()
     {
         // Ask user for their password prior to creating MFA.
         Swal.fire({
@@ -49,7 +49,13 @@ $(document).ready(function(){
                                 data: {code: code},
                                 dataType: "json",
                                 success: function(r){
-                                    Swal.fire(r.message);
+                                    Swal.fire({
+                                        text: r.message, 
+                                        icon: r.status === "success" ? "success" : "error"
+                                    }).then(() => {
+                                        // Reload mfa block in settings to update options.
+                                        $(".mfa-block").load(location.href + " .mfa-block > *");
+                                    });
                                 },
                                 error: function(xhr, status, error) {
                                     console.error("MFA Confirm AJAX Error:", status, error);
@@ -74,13 +80,14 @@ $(document).ready(function(){
     });
 
     // Create backup codes for users who lost MFA access.
-    $("#generate-backup").click(function (event) 
+    $(document).on("click", "#generate-backup", function() 
     {
         event.preventDefault();
 
         // Ask user for their password prior to generating backup code.
         Swal.fire({
-            title: 'Verify Password',
+            title: 'Confirm New Backup Code',
+            html: '<p class="text-muted">Previous codes will no longer work once a new one has been generated.</p>',
             input: 'password',
             inputAttributes: { autocapitalize: 'off', placeholder: 'Please enter your current password' },
             showCancelButton: true,
@@ -134,7 +141,55 @@ $(document).ready(function(){
                     });
                 }
             });
-
         });
     });
+
+    // Remove MFA.
+    $(document).on("click", "#remove-mfa", function() 
+    {
+        // Ask for password confirmation before disabling MFA.
+        Swal.fire({
+            title: 'Confirm MFA Removal',
+            html: '<p class="text-muted">This will remove MFA and all associated backup codes from your account.</p>',
+            input: 'password',
+            inputAttributes: { autocapitalize: 'off', placeholder: 'Please enter your current password' },
+            showCancelButton: true,
+            confirmButtonText: 'Disable MFA',
+            cancelButtonText: 'Cancel',
+            inputValidator: (password) => {
+                if (!password) return 'Please enter your password.';
+            }
+        }).then(function(result) {
+            if (!result.isConfirmed) return;
+
+            const password = result.value.trim();
+
+            // AJAX request to remove MFA.
+            $.ajax({
+                url: "./mfaRemove",
+                type: "POST",
+                data: { password: password },
+                dataType: "json",
+                success: function(res) {
+
+                    if(res.status === "success") {
+                        Swal.fire({
+                            text: res.message,
+                            icon: "success"
+                        }).then(() => {
+                            // Reload MFA section to show "Enable MFA" button.
+                            $(".mfa-block").load(location.href + " .mfa-block > *");
+                        });
+                    } else {
+                        Swal.fire('Error', res.message, 'error');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("MFA Remove AJAX Error:", status, error);
+                    Swal.fire('Error', 'An unexpected error occurred. Please try again.', 'error');
+                }
+            });
+        });
+    });
+
 });

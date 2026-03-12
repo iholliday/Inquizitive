@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- temp -->
+    <!-- Separate CSS files faster loading as signup doesn't require platform-wide styling  -->
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/colours.css" />
     <link rel="stylesheet" href="./css/login.css" />
@@ -55,8 +57,9 @@
                                 <div>
                                     <input type="email" name="txtEmail" class="form-control login-form-control" id="email" placeholder="Email Address" required>
                                 </div>
-                                <div>
+                                <div class="signup-password">
                                     <input type="password" name="txtPass" class="form-control login-form-control" id="password" placeholder="Password" required>
+                                    <span id="password-indicator" ></span>
                                 </div>
                                 <div>
                                     <input type="password" name="txtPassConfirm" class="form-control login-form-control" id="passwordConfirm" placeholder="Confirm Password" required>

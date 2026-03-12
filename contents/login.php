@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- temp -->
+    <!-- Separate CSS files faster loading as login doesn't require platform-wide styling  -->
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/colours.css" />
     <link rel="stylesheet" href="./css/login.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Login | Inquizitive</title>
 
     <!-- Required scripts -->

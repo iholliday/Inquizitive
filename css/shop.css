@@ -131,7 +131,9 @@
 #shop-page .shop-items-grid
 {
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(16px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(auto-fit, minmax(16px, 1fr));
+
     gap:5px;
     padding:5px;
 }
@@ -187,4 +189,21 @@
 #shop-page .shop-legendary .shop-items-header-divider
 {
     background-color:var(--c-yellow);
+}
+
+@media screen and (max-width: 740px) 
+{
+    #shop-page .shop-items-grid
+    {
+        grid-template-columns: 1fr 1fr 1fr !important;
+
+    }
+}
+@media screen and (max-width: 360px) 
+{
+    #shop-page .shop-items-grid
+    {
+        grid-template-columns: 1fr 1fr !important;
+
+    }
 }

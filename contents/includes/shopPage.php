@@ -81,7 +81,6 @@ if ($result = $db->Query("CALL GetInquizitiveCurrencyByUserUUID(?);", [$userUUID
             <div id="shop-page-nav-wrapper">
                 <div class="links">
                     <div id="shop-page-nav-shop" class="active">Shop</div>
-                    <div id="shop-page-nav-gacha">Gacha</div>
                     <div id="shop-page-nav-inventory">Inventory</div>
                 </div>
                 <div id="shop-page-nav-currency-wrapper">

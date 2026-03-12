@@ -12,13 +12,25 @@
     // Setting site to UK timezone.
     date_default_timezone_set('Europe/London');
 
+    // Start session if not started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
     // Default route.
-    $route->Route(['get'], '/', "./contents/landingPage.php"); 
+    if (!empty($_SESSION['userUUID'])) {
+        $route->Route(['get'], '/', "./contents/dashboardNavigation.php"); 
+
+    }
+    else { 
+        $route->Route(['get'], '/', "./contents/landingPage.php");
+    }
 
     // Allow serving static CSS and JS directories directly.
     $route->AddDir('/css', "./css/");
     $route->AddDir('/js', "./js/");
     $route->AddDir('/img', "./contents/images/");
+    $route->AddDir('/pfp', "./images/profilepictures/");
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
@@ -35,6 +47,7 @@
     $route->Route(['post'], '/updatePassword', "./php/updatePassword.php");
     $route->Route(['get'], '/login', "./contents/login.php"); 
     $route->Route(['post'], '/create-test', "./php/addQuiz.php");
+    $route->Route(['post'], '/mfaRemove', "./php/mfaRemove.php");
 
     $route->Route(['post'], '/add-student', "./php/addStudent.php");
     $route->Route(['post'], '/set-quiz-disabled', "./php/setQuizDisabled.php");
@@ -79,11 +92,13 @@
     $route->Route(['post'], '/editLecturer', "./php/editLecturer.php");
     $route->Route(['post'], '/edit-lecturer', "./contents/includes/editLecturer.php");
     $route->Route(['post'], '/getLeaderboard', "./php/getLeaderboard.php");
+    $route->Route(['post'], '/updateAvatar', "./php/updateAvatar.php");
+    $route->Route(['post'], '/reviewQuizAttempt', "./contents/includes/reviewQuiz.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
+    $route->Route(['get'], '/landing-page', "./contents/landingPage.php");
+  
     $route->Route(['get'], '/logout', "./php/logout.php");
-    $route->Route(['get'], '/temp', "./contents/tempMFA.php");
-
     $route->Route(['get'], '/dashboardStatistics', "./contents/includes/dashboardStatistics.php");
     $route->Route(['post'], '/subjectStatistics', "./contents/includes/subjectStatistics.php");
     $route->Route(['post'], '/quiz-result', "./contents/includes/quizResult.php");
