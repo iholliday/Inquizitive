@@ -19,6 +19,7 @@
     $route->AddDir('/css', "./css/");
     $route->AddDir('/js', "./js/");
     $route->AddDir('/img', "./contents/images/");
+    $route->AddDir('/pfp', "./images/profilepictures/");
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
