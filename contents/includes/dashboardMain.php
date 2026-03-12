@@ -52,7 +52,7 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
             <!-- First row - quiz cards -->
 			<div class="flex-col">
 				<h2>Quizzes to complete</h2>
-				<a href="">View quizzes</a>
+				<a href="./quizzes">View quizzes</a>
 				<div class="flex-row">
 					<?php
                     // Output quiz cards along top row
@@ -61,7 +61,7 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
 						<div><h2><?=htmlspecialchars($quizData[$i]["subjectTitle"]) ?></h2></div>
 						<div class="underline"></div>
 						<div><?=htmlspecialchars($quizData[$i]["quizName"]) ?></div>
-						<a href="quizzesPage.php" class="bottom right"><button>Take Quiz</button></a>
+						<a href="./quizzes" class="bottom right"><button>Take Quiz</button></a>
 					</div>
 					<?php
 					}
@@ -75,7 +75,7 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
 			<div class="flex-row md-collapse">
 				<div class="card">
 					<h2>Enrolled Subjects</h2>
-					<a href="">View subjects</a>
+					<a href="./subjects">View subjects</a>
 					<div>
 						<table class="table table-hover">
                             <thead>
