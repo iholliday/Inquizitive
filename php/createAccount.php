@@ -100,17 +100,33 @@
         // Create DB instance.
         $db = new inquizitiveDB();
 
-        // Query prepares internally, binds the parameters, and executes them. 
-        $stmt = $db->Query(
-            "CALL CreateAccount(?, ?, ?, ?, ?, ?)",
-            [$email, $firstName, $lastName, $passwordHash, $accessLevel, $isDisabled]
-        );
-
+        // Checks if user's email is already existing using preexisting database routine.
+        $stmt = $db->Query("CALL GetUserByEmail(?)", [$email]);
+        $user = $stmt->fetch_assoc(); 
+        
         // Ensure query succeeded before using the result resource.
-        if ($stmt === false) {
+        if ($stmt === false) 
+        {
             error_log("Prepare failed: " . mysqli_error($db->connect));
         }
+
+        // If email is already in use.
+        if ($user)
+        {
+                $_SESSION['signupSpamChecker']++;
+                echo json_encode(['status' => 'error', 'message' => 'Email already in use.']);
+                exit;
+        }
+
+        // Query prepares internally, binds the parameters, and executes them. 
+        $stmt = $db->Query("CALL CreateAccount(?, ?, ?, ?, ?, ?)", [$email, $firstName, $lastName, $passwordHash, $accessLevel, $isDisabled]);
         
+        // Ensure query succeeded before using the result resource.
+        if ($stmt === false) 
+        {
+            error_log("Prepare failed: " . mysqli_error($db->connect));
+        }
+
         // Send signup email, disabled for localhost development.
         if (!isLocalHost()) 
         {
