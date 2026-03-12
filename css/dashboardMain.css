@@ -1030,6 +1030,150 @@ body {
   color: #3d4b63;
 }
 
+#student-dashboard {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+	
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .flex-col {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .main-column {
+        height: 100%;
+        position: relative;
+    }
+
+    .card {
+        display: flex;
+        margin-right: 10px;
+        background-color: white;
+        border-radius: var(--radius);     
+        margin: 10px;  
+        padding: 20px;     
+        box-shadow: 0px 8px 25px rgb(218, 215, 215);   
+        border: none;                                       
+    }
+
+    .flex-grow-2 {
+        flex-grow: 2;
+    }
+
+    .flex-grow-1 {
+        flex-grow: 2;
+    }
+
+    .height-100 {
+        height: 100%;
+    }
+
+    .height-fit-content {
+        height: fit-content;
+    }
+
+    button {
+        border-radius: 10px;
+        padding: auto;
+        height: 35px;
+        border: none;
+        box-shadow: 0px 0px 2px 1px var(--c-english-violet);
+		background-color: var(--c-yellow);
+		color: var(--c-dark-purple);
+		transition: 0.2s;
+    }
+
+    button:hover {
+        transition: 0.2s;
+        box-shadow: 0px 0px 2px 2px var(--c-space-cadet);
+		background-color: var(--c-space-cadet);
+		color: var(--c-offwhite)
+    }
+
+    button i {
+        vertical-align: middle;
+    }
+
+
+    /* Responsiveness for mobile */
+    @media (max-width: 757px) {
+        .md-collapse {
+            flex-direction: column !important;
+        }
+
+        .md-flex-grow-0 {
+            flex-grow: 0;
+        }
+    }
+
+    .table {
+        min-width: 60%;
+    }
+
+	.quiz-card-wrapper {
+		display: grid;
+	}
+
+	.quiz-card {
+		height: 200px;
+		width: 200px;
+		padding: 10px;
+	}
+
+	.underline {
+		background-color: var(--c-english-violet);
+		height: 2px;
+		width: 100%;
+	}
+
+	.bottom {
+		margin-top: auto;
+	}
+
+	.right {
+		margin-left: auto;
+	}
+
+	.graph-container * {
+		max-width: 400px;
+	}
+
+	.flex-grow-1 {
+		flex-grow: 1;
+	} 
+
+	a {
+		color: var(--c-english-violet)
+	}
+
+	a:hover {
+		color: var(--c-yellow)
+	}
+	
+	/* Responsiveness for mobile */
+    @media (max-width: 757px) {
+        .md-collapse {
+            flex-direction: column !important;
+        }
+
+        .md-flex-grow-0 {
+            flex-grow: 0;
+        }
+    }
+}
+
 /* --------------------------------------------------- */
   /* LEADERBOARD PAGE */
 /* --------------------------------------------------- */

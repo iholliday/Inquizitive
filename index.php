@@ -99,8 +99,8 @@
     $route->Route(['get'], '/landing-page', "./contents/landingPage.php");
   
     $route->Route(['get'], '/logout', "./php/logout.php");
-
-
+    $route->Route(['get'], '/dashboardStatistics', "./contents/includes/dashboardStatistics.php");
+    $route->Route(['post'], '/subjectStatistics', "./contents/includes/subjectStatistics.php");
     $route->Route(['post'], '/quiz-result', "./contents/includes/quizResult.php");
 
 
