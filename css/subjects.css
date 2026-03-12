@@ -32,7 +32,7 @@
     .card {
         display: flex;
         margin-right: 10px;
-        background-color: rgb(243, 243, 243);
+        background-color: white;
         border-radius: var(--radius);     
         margin: 10px;  
         padding: 20px;     
@@ -67,7 +67,7 @@
 
     button:hover {
         transition: 0.2s;
-        box-shadow: 0px 0px 2px 2px var(--c-space-cadet);
+        box-shadow: 0px 0px 2px 1px var(--c-space-cadet);
     }
 
     button i {

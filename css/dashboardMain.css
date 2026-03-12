@@ -1035,7 +1035,7 @@ body {
     .card {
         display: flex;
         margin-right: 10px;
-        background-color: rgb(243, 243, 243);
+        background-color: white;
         border-radius: var(--radius);     
         margin: 10px;  
         padding: 20px;     

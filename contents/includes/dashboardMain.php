@@ -10,12 +10,13 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
   exit;
 }
 
+    // Session data
     $userID = $_SESSION["userUUID"];
     $db = New inquizitiveDB();
 	// Get subject data
     $result = $db->Query("CALL GetUserSubjectsByUUID(?)", [$userID]);
     $subjectData = [];
-
+    // Protection against empty set
     if (mysqli_num_rows($result) > 0) {
         while (
             $row = mysqli_fetch_assoc($result)
@@ -25,7 +26,7 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
 	// Get quiz data
 	$result = $db->Query("CALL GetQuizzesByUserUUID(?)", [$userID]);
     $quizData = [];
-	
+    // Protection against empty set
     if (mysqli_num_rows($result) > 0) {
         while (
             $row = mysqli_fetch_assoc($result)
@@ -48,17 +49,19 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
         <div class="flex-col main-column">
             <h1>Welcome</h2>
 			<div class="underline"></div>
+            <!-- First row - quiz cards -->
 			<div class="flex-col">
 				<h2>Quizzes to complete</h2>
 				<a href="">View quizzes</a>
 				<div class="flex-row">
 					<?php
+                    // Output quiz cards along top row
 					for ($i = 0; $i <= 6 && $i < count($quizData); $i++) {
 					?><div class="card quiz-card">
 						<div><h2><?=htmlspecialchars($quizData[$i]["subjectTitle"]) ?></h2></div>
 						<div class="underline"></div>
 						<div><?=htmlspecialchars($quizData[$i]["quizName"]) ?></div>
-						<button class="bottom right">Take Quiz</button>
+						<a href="quizzesPage.php" class="bottom right"><button>Take Quiz</button></a>
 					</div>
 					<?php
 					}
@@ -68,6 +71,7 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
 
 			<div class="underline"></div>
 
+            <!-- Second row - subjects and statistics -->
 			<div class="flex-row md-collapse">
 				<div class="card">
 					<h2>Enrolled Subjects</h2>
@@ -82,15 +86,14 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
                             </thead>
                             <tbody>
                             <?php
+                            // Output subject table
                             foreach ($subjectData as $item) {
                                 ?><tr>
                                     <th scope="row"><?=htmlspecialchars($item["subjectTitle"]) ?></th>
                                     <td><?=htmlspecialchars($item["authorName"]) ?></td>
                                 </tr><?php
                             }
-                            
                             ?>
-
                             </tbody>
                         </table>
 
@@ -109,6 +112,7 @@ if (!$isAjax && !$isEmbeddedInDashboard) {
     
 <script>
 
+// Initialise google charts
 google.charts.load('current',{packages:['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
@@ -152,5 +156,5 @@ $(".student-dashboard").ready(function(){
 
 
 
-    </script>
+</script>
 </body>
