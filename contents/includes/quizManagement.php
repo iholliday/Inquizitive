@@ -102,7 +102,7 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
                 <th class="qm-option">B</th>
                 <th class="qm-option">C</th>
                 <th class="qm-option">D</th>
-                <th class="tblHeader;">Timer Duration</th>
+                <th class="tblHeader;">Timer Duration (s)</th>
                 <th class="qm-actions text-end">Actions</th>
               </tr>
             </thead>
@@ -270,7 +270,7 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
     if (!p.questionText) return "Question text is required.";
     if (!p.answerA || !p.answerB || !p.answerC || !p.answerD) return "All four answers (A–D) are required.";
     if (!p.correctAnswer) return "Pick which option (A–D) is correct.";
-    if (!p.difficultyPoints || Number(p.difficultyPoints) < 1) return "Points must be 1 or higher.";
+    if (!p.difficultyPoints || Number(p.difficultyPoints) < 0) return "Timer must be 0 or higher.";
     const answers = [p.answerA, p.answerB, p.answerC, p.answerD].map(x => x.trim());
     if (!answers.includes(p.correctAnswer.trim())) return "Correct answer must match one of the options exactly.";
     return null;

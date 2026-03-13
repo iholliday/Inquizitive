@@ -1,0 +1,246 @@
+[33m1aa4b67[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mpre-staging-test[m[33m, [m[1;31morigin/pre-staging-test[m[33m)[m Saving file (Error)
+[33m3181e05[m Added session role checks to admin and lecturer pages.
+[33m3418ff7[m Updated comments
+[33mccbf94f[m Merge pull request #63 from iholliday/IHMT-StudentDashboard
+[33m7cb4371[m Merge branch 'pre-staging-test' into IHMT-StudentDashboard
+[33m1a28f8d[m Links working (quizzes and subjects), as well as quiz buttons (goes to quiz page)
+[33m36a0ae9[m Response to review: Card background colour now matches rest of site, comments added, links to follow. Also fixed button shadow animation.
+[33m15a7a9a[m Nested repo fix
+[33m9c3bc6b[m Removed console log
+[33mc9b4095[m Register Email Already In Use
+[33m974e929[m Merge pull request #64 from iholliday/IH-ProfilePictures
+[33mf232b8c[m[33m ([m[1;31morigin/IH-ProfilePictures[m[33m, [m[1;32mIH-ProfilePictures[m[33m)[m Added Profile Pictures to database
+[33mf950f48[m Removed console logs.
+[33m0875704[m Removed console logs
+[33m7a169b2[m Moved Mihael's profile pictures to the folder with mine in
+[33md46db9e[m Landing Email Form Backend
+[33maec1411[m Dashboard completed. Quizzes to complete are on top row in separate cards, enrolled subjects bottom left with just title and author, graph of score over time bottom right. Could use some small changes but overall good.
+[33m1a2f3a0[m Landing Page - Final
+[33m43f056e[m[33m ([m[1;31morigin/IH-LandingPage[m[33m, [m[1;32mIH-LandingPage[m[33m)[m Merge branch 'pre-staging-test' into IH-LandingPage
+[33mc73ecad[m Screenshots added and page complete
+[33ma29d70a[m Responsiveness integrated to landing page and styling complete: bugs fixed with image positioning on smaller screens, divs don't hang off right side of screen, real logo added, form has styling, only screenshots needed
+[33mc75410c[m[33m ([m[1;31morigin/staging[m[33m, [m[1;32mstaging[m[33m)[m Merge pull request #61 from iholliday/MT-Final-changes
+[33mc265eec[m Added dashboard statistics for the total score the user gets across all subject per date
+[33mee13664[m Started adding email functionality and styling tweaks on landing page
+[33mda8c2df[m[33m ([m[1;31morigin/MT-Final-changes[m[33m)[m Timer changes, quiz results fixing bugs, ability to review old quizzes, fixing multiple ajax requests binding on document to only binding once
+[33mc9ce461[m Styling email form progress
+[33mfa54f4e[m Default dashboard include, timer label, login UX
+[33m0359b58[m Merge branch 'IHMT-StudentDashboard' of https://github.com/iholliday/Inquizitive into IHMT-StudentDashboard
+[33mdff908d[m Quiz card made for top row (quizzes to complete), bringing in data, has bugs
+[33mcd96e5e[m MFA Fully integrated, Login & signup pages modified, Favicon.
+[33m0aecc1c[m[33m ([m[1;31morigin/TA-LoginPage[m[33m, [m[1;32mTA-LoginPage[m[33m)[m Merge branch 'staging' into TA-LoginPage
+[33m920adb6[m Leaderboard Page Styling
+[33m91b3424[m Statistics functionality for the subjects page
+[33m01c71ca[m Merge branch 'IHMT-StudentDashboard' of https://github.com/iholliday/Inquizitive into IHMT-StudentDashboard
+[33mf1824de[m Added mobile responsiveness - row collapses on smaller screens
+[33mff6c3f8[m Data retrieval
+[33mf6aaa22[m Merge branch 'IHMT-StudentDashboard' of https://github.com/iholliday/Inquizitive into IHMT-StudentDashboard
+[33mabaf650[m Inventory now allows users to change their profile picture
+[33m970325b[m Forgot password now has serverside match checks.
+[33m5b20069[m Forgot password indicator
+[33mfa63ff6[m Added comment splitting MFA in settings page.
+[33m69bcf5c[m Added password indicator to signup, reCAPTCHA cooldown, and login image
+[33m326c1a4[m Statistics card updated
+[33mbbb6fad[m Push because bug wasn't showing
+[33m62b02fb[m Merge branch 'IHMT-StudentDashboard' of https://github.com/iholliday/Inquizitive into IHMT-StudentDashboard
+[33me257343[m Updated styles - headings bolder, better spacing
+[33m3038404[m Added MFA to settings, favicon, some small bug fixes.
+[33m5b2660a[m quick update
+[33mae98ad4[m Statistics for subjects page
+[33m55be935[m Merge branch 'IHMT-StudentDashboard' of https://github.com/iholliday/Inquizitive into IHMT-StudentDashboard
+[33m23a93f5[m Testing working at the same time
+[33m7b0e5cc[m Test commit
+[33mf08f89b[m Button added
+[33mbfc8e54[m Page structure for subjects page
+[33m6f6eb66[m Added 8 profile pictures
+[33mfc9a1cf[m Student photo added
+[33m9849070[m[33m ([m[1;31morigin/TA-Leaderboard[m[33m)[m Updated Titles
+[33m6d44901[m Fixed Styling bugs.
+[33mbf86b8a[m Styled Table
+[33m17aff29[m Fix require_once path in removeStudentSubjects.php
+[33m006c165[m Fixed bugs that appeared out of nowhere after merges
+[33mfb4411e[m Merging Staging -> TA-LoginPage to continue development.
+[33mf6a9cd0[m Merging staging -> TA-Leaderboard to continue development.
+[33mbba96c7[m Initial leaderboard functionality (MT & TA)
+[33m8ba4b0e[m Integrated MFA + Backup code generation, enabled reCAPTCHA, added password attempts, fixed issue with Query function & more.
+[33mc3dcce4[m Merge pull request #55 from iholliday/AHEB-TestSelection
+[33mfd5652c[m Quiz screenshot changed
+[33m9984a97[m[33m ([m[1;31morigin/AHEB-TestSelection[m[33m, [m[1;32mAHEB-TestSelection[m[33m)[m (EB) Enable POST route and improve back-button AJAX
+[33mc1ed430[m Merge branch 'staging' into TA-LoginPage
+[33m76d929e[m (MT) Display user avatar with initials fallback
+[33m0248c77[m Added images, routing, and landing-page style to body
+[33mc133612[m Student management: edit modal & subject APIs
+[33m83f2336[m Paired Programming: MT & TA: Leaderboards page initial.
+[33mcd5851a[m Refactor quizzes page: tabs, DB, and AJAX
+[33m6be4567[m Improve quiz delete flow and validation
+[33m058c96b[m Improve deleteQuiz error handling & cleanup
+[33mc5d6082[m Merge pull request #53 from iholliday/EB-LecturerDashboard
+[33m664c80b[m Merging staging -> TA-Leaderboard to continue development.
+[33m9132da2[m Merge branch 'TA-Leaderboard' into staging
+[33mbb9b57b[m Add quiz deletion endpoint and UI
+[33md078a11[m Temp preparation for merge from staging.
+[33mb0fad4e[m Mihael changes after tech demo
+[33m116526d[m[33m ([m[1;31morigin/MT-Changes-After-Tech-Demo[m[33m, [m[1;32mMT-Changes-After-Tech-Demo[m[33m)[m Merge branch 'staging' into MT-Changes-After-Tech-Demo
+[33m1b7a598[m Merge branch 'EB-LecturerDashboard' of https://github.com/iholliday/Inquizitive into EB-LecturerDashboard
+[33m8764af0[m Add delete UI and user delete handler
+[33m6dabf2e[m Merge branch 'staging' into TA-LoginPage
+[33mc10c0c7[m Integrated landing page.
+[33mcd96c16[m Prevent direct include access & rename nav item
+[33m3621915[m Merge branch 'staging' of https://github.com/iholliday/Inquizitive into staging
+[33ma496563[m Merge pull request #46 from iholliday/EB-LecturerDashboard
+[33m6ef98b8[m Merge branch 'staging' into EB-LecturerDashboard
+[33mf369dbb[m Merge branch 'staging' of https://github.com/iholliday/Inquizitive into staging
+[33mb4418af[m Merge pull request #51 from iholliday/AH-AdminDashboard
+[33mdb0d606[m[33m ([m[1;31morigin/AH-AdminDashboard[m[33m, [m[1;32mAH-AdminDashboard[m[33m)[m Merge branch 'staging' into AH-AdminDashboard
+[33mafea6b5[m Merge pull request #49 from iholliday/AH-ProfileSettings
+[33mb423718[m[33m ([m[1;31morigin/AH-ProfileSettings[m[33m)[m Merge branch 'staging' into AH-ProfileSettings
+[33m76760d3[m Temp leaderboard page.
+[33me54c594[m Initial Leaderboard setup
+[33m397341e[m Enabling MFA & creating backup now require password.
+[33m7cd26f4[m Fixed invalid password reset link.
+[33m544d025[m Updated password reset navigation
+[33m79862a3[m Password Reset + Database Class Patch
+[33m5a709c1[m Support embedding subject management in dashboard
+[33mef73138[m Support dashboard embedding & pageSession fixes
+[33mf868731[m Add AJAX user update endpoint and UI
+[33mb3269ed[m (Unfinished) Password reset
+[33m3c13079[m Logout modal.
+[33m4e49ca7[m (Paired: TA, MT) Failed login attempt session checks
+[33m2b44434[m MFA Backup code Integration
+[33m2824845[m MFA QR Code
+[33mda98c1c[m Initial MFA Implementation
+[33m7f913b6[m Refactor quizzes page layout and AJAX guard
+[33m1a77520[m Add quiz edit UI and backend endpoint
+[33m1523c4a[m Add quiz enable/disable feature
+[33m9b19b73[m Add user disable/enable UI and relax endpoint check
+[33mc63a2a9[m Add student endpoint and native JS submit handler
+[33mdd5f4e9[m Add settings UI, subject nav & user creation date
+[33m67cc3ee[m Implement student management UI and styles
+[33m1affc19[m Render quizzes table and add AJAX handlers
+[33m3c03a0e[m Enabled reCAPTCHA v2
+[33m50637a2[m Merging staging into TA-LoginPage
+[33m5f3f5c4[m Add backBtn AJAX handler to quiz/test pages
+[33m77642bc[m Update lecturer dashboard link styles
+[33md5bd23a[m Add quiz creation endpoint and AJAX form
+[33m22bbc77[m Load subjects and replace subject input with select
+[33m6ce7a74[m (PP, AH/EB) Add question CRUD endpoints and management UI
+[33m7c76044[m Merge branch 'staging' into EB-LecturerDashboard
+[33mda1850e[m Merge branch 'EB-LecturerDashboard' of https://github.com/iholliday/Inquizitive into EB-LecturerDashboard
+[33m98ee4f7[m Styling upgrades for the editing lecturers and subject
+[33m7cba8e0[m Removed lecturer ability to be edited to an admin
+[33m431c12f[m Fully functional Lecturer account editing featuring hydration and smooth UX
+[33mdadeb86[m Complete functionality and styling added for editing subject management subjects
+[33md3ce7a8[m Updated and fixes new accounts not getting their calculated quiz points
+[33m1cb3351[m Added 13 profile pictures
+[33m643bb15[m Update account creation and fix CSS braces
+[33mbc195ba[m[33m ([m[1;31morigin/IH-StudentDashboard[m[33m)[m Merge pull request #44 from iholliday/MT-Shop-And-Inventory
+[33m2ea00c5[m Merge pull request #45 from iholliday/MT-Results-Page
+[33m244a7d1[m[33m ([m[1;31morigin/MT-Shop-And-Inventory[m[33m)[m Merge branch 'staging' into MT-Shop-And-Inventory
+[33mf4523d3[m Resolve CSS merge conflicts and cleanups
+[33md0c1d84[m[33m ([m[1;31morigin/MT-Results-Page[m[33m, [m[1;32mMT-Results-Page[m[33m)[m Styling
+[33mcd0e8e0[m User can now get IQ Points based on their score
+[33m9babbe1[m Merge branch 'staging' of https://github.com/iholliday/Inquizitive into staging
+[33m7841c22[m Cleanup for first build (APPROVED).
+[33ma98e177[m Merge pull request #41 from iholliday/EB-LecturerDashboard
+[33m01da5f9[m Merge branch 'staging' into EB-LecturerDashboard
+[33m8cda692[m Merge pull request #36 from iholliday/IH-LandingPage
+[33m80ebdec[m (MOB EB, AH, MT) Add quiz classes and fix quiz POST key
+[33m04cd2e9[m Update quizManagement.php
+[33m7c9a6f5[m (MOB EB, AH, MT)Echo quiz POST, use #content, disable last-page
+[33mde55875[m Merge pull request #43 from iholliday/TA-LoginPage
+[33m7517759[m Add quiz editor route and AJAX integration
+[33md5e05f3[m Added last login
+[33mb9edb90[m Add quiz management UI and fetch quizzes
+[33m4f269cd[m Add Test Management view and CSS updates
+[33mdfae582[m Results page server sided logic added, testing page redirecting to results page at the end, testing page accurately creates a quiz instance
+[33mf645953[m sendSignupEmail now called sendEmail
+[33m5da1b6e[m Updated email script.
+[33m91b83b5[m Merge pull request #37 from iholliday/MT-Testing-Page
+[33m2decaa5[m[33m ([m[1;31morigin/MT-Testing-Page[m[33m, [m[1;32mMT-Testing-Page[m[33m)[m Merge branch 'staging' into MT-Testing-Page
+[33m4247e4e[m Merge branch 'staging' into IH-LandingPage
+[33mc811980[m Completed shop and inventory functionality, items get added and validated, currency gets properly deducted, items get placed in inventory, added more purchasable items for different tiers
+[33ma0780b0[m Merge pull request #30 from iholliday/AH-AdminDashboard
+[33m6beaff2[m Merge branch 'staging' into AH-AdminDashboard
+[33m4740b31[m Merge pull request #38 from iholliday/AH-DashboardLayout
+[33m76320fe[m Removed unneeded error log
+[33mfded78b[m Removed unneeded script.
+[33m9b181ee[m Fixed Logout & Role Display
+[33m764a96e[m Removed default HTML validation.
+[33mb376799[m New Account Password Rules
+[33mdf56de8[m Confirmation Emails on New Student Accounts
+[33m5b129ba[m Merge pull request #42 from iholliday/staging
+[33m8228e66[m Initial Setup of Student Signup Page (From TA-LoginPage)
+[33mea28d3f[m Merge branch 'staging' into TA-LoginPage
+[33m13fe002[m Removing Temp Files
+[33m9880be1[m Visual updates, database procedures created, storing and handling shop item logic expanded, navigation added, custom styling added, ajax hydration added, inventory adding in the early stages
+[33mcc5368b[m Database changes, database procedures created, classes and data types created, shop item retrieval and sorting functionality created
+[33me347c1a[m Features update, code clean up, functionality added, styling and code formatting changed
+[33m76c518d[m Style Create Student button in lecturer dashboard
+[33md922826[m Add Student Management UI and styles; update router
+[33m717a52d[m Fixed bug with AJAX not loading dashboard.
+[33m7ab6d05[m Fixed loadPage vulnerability & updated CSS
+[33m6435cb4[m jRoute session checks
+[33m81088ce[m[33m ([m[1;31morigin/AH-DashboardLayout[m[33m, [m[1;32mAH-DashboardLayout[m[33m)[m Add access checks to dashboard and update route
+[33med2ebbf[m Style admin create buttons
+[33m992b637[m fix
+[33m3708f04[m Updates and quality of life
+[33mcf418b2[m Testing Page
+[33m775c000[m Remade signup form with initial styling.
+[33mef11f06[m Cloning the lecturer management page for subject management
+[33m78a1361[m Add Subject Management interface (Same as Lecturer Management)
+[33m74aeee7[m Add Subject Management page and route
+[33mb41774f[m Improved landing page images and styles
+[33m89c1a0e[m Updated login success message.
+[33m70202d2[m Added account disabled checks & updated error messaged on login.
+[33m294c0d9[m Adding comments to the disabling account scripts
+[33m2acbf10[m Add lecturer disable/enable UI and endpoint
+[33me00ea7d[m Add delete-user route, handler and UI
+[33mfa0cc7e[m Fixed positioning problems
+[33m32f0216[m Added temporary link to login page.
+[33md10ef7b[m Added Student Account Creation
+[33mfeaa655[m Styles tweaked, writing added, placeholder email form
+[33m76fb010[m Capitalised sign-in text, updated title spacing.
+[33ma70fb3a[m Merge pull request #27 from iholliday/TA-LoginPage
+[33m801b9c8[m Improved styling
+[33mab2b959[m Updated login page based on feedback
+[33mc50439a[m Register /add-lecturer route and update AJAX
+[33m7a31ed8[m Use centralized access block in lecturer admin
+[33m31d78be[m Use prepared stmt for lecturers; update CSS layout
+[33m63d0297[m Use mb_strtoupper for initials to make proficon work
+[33ma0933f9[m Use remote SVG for lecturer avatar
+[33m379521b[m Add lecturer management UI and API
+[33mec4e9f8[m Landing page structure with placeholders, testing styles and minor bugs
+[33m6d3fe52[m Login Page Styling & Enhancements
+[33m7befddb[m Merge pull request #26 from iholliday/AH-DashboardLayout
+[33m89ef2e7[m Add last page session tracking and improve profile menu UX
+[33m712ea15[m Testing Page Refresh on 1 Page (admLecturerManagement)
+[33mc1e5626[m Refactor profile menu event handling and cleanup
+[33m86b718d[m Refactor dashboard navigation and routing structure
+[33ma35e928[m Merge branch 'staging' into AH-DashboardLayout
+[33m4b93eda[m Merge pull request #25 from iholliday/TA-LoginPage
+[33m1503846[m Login Functionality, Logout, Started converting JS to use jRoute
+[33m04b3a3f[m Add lecturer and admin management sections to dashboard
+[33mfb0c559[m Merge branch 'AH-DashboardLayout' of https://github.com/iholliday/Inquizitive into AH-DashboardLayout
+[33m55bb018[m WIP Created blockDirectAccess and began work on login page.
+[33m73d8e6c[m Merge pull request #24 from iholliday/AH-DashboardLayout
+[33m716b56c[m Basic structure but still needs changes
+[33mcb90167[m Set up at home, starting to build page and css structure
+[33mfa7ec83[m Refactor dashboard navigation and add AJAX page loading
+[33m3246155[m Start to landing page
+[33m8dfc8bb[m Update dashboardNavigation.php
+[33m878b4bd[m Update dashboardNavigation.php
+[33m1960ffc[m Merge pull request #22 from iholliday/main
+[33m35450d6[m Merge pull request #21 from iholliday/AH-DashboardLayout
+[33m7232c07[m Rename dashboard layout and add admin dashboard include
+[33m5a01dba[m Merge pull request #20 from iholliday/staging
+[33m2b4e67f[m Removed from Adam's files where added to global and colours
+[33m11cdf79[m Added to global.css and colours.css using Adam's dashboard navigation
+[33ma329169[m Adding Adam's colour and non colour css for the dashboard navigation to colours.css and global.css
+[33m7792852[m Merge pull request #17 from iholliday/AH-DashboardLayout
+[33md290cbf[m Add dashboard layout with sidebar, topbar, and profile menu
+[33m0e98979[m Merge branch 'staging' of https://github.com/iholliday/Inquizitive into staging
+[33m0e742c4[m Initial connect file
+[33m0a0e3af[m Merge branch 'staging' of https://github.com/iholliday/Inquizitive into staging
+[33mcdd27c9[m Added global css file an css folder, and images folder
+[33mcd99df3[m Initial jRoute setup
+[33me0945dc[m Initial commit
