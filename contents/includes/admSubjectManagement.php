@@ -1,11 +1,13 @@
 <?php
 
-  // If user isn't logged in, redirect to landing page. Not AJAX as this check should happen befoe page loads.
+// TOMS CODE
+// If user isn't logged in, redirect to landing page. Not AJAX as this check should happen befoe page loads.
   if (!isset($_SESSION['userUUID']) || ($_SESSION['accessLevel'] != "ADMIN"))
   {
      header("Location:./");
      exit();
   }
+// END OF TOMS CODE
   
 
 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
