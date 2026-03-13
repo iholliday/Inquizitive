@@ -3,6 +3,14 @@ require_once("./php/_connect.php");
 $db = new inquizitiveDB();
 $conn = $db->connect;
 
+// TOMS CODE
+// If user isn't logged in, redirect to landing page. Not AJAX as this check should happen befoe page loads.
+  if (!isset($_SESSION['userUUID']) || ($_SESSION['accessLevel'] == "USER"))
+  {
+     header("Location:./");
+     exit();
+  }
+// END OF TOMS CODE
 
 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';

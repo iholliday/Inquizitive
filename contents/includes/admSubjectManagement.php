@@ -1,6 +1,12 @@
 <?php
 
-// include __DIR__ . "/../../php/blockDirectAccess.php";
+  // If user isn't logged in, redirect to landing page. Not AJAX as this check should happen befoe page loads.
+  if (!isset($_SESSION['userUUID']) || ($_SESSION['accessLevel'] != "ADMIN"))
+  {
+     header("Location:./");
+     exit();
+  }
+  
 
 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
