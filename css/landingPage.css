@@ -29,13 +29,6 @@ lp stands for landing page
         object-fit: cover;
     }
 
-    a {
-        color: var(--c-yellow) !important;
-    }
-
-    a:hover {
-        color: var(--c-english-violet) !important;
-    }
 
     /* testing styles */
     /* * {
@@ -136,6 +129,7 @@ lp stands for landing page
 
     button:hover {
         transition: 0.1s box-shadow ease-in-out;
+        transform: scale(1.01);
         box-shadow: 0px 0px 5px var(--c-yellow);
     }
 
@@ -265,10 +259,37 @@ lp stands for landing page
     }
 }
 
-.landing-login-btn:hover {
-    color: var(--c-yellow) !important;
-}
+/* AH BUTTON FIXES */
+    .landing-login-btn{
+        color: var(--c-yellow) !important;
+    }
 
-.landing-signup-btn{
-    color: var(--c-dark-purple) !important;
-}
+    .landing-login-btn:hover {
+        color: var(--c-yellow) !important;
+        text-decoration: none;
+        transform: scale(1.5);
+    }
+
+    .landing-signup-btn{
+        color: var(--c-dark-purple) !important;
+    }
+
+    .landing-signup-btn:hover{
+        transform: scale(1.5);
+    }
+
+    .landing-signup-btn,
+    .landing-login-btn{
+        padding:8px;
+        text-decoration: none;
+    }
+
+    .btnContainer{
+        margin-right: 15px;
+    }
+
+    .sm-hide{
+        margin-right:15px;
+    }
+
+        /* AH BUTTON FIX END */

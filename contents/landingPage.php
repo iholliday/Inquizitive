@@ -21,7 +21,7 @@
 <body id="landing-page" class="body">
     <div id="header">
         <div id="logo"><img src="./contents/images/logo.png" alt="Inquizitive"></div>
-        <div>
+        <div class="btnContainer">
             <button class="sm-hide"> <a href="./login" class="landing-login-btn">Login</a></button>
             <button class="bold-button"> <a href="./signup" class="landing-signup-btn">Create an account</a></button>
         </div>
