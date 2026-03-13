@@ -9,6 +9,15 @@ $subjectUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['s
       }
   }
 
+  // TOMS CODE
+// If user isn't logged in, redirect to landing page. Not AJAX as this check should happen befoe page loads.
+  if (!isset($_SESSION['userUUID']) || ($_SESSION['accessLevel'] == "USER"))
+  {
+     header("Location:./");
+     exit();
+  }
+// END OF TOMS CODE
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

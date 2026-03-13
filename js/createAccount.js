@@ -78,8 +78,6 @@ $('#signup-form').submit(function (e)
             data: $('#signup-form').serialize(),
             dataType: "json",
             success: function(res) {
-                console.log("AJAX Success - signup:", res);
-
                 if (res.status === "success") {
                     Swal.fire("Account created!", res.message, "success").then(() => {
                         location.reload();

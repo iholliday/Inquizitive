@@ -23,6 +23,7 @@ if (!isset($_SESSION['userUUID']))
 $userUUID = $_SESSION['userUUID'];
 $password = $_POST['password'] ?? '';
 
+// If password isn't inputted, return error.
 if (!$password) 
 {
     echo json_encode(['status' => 'error', 'message' => 'Password required.']);
@@ -38,6 +39,7 @@ if (!$stmt)
     exit;
 }
 
+// Password incorrect.
 $user = mysqli_fetch_assoc($stmt);
 if (!$user || !password_verify($password, $user['password'])) 
 {

@@ -15,9 +15,6 @@ $("#login-form").submit(function (event)
         data: $('#login-form').serialize(),
         dataType: "json",
         success: function(res) {
-            // Log success response.
-            console.log("AJAX Success:", res);
-            
             if (res.status === 'success') 
             {
                 // If auth is successful, redirect user to dashboard page via AJAX.
@@ -65,7 +62,6 @@ $("#login-form").submit(function (event)
                             dataType: "json",
                             success: function(mfaRes) {
                                 if (mfaRes.status === 'success') {
-                                    console.log("helllo");
                                     $.ajax({
                                         url: "./dashboard",
                                         type: 'GET',
@@ -81,7 +77,6 @@ $("#login-form").submit(function (event)
                             },
                             error: function(xhr, status, error) {
                                 console.error("MFA AJAX Error:", status, error);
-                                console.log("Raw response:", xhr.responseText);
                                 alert("An error occurred during MFA verification.");
                             }
                         });

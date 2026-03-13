@@ -1,4 +1,14 @@
 <?php
+
+// TOMS CODE
+// If user isn't logged in, redirect to landing page. Not AJAX as this check should happen befoe page loads.
+  if (!isset($_SESSION['userUUID']) || ($_SESSION['accessLevel'] == "USER"))
+  {
+     header("Location:./");
+     exit();
+  }
+// END OF TOMS CODE
+
 $db = new inquizitiveDB();
 $userUUID = htmlspecialchars(mysqli_real_escape_string($db->connect,$_POST['userUUID'])); 
   if ($result = $db->Query("CALL GetUserByUserUUID(?)", [$userUUID])) {

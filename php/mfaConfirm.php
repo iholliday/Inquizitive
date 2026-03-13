@@ -25,6 +25,7 @@ $code = trim($_POST['code']);
 $secret = $_SESSION['mfaTempSecret'];
 $mfa = new TwoFactorAuth('Inquizitive');
 
+// If code is invalid return error.
 if(!$mfa->verifyCode($secret, $code))
 {
     echo json_encode(['status'=>'error','message'=>'Invalid code.']);

@@ -30,6 +30,7 @@
     $route->AddDir('/css', "./css/");
     $route->AddDir('/js', "./js/");
     $route->AddDir('/img', "./contents/images/");
+    $route->AddDir('/pfp', "./images/profilepictures/");
 
     // Routes required for all pages.
     $route->Route(['post'], '/auth', "./php/auth.php");
@@ -95,9 +96,11 @@
     $route->Route(['post'], '/reviewQuizAttempt', "./contents/includes/reviewQuiz.php");
 
     $route->Route(['get'], '/last-page', "./contents/includes/pageSession.php");
+    $route->Route(['get'], '/landing-page', "./contents/landingPage.php");
+  
     $route->Route(['get'], '/logout', "./php/logout.php");
-
-
+    $route->Route(['get'], '/dashboardStatistics', "./contents/includes/dashboardStatistics.php");
+    $route->Route(['post'], '/subjectStatistics', "./contents/includes/subjectStatistics.php");
     $route->Route(['post'], '/quiz-result', "./contents/includes/quizResult.php");
 
 

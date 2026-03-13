@@ -3,6 +3,14 @@ require_once("./php/_connect.php");
 $db = new inquizitiveDB();
 $conn = $db->connect;
 
+// TOMS CODE
+// If user isn't logged in, redirect to landing page. Not AJAX as this check should happen befoe page loads.
+  if (!isset($_SESSION['userUUID']) || ($_SESSION['accessLevel'] == "USER"))
+  {
+     header("Location:./");
+     exit();
+  }
+// END OF TOMS CODE
 
 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
@@ -94,7 +102,7 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
                 <th class="qm-option">B</th>
                 <th class="qm-option">C</th>
                 <th class="qm-option">D</th>
-                <th class="tblHeader;">Timer Duration</th>
+                <th class="tblHeader;">Timer Duration (s)</th>
                 <th class="qm-actions text-end">Actions</th>
               </tr>
             </thead>
@@ -224,7 +232,7 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
             <div class="form-text">We store the full text in <code>correctAnswer</code> (same as your DB).</div>
           </div>
           <div class="col-4">
-            <label class="form-label">Timer Duration</label>
+            <label class="form-label">Timer Duration (s)</label>
             <input id="sw_points" type="number" min="1" class="form-control" value="${points}">
           </div>
         </div>
@@ -262,7 +270,7 @@ $updated    = htmlspecialchars($quizMeta['lastUpdated'] ?? '', ENT_QUOTES, 'UTF-
     if (!p.questionText) return "Question text is required.";
     if (!p.answerA || !p.answerB || !p.answerC || !p.answerD) return "All four answers (A–D) are required.";
     if (!p.correctAnswer) return "Pick which option (A–D) is correct.";
-    if (!p.difficultyPoints || Number(p.difficultyPoints) < 1) return "Points must be 1 or higher.";
+    if (!p.difficultyPoints || Number(p.difficultyPoints) < 0) return "Timer must be 0 or higher.";
     const answers = [p.answerA, p.answerB, p.answerC, p.answerD].map(x => x.trim());
     if (!answers.includes(p.correctAnswer.trim())) return "Correct answer must match one of the options exactly.";
     return null;

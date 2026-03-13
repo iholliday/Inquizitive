@@ -16,6 +16,7 @@
     $password = $_POST['txtPassword'] ?? '';
     $confirmPassword = $_POST['txtConfirmPassword'] ?? '';
 
+    // If either token or password are missing, return error.
     if (!$token || !$password) {
         echo json_encode(['status' => 'error', 'message' => 'Invalid request.']);
         exit;
@@ -47,7 +48,6 @@
 
     // Create DB instance.
     $db = new inquizitiveDB();
-
 
     // Deleting expired reset tokens.
     $stmt = $db->Query("CALL DeleteExpiredPasswordResets");
