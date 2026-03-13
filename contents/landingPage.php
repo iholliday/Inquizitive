@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquizitive - educational quizzes</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/landingPage.css">
+    <link rel="stylesheet" href="./css/colours.css">
+    <link rel="stylesheet" href="./css/global.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Mogra&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pacifico&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=send" />
+</head>
+
+<body id="landing-page" class="body">
+    <div id="header">
+        <div id="logo"><img src="./contents/images/logo.png" alt="Inquizitive"></div>
+        <div class="btnContainer">
+            <button class="sm-hide"> <a href="./login" class="landing-login-btn">Login</a></button>
+            <button class="bold-button"> <a href="./signup" class="landing-signup-btn">Create an account</a></button>
+        </div>
+    </div>
+    
+    <!-- First row - welcome to Inquizitive -->
+    <section id="first-row" class="flex-row lp-row">
+        <div class="lp-row-internal halves-row 100w md-collapse">
+            <div class="textbox-lg">
+                <h1>Welcome to Inquizitive!</h1>
+                <p>UCW's own reinforcement testing platform.</p>
+                <button>Find out more</button>
+            </div>
+            <div>
+                <img class="large-section-img" src="./images/quiz.png" alt="Quiz in Progress">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Second row -->
+    <section id="second-row" class="flex-row lp-row">
+        <div class="lp-row-internal halves-row 100w md-collapse">
+            <div class="image-wrapper">
+                <img class="large-section-img" src="./images/StudentLaptopPhoto.jpg" alt="student using app">
+            </div>
+            <div class="textbox-lg">
+                <h3>Who It’s For</h3>
+                <p>Inquizitive is designed for university learners and the educators who support them, offering an engaging way to reinforce knowledge beyond traditional lectures.</p>
+
+                <h3>What It Does</h3>
+                <p>The platform gives teachers greater control over quiz creation and clear visibility into student progress, while providing students with a flexible space to practise and improve at their own pace.</p>
+
+                <h3>Why It Stands Out</h3>
+                <p>Inquizitive blends structured assessment with enjoyable gamified elements, striking a balance between formal testing and fun to motivate students even when no exam is approaching.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Third row - how to use Inquizitive -->
+    <section id="guide-row" class="flex-row lp-row 100vw ">
+        <div class="lp-row-internal thirds-row md-collapse">
+            <div class="flex-col">
+                <img src="./images/signup.png" alt="sample">
+                <div class="textbox">
+                    <h2>1: Create an account</h2>
+                    <p>Click <a class="a" href="./signup">Sign Up</a> in the top right to start!</p>
+                </div>
+                
+            </div>
+            <div class="flex-col">
+                <img src="./images/quizlist.png" alt="sample">
+                <div class="textbox">
+                    <h2>2: Join a subject</h2>
+                    <p>Teachers can create classes for their students, or you can join a class created by your teacher.</p>
+                </div>
+            </div>
+            <div class="flex-col">
+                <img src="./images/QuizzesScreenshotWider.png" alt="sample">
+                <div class="textbox">
+                    <h2>3: Start quizzing!</h2>
+                    <p>Learn in a fun environment and track your progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div id="bottom-row">
+        <form method="post" action="sendEnquiryEmail.php">
+            <label for="email">Have an enquiry?</label>
+            <div class="flex-col">
+                <input id="email" class="email" type="email" name="emailAddress" placeholder="Your email">
+                <textarea id="message" class="message" type="textarea" name="message">Hi Inquizitive...</textarea>
+                <i type="submit" value="" class="material-symbols-outlined">send</i>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
