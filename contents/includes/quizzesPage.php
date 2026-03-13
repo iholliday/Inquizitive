@@ -127,7 +127,7 @@ $userUUID = $_SESSION['userUUID'] ?? null;
                 while($row = mysqli_fetch_assoc($completedResult)) {
 
                   $quizTitle = !empty($row['quizName']) ? $row['quizName'] : 'Completed Quiz';
-                  $score = isset($row['score']) ? $row['score'] . '%' : 'Completed';
+                  $score = isset($row['score']) ? $row['score'] . ' Points' : 'Completed';
                   $completedDate = !empty($row['completionDate']) ? $row['completionDate'] : 'Unknown date';
                   $dateFormatted = date("d/m/Y", strtotime($completedDate));
 
